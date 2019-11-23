@@ -1,0 +1,1 @@
+<view><block wx:if="{{!isLogin}}"><view><login-in bind:isLogin="__e" vue-id="1" data-event-opts="{{[['^isLogin',[['getLogin']]]]}}" bind:__l="__l"></login-in></view></block><block wx:if="{{isLogin}}"><view>用户已经登录</view></block></view>

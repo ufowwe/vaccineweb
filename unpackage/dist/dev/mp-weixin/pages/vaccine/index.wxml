@@ -1,0 +1,1 @@
+<view><vacc-bar vue-id="1" nav="{{setNav}}" data-event-opts="{{[['^changePage',[['changePage']]]]}}" bind:changePage="__e" bind:__l="__l"></vacc-bar><block wx:if="{{isShow==1}}"><va-certificate vue-id="2" bind:__l="__l"></va-certificate></block><block wx:if="{{isShow==2}}"><va-plan vue-id="3" bind:__l="__l"></va-plan></block></view>

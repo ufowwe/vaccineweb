@@ -1,0 +1,124 @@
+.certmain {
+  padding: 30rpx;
+  background: #fff;
+}
+.certmain .certmain_title {
+  color: #666666;
+  font-size: 26rpx;
+}
+.certmain .certmain_box {
+  color: #666666;
+  font-size: 30rpx;
+  line-height: 70rpx;
+}
+.certmain .certmain_box .linemain {
+  margin-left: 30rpx;
+}
+.certmainb {
+  background: #FAFAFB;
+}
+
+.vaccSelect {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 50rpx;
+  padding-top: 40rpx;
+}
+.vaccSelect .knowledge {
+  padding-top: 20rpx;
+  color: #8686F7;
+  font-size: 26rpx;
+}
+.vaccTotal {
+  padding: 0 30rpx;
+  line-height: 28px;
+  height: 130rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #666666;
+}
+.vaccTotal .textcol {
+  color: #000000;
+}
+.table {
+  border: 0px solid darkgray;
+  overflow-y: auto;
+}
+.tr {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 5000rpx;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 80%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.td {
+  width: 50%;
+  height: 100rpx;
+  border: 1rpx solid #F8F8F8;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+.bg-w {
+  background: #EFEFFF;
+}
+.bg-g {
+  background: #fff;
+}
+.th {
+  width: 50%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #F2F3F5;
+  color: #000;
+  border: 1rpx solid #F8F8F8;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 3rem;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.thHead {
+  width: 100%;
+  /* position: fixed;
+	left: 0;
+	z-index: 10000; */
+  background: #fff;
+}
+/* .thHead+.overauto{
+	margin-left: 300rpx;
+} */
+.cost {
+  background: #F2F2F2;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}
+.cost .moneyNum {
+  display: inline-block;
+  width: 60%;
+}
+.cost .vaccBtn {
+  color: #fff;
+}
+

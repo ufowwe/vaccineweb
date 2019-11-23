@@ -1,0 +1,19 @@
+.mymain .myHead {
+  height: 400rpx;
+}
+.mymain .myHead image {
+  width: 100%;
+  height: 100%;
+}
+.mymain .groupmy {
+  padding: 6%;
+}
+.mymain .groupmy .leftclass {
+  color: #666666;
+  font-size: 32rpx;
+}
+.mymain .groupmy .line {
+  height: 100rpx;
+  line-height: 100rpx;
+}
+

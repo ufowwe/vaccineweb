@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/task/index",
+    "pages/vaccine/index",
+    "pages/inoculate/index",
+    "pages/my/index",
+    "pages/task/component/Login",
+    "pages/vaccine/component/VaPlan",
+    "pages/vaccine/component/VaCertificate",
+    "pages/login/login",
+    "pages/baby/addBaby"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "height": "50px",
+    "fontSize": "10px",
+    "iconWidth": "24px",
+    "spacing": "3px",
+    "list": [
+      {
+        "pagePath": "pages/task/index",
+        "iconPath": "static/img/task.png",
+        "selectedIconPath": "static/img/taskActive.png",
+        "text": "成长任务"
+      },
+      {
+        "pagePath": "pages/vaccine/index",
+        "iconPath": "static/img/vaccine.png",
+        "selectedIconPath": "static/img/vaccineActive.png",
+        "text": "儿童疫苗"
+      },
+      {
+        "pagePath": "pages/inoculate/index",
+        "iconPath": "static/img/inoculate.png",
+        "selectedIconPath": "static/img/inoculateActive.png",
+        "text": "接种保障"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "static/img/my.png",
+        "selectedIconPath": "static/img/myActive.png",
+        "text": "我爱我家"
+      }
+    ]
+  },
+  "permission": {},
+  "usingComponents": {},
+  "sitemapLocation": "sitemap29.json"
+}

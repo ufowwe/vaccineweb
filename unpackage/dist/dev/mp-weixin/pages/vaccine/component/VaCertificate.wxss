@@ -1,0 +1,20 @@
+.certmain {
+  padding: 30rpx;
+  background: #fff;
+}
+.certmain .certmain_title {
+  color: #666666;
+  font-size: 26rpx;
+}
+.certmain .certmain_box {
+  color: #666666;
+  font-size: 30rpx;
+  line-height: 70rpx;
+}
+.certmain .certmain_box .linemain {
+  margin-left: 30rpx;
+}
+.certmainb {
+  background: #FAFAFB;
+}
+

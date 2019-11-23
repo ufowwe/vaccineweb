@@ -1,0 +1,13 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+    "van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+    "van-row": "/wxcomponents/vant/dist/row/index",
+    "van-col": "/wxcomponents/vant/dist/col/index",
+    "vacc-bar": "/pages/vaccine/component/VaccBar",
+    "va-certificate": "/pages/vaccine/component/VaCertificate",
+    "va-plan": "/pages/vaccine/component/VaPlan"
+  }
+}

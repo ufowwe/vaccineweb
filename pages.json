@@ -1,0 +1,133 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "首页",
+		// 		"usingComponents":{
+		// 			"van-button": "/wxcomponents/vant/dist/button/index"
+		// 		}
+		// 	}
+		// }, 
+		{
+			"path": "pages/task/index",
+			"style": {
+				"navigationBarTitleText": "成长任务",
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+		}, {
+			"path": "pages/vaccine/index",
+			"style": {
+				"navigationStyle":"custom",
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index"
+				}
+			}
+		}, {
+			"path": "pages/inoculate/index",
+			"style": {
+				"navigationStyle":"custom",
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+		}, {
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "我爱我家",
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+				}
+			}
+		}, {
+			"path": "pages/task/component/Login",
+			"style": {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/vaccine/component/VaPlan",
+            "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/vaccine/component/VaCertificate",
+            "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+			
+        },
+		{
+		    "path" : "pages/login/login",
+		    "style" : {
+				"navigationStyle":"custom",
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
+				}
+			}
+		}
+		,{
+		    "path" : "pages/baby/addBaby",
+		    "style" : {
+				"navigationBarTitleText": "添加宝宝"
+			}
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"height": "50px",
+		"fontSize": "10px",
+		"iconWidth": "24px",
+		"spacing": "3px",
+		"list": [{
+			"pagePath": "pages/task/index",
+			"iconPath": "static/img/task.png",
+			"selectedIconPath": "static/img/taskActive.png",
+			"text": "成长任务"
+		}, {
+			"pagePath": "pages/vaccine/index",
+			"iconPath": "static/img/vaccine.png",
+			"selectedIconPath": "static/img/vaccineActive.png",
+			"text": "儿童疫苗"
+		}, {
+			"pagePath": "pages/inoculate/index",
+			"iconPath": "static/img/inoculate.png",
+			"selectedIconPath": "static/img/inoculateActive.png",
+			"text": "接种保障"
+		}, {
+			"pagePath": "pages/my/index",
+			"iconPath": "static/img/my.png",
+			"selectedIconPath": "static/img/myActive.png",
+			"text": "我爱我家"
+		}]
+	}
+}

@@ -1,0 +1,76 @@
+.header-img {
+  width: 750rpx;
+  height: 998rpx;
+  text-align: center;
+}
+.header-img ._img {
+  display: inline-block;
+  width: 313rpx;
+  height: 463rpx;
+  margin-top: 280rpx;
+}
+.btnBox {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0 75rpx;
+}
+.btnBox .btn {
+  border-radius: 60rpx;
+  font-size: 30rpx;
+  padding: 15rpx 0;
+  width: 100%;
+}
+.btnBox .btn::after {
+  border: none;
+}
+.btnBox .cancelLogin {
+  margin-top: 30rpx;
+  color: #666;
+}
+.dialog-title {
+  height: 70rpx;
+  text-align: center;
+}
+.dialog-title ._img {
+  display: inline-block;
+  width: 66rpx;
+  height: 66rpx;
+}
+.tip-content {
+  padding: 0 95rpx;
+  text-align: center;
+  display: block;
+}
+.tip-content .dialog-tip {
+  text-align: center;
+  color: #333;
+  font-size: 40rpx;
+  height: 56rpx;
+  line-height: 56px;
+}
+.tip-content .dialog-tip2 {
+  color: #666;
+  font-size: 28rpx;
+  margin-top: 16rpx;
+}
+.tip-content.btn-content {
+  padding: 0;
+  margin: 70rpx 0;
+}
+.tip-content.btn-content .dialog-btn {
+  width: 300rpx;
+  border: none;
+}
+.tip-content.btn-content .dialog-btn.dialog-btn-cacel {
+  border-top-left-radius: 60rpx;
+  border-bottom-left-radius: 60rpx;
+  background: #f2f2f2;
+  color: #666;
+}
+.tip-content.btn-content .dialog-btn.dialog-btn-add {
+  background: #8686F7;
+  border-top-right-radius: 60rpx;
+  border-bottom-right-radius: 60rpx;
+  color: #fff;
+}
+
