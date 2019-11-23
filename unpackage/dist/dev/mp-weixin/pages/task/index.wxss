@@ -19,3 +19,36 @@
   font-size: 40rpx;
 }
 
+.tackmain .header {
+  background: #8686F7;
+  height: 450rpx;
+  width: 100%;
+  padding: 10rpx 30rpx;
+  display: block;
+}
+.tackmain .header .title {
+  line-height: 120rpx;
+  font-size: 54rpx;
+  color: #fff;
+}
+.tackmain .header .slider {
+  width: 80%;
+  padding: 36rpx;
+  background: #F8F8FB;
+}
+.tackmain .header .slider .tags {
+  font-size: 28rpx;
+}
+.tackmain .header .slider .tab {
+  padding: 20rpx 0;
+}
+.tackmain .header .slider .tab .td {
+  text-align: center;
+  width: 33%;
+  display: inline-block;
+}
+.tackmain .task_box {
+  margin: 10rpx 20rpx;
+  background: #FAFAFB;
+}
+

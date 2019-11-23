@@ -1,7 +1,7 @@
 <template>
 	<view class="">
-		<VaccBar :nav="setNav" @changePage="changePage"></VaccBar>
-		<VaCertificate v-if="isShow == 1"></VaCertificate>	
+		<VaccBar ref="bar" :nav="setNav" @changePage="changePage"></VaccBar>
+		<VaCertificate @changePage="changePage" v-if="isShow == 1"></VaCertificate>	
 		<VaPlan v-if="isShow == 2"></VaPlan>	
 	</view>
 </template>
@@ -10,7 +10,7 @@
 	import VaccBar from './component/VaccBar.vue';
 	import VaCertificate from './component/VaCertificate.vue';
 	import VaPlan from './component/VaPlan.vue';
-	import vaccineApi from "../../service/vaccine"
+
 	
 	export default {
 	  components:{
@@ -31,18 +31,13 @@
 				
 			}
 		},
-		async mounted() {
-			let obj={
-				"provinceId":"0",
-				"schemeType":"0"
-			};
-			await vaccineApi.getRecordNoLogin(obj).then(res=>{
-				console.log(res);
-			});	
+		mounted() {
+
 		},
 		methods: {
 			changePage(val) {
 				this.isShow = val;
+				this.$refs.bar.setcheck(val);
 			}
 		}
 	}

@@ -27,6 +27,7 @@
 	left:15rpx;
 	font-size:30rpx;
 	padding: 10rpx;
-	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
 }
 

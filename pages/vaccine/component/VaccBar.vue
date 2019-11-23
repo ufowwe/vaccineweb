@@ -25,7 +25,7 @@
 			return {
 				statusBarHeight: 0, 
 				titleBarHeight: 0, 
-				isCheck: true,
+				isCheck: 1,
 			}
 		},
 		created() {
@@ -49,8 +49,11 @@
 					delta:1
 			    })
 			},
+			setcheck(value){
+				this.isCheck = value;
+			},
 			checkTab(value) {
-				this.isCheck = value; 
+				this.isCheck = value;
 				this.$emit('changePage',this.isCheck)
 			}
 		}

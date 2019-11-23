@@ -15,7 +15,8 @@
   padding: 0 75rpx;
 }
 .btnBox .btn {
-  border-radius: 60rpx;
+  -webkit-border-radius: 60rpx;
+          border-radius: 60rpx;
   font-size: 30rpx;
   padding: 15rpx 0;
   width: 100%;
@@ -26,6 +27,17 @@
 .btnBox .cancelLogin {
   margin-top: 30rpx;
   color: #666;
+}
+.login-tip-view {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 30rpx;
+  font-size: 22rpx;
+  color: #666;
+}
+.login-tip-view .login-text {
+  color: #8686F7;
 }
 .dialog-title {
   height: 70rpx;
@@ -62,15 +74,19 @@
   border: none;
 }
 .tip-content.btn-content .dialog-btn.dialog-btn-cacel {
-  border-top-left-radius: 60rpx;
-  border-bottom-left-radius: 60rpx;
+  -webkit-border-top-left-radius: 60rpx;
+          border-top-left-radius: 60rpx;
+  -webkit-border-bottom-left-radius: 60rpx;
+          border-bottom-left-radius: 60rpx;
   background: #f2f2f2;
   color: #666;
 }
 .tip-content.btn-content .dialog-btn.dialog-btn-add {
   background: #8686F7;
-  border-top-right-radius: 60rpx;
-  border-bottom-right-radius: 60rpx;
+  -webkit-border-top-right-radius: 60rpx;
+          border-top-right-radius: 60rpx;
+  -webkit-border-bottom-right-radius: 60rpx;
+          border-bottom-right-radius: 60rpx;
   color: #fff;
 }
 

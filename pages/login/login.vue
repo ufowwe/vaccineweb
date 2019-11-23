@@ -8,6 +8,7 @@
 			    微信授权登录/注册
 			</button>
 			<van-button @click="cancel" custom-class='cancelLogin btn'>残忍拒绝</van-button>
+			<view class="login-tip-view">登录即带代表您同意<text class="login-text">《用户协议》</text></view>
 		</view>
 		<van-dialog
 			use-slot
@@ -41,7 +42,8 @@
 	export default {
 		data() {
 			return {
-				dialogShow:false
+				dialogShow:false,
+				backUrl:""
 			}
 		},
 		methods: {
@@ -52,25 +54,48 @@
 				        title: '您取消了授权，登录失败'
 				    });
 				    return false;
+				};
+				this.init(res.mp.detail.userInfo);
+			},
+			//用户登录 初始化页面数据
+			async init(userInfo){
+				const user = {
+					avatar:userInfo.avatar,
+					nickName:userInfo.nickName,
+					sex:userInfo.gender
+				};
+				//获取code
+				const isLogin = await authApi.doLogin();
+				if(isLogin){
+					//更新用户信息
+					authApi.setUser(user).then(()=>{
+						global.setUser(JSON.stringify(userInfo));
+					});
+					//获取宝宝列表
+					babyApi.getBabyList().then(res=>{
+						if(res.data && res.data.length <= 0){
+							this.dialogShow = true;
+						}else{
+							this.cancel();
+						}
+					})
 				}
-				global.setUser(JSON.stringify(res.mp.detail.userInfo));
-				babyApi.getBabyList().then(res=>{
-					if(res.data && res.data.length <= 0){
-						this.dialogShow = true;
-					}else{
-						this.cancel();
-					}
-				})
+				
 			},
 			cancel(){
 				uni.reLaunch({
-				    url:'/pages/task/index'
+				    url:this.backUrl || '/pages/task/index'
 				});
 			},
 			addBaby(){
 				uni.navigateTo({
 				    url:'/pages/baby/addBaby'
 				});
+			}
+		},
+		onLoad(option){
+			if(option.backpath){
+				this.backUrl = option.backpath;
 			}
 		}
 	}
@@ -104,6 +129,17 @@
 		margin-top:30rpx;
 		color:#666;
 	}	
+}
+.login-tip-view{
+	display:block;
+	width:100%;
+	text-align:center;
+	margin-top:30rpx;
+	font-size:22rpx;
+	color:#666;
+	.login-text{
+		color:#8686F7;
+	}
 }
 .dialog-title{
 	height:70rpx;

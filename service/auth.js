@@ -1,6 +1,6 @@
 import global from '../utils/global.js';
 import Base from './base';
-
+import config from "./config";
 export default class Auth extends Base {
 	//判断用户是否登录
 	static async login() {
@@ -15,11 +15,11 @@ export default class Auth extends Base {
 		        return false;
 		     } catch (e) {
 		        // /return false;
-		        return await this.doLogin();
+		        return false;
 		     }
 		} else {
-			return await this.doLogin();
-		    console.warn('token失效', token);
+			console.warn('token失效', token);
+			return false;
 		}
 	}
 	/*
@@ -33,12 +33,16 @@ export default class Auth extends Base {
 	 * 执行登录方法
 	 * **/
 	static async doLogin() {
-	    const {code} = await this.wxlogin();
-	    const res = await this.getToken(code);
-		if(res.code == "0000"){
-			await global.setToken(res.data.token);
-			await this.login();
-		}else{
+		try{
+			const { code } = await this.wxlogin();
+			const res = await this.getToken(code);
+			if(res.code == "0000"){
+				await global.setToken(res.data.token);
+				return true;
+			}else{
+				return false;
+			}
+		}catch(e){
 			return false;
 		}
 	}
@@ -60,7 +64,12 @@ export default class Auth extends Base {
 	  * 获取token
 	  */
 	 static async getToken(jsCode) {
-	     const url = `${this.baseUrl}/login`
-	     return await this.post(url,{code:jsCode});
+	     return await this.post(config.auth.login,{code:jsCode});
 	 }
+	 /**
+	  * 设置用户
+	  * **/
+	static async setUser(data){			
+		return await this.post(config.auth.updateUserByWx,data);
+	}
 }

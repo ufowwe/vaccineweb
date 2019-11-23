@@ -1,11 +1,8 @@
 import Base from './base';
-const vac={
-	getBabyList:`${Base.appService}/baby/selectList` //获取接种证集合，未登录
-}
-
+import config from "./config";
 export default class Vaccine extends Base {
 	static async getBabyList(data){
-		return await this.post(vac.getBabyList,data);
+		return await this.post(config.baby.getBabyList,data);
 	}
 	static async isHaveBaby(){
 		const list = await this.getBabyList();

@@ -12,9 +12,12 @@
 		{
 			"path": "pages/task/index",
 			"style": {
-				"navigationBarTitleText": "成长任务",
+				// "navigationStyle":"custom",
 				"usingComponents":{
-					"van-button": "/wxcomponents/vant/dist/button/index"
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-slider": "/wxcomponents/vant/dist/slider/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index"
 				}
 			}
 		}, {
@@ -71,7 +74,9 @@
             "path" : "pages/vaccine/component/VaCertificate",
             "style" : {
 				"usingComponents":{
-					"van-button": "/wxcomponents/vant/dist/button/index"
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-checkbox":"/wxcomponents/vant/dist/checkbox/index",
+					"van-image":"/wxcomponents/vant/dist/image/index"
 				}
 			}
 			
@@ -85,11 +90,25 @@
 					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
 				}
 			}
-		}
-		,{
+		},{
 		    "path" : "pages/baby/addBaby",
 		    "style" : {
-				"navigationBarTitleText": "添加宝宝"
+				"navigationBarTitleText": "添加宝宝",
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-overlay": "/wxcomponents/vant/dist/overlay/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index"
+				}
+			}
+		},{
+		    "path" : "pages/components/timePicker",
+		    "style" : {
+				"usingComponents":{
+					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index"
+				}
 			}
 		}
     ],

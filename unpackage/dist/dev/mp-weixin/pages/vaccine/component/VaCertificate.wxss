@@ -10,11 +10,44 @@
   color: #666666;
   font-size: 30rpx;
   line-height: 70rpx;
+  margin: 15rpx 0;
 }
 .certmain .certmain_box .linemain {
-  margin-left: 30rpx;
+  margin-left: 20rpx;
+  display: inline-block;
+}
+.certmain .certmain_box .linemain .linemaindesc {
+  color: #3f3f3f;
+}
+.certmain .certmain_box .time-img-box {
+  display: inline-block;
+  float: right;
+}
+.certmain .certmain_box .itm-img {
+  margin-top: 12rpx;
+  vertical-align: sub;
+}
+.certmain .certmain_box .itm-time {
+  margin-right: 10rpx;
 }
 .certmainb {
   background: #FAFAFB;
+}
+.card-header {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 34rpx;
+  padding-bottom: 0;
+}
+.card-header .card-top-tip {
+  line-height: 42rpx;
+  color: #E088FF;
+  font-size: 30rpx;
+}
+.card-header .card-top-btn {
+  font-size: 28rpx;
+  height: 60rpx;
+  margin: 30rpx 0;
 }
 

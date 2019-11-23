@@ -1,7 +1,9 @@
 {
-  "navigationBarTitleText": "成长任务",
   "usingComponents": {
     "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-slider": "/wxcomponents/vant/dist/slider/index",
+    "van-icon": "/wxcomponents/vant/dist/icon/index",
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
     "login-in": "/pages/task/component/Login"
   }
 }

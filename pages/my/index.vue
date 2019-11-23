@@ -8,6 +8,12 @@
 			</view>
 			<view class="groupmy">
 				<view class="line">
+					<van-cell title-class="leftclass" :border="false" title="我的宝宝" icon="comment-o" is-link />
+				</view> 
+				<view class="line">
+					<van-cell title-class="leftclass" :border="false" title="我的保单" icon="comment-o" is-link />
+				</view> 
+				<view class="line">
 					<van-cell title-class="leftclass" :border="false" title="邀请好友" icon="friends-o" is-link >
 					<!-- <view slot="icon">
 					  <image src="../../static/img/invite.png" mode=""></image>

@@ -1,4 +1,9 @@
 {
   "navigationBarTitleText": "添加宝宝",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-overlay": "/wxcomponents/vant/dist/overlay/index",
+    "van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index"
+  }
 }
