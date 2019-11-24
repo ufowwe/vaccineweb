@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<!--头部文字提示-->
 		<view class="card-header">
 			<view v-if="!isLogin || !isHaveBaby">
 				<text class="card-top-tip">您还没有添加宝宝，无法为您推荐接种方案。</text>
@@ -16,15 +17,6 @@
 				</view>
 			</view>
 		</view>
-		<!-- <view :class="['certmain',index%2?'':'certmainb']" :key="index" v-for="(item,index) in data.data.vaccineRecordGroupList">
-			<view class="certmain_title">{{item.vaccinationAge}}</view>
-			<view class="certmain_box" :key="idx" v-for="(itm,idx) in item.vaccineRecordDetailList">
-				<van-button size="mini" color="#4BD2B6">免费</van-button>
-				<text class="linemain">{{itm.name}}</text>
-				<text></text>
-				<text></text>
-			</view>
-		</view> -->
 		<!--未登录 或者无宝宝状态下 不可点击 点击跳转登录页或者添加宝宝页面-->
 		<view v-if="!isLogin || !isHaveBaby" @click="doAddBabyOrLogin">
 			<view :class="['certmain',index%2?'':'certmainb']" :key="index" v-for="(item,index) in noLoginList">
@@ -36,9 +28,9 @@
 						<text class="linemaindesc">(第{{itm.currTimes}}/{{itm.totalTimes}}剂)</text>
 					</view>
 					<view class="time-img-box">
-						<text class="itm-time">2017-01-01</text>
+						<!-- <text class="itm-time">2017-01-01</text> -->
 						<van-image class="itm-img" v-if="!itm.vaccinationStatus" round width="40rpx" height="40rpx" src="/static/img/my.png" />
-						<van-image class="itm-img" v-if="itm.vaccinationStatus" round  src="/static/img/myActive.png" />
+						<van-image class="itm-img" v-if="itm.vaccinationStatus" round  width="40rpx" height="40rpx" src="/static/img/myActive.png" />
 					</view>
 				</view>
 			</view>
@@ -55,22 +47,32 @@
 						<text class="linemaindesc">(第{{itm.currTimes}}/{{itm.totalTimes}}剂)</text>
 					</view>
 					<view class="time-img-box">
-						<text class="itm-time">2017-01-01</text>
-						<van-image class="itm-img" v-if="!itm.vaccinationStatus" round width="40rpx" height="40rpx" src="/static/img/my.png" />
-						<van-image class="itm-img" v-if="itm.vaccinationStatus" round  src="/static/img/myActive.png" />
+						<text @click="setTime(itm)" v-if="itm.vaccinationDate" class="itm-time">{{itm.vaccinationDate}}</text>
+						<van-image @click="setTime(itm)"  class="itm-img" v-if="!itm.vaccinationStatus" round width="40rpx" height="40rpx" src="/static/img/my.png" />
+						<van-image @click="cancelTime(itm)" class="itm-img" v-if="itm.vaccinationStatus" round width="40rpx" height="40rpx"  src="/static/img/myActive.png" />
 					</view>
 				</view>
 			</view>
 		</view>
-		<timer-picker :show="showPopup"></timer-picker>
+		<t-picker ref="pop" v-if="showPopup" @cancel="showPopup=false" @getSelect="getSelect"></t-picker>
+		<van-dialog
+		  :show="showCancelDialog"
+		  show-cancel-button
+		  message="取消当前状态将清除之前设置的接种时间,确定修改？"
+		  @close="showCancelDialog = false"
+		  @confirm="doClear"
+		>
+		  <image src="https://img.yzcdn.cn/1.jpg" />
+		</van-dialog>
 	</view>
 </template>
 
 <script>
+	import global from "../../../utils/global.js";
 	import authApi from "../../../service/auth";
 	import babyApi from "../../../service/baby";
 	import vaccineApi from "../../../service/vaccine";
-	import timerPicker from "../../components/timePicker";
+	import tPicker from "../../components/timePicker";
 	export default {
 		data() {
 			return {
@@ -80,30 +82,56 @@
 				isMe:false,        //只显示我选择的疫苗
 				noLoginList:[],    //没有登录 或者 没有宝宝的时候 页面显示的数据
 				loginList:[],      //有宝宝的时候 页面显示的数据
-				showPopup:false
+				selectItem:{},     //当前编辑的疫苗
+				popData:{
+					status:"",
+					curTime:""
+				},
+				showPopup:false,
+				showCancelDialog:false
 			};
 		},
 		components:{
-			timerPicker
+			tPicker
 		},
 		async mounted() {
 			this.isLogin = await authApi.login();
 			if(this.isLogin){
 				this.isHaveBaby = await babyApi.isHaveBaby();
+				//this.isHaveBaby = true;
 				if(!this.isHaveBaby){
 					this.getNoLoginList();
+				}else{
+					this.getLoginList();
 				}
 			}else{
 				this.getNoLoginList();
 			}
 		},
 		methods: {
-			getNoLoginList(){
+			//用户登录后 有宝宝调用接口
+			getLoginList(){
 				let obj={
-					"provinceId":"0",
-					"schemeType":"0"
+					babyId:global.getBabyId() || 14
 				};
-				vaccineApi.getRecordNoLogin(obj).then(res=>{
+				vaccineApi.getRecordByLogin(obj).then(res=>{
+					if(res.code == "0000"){
+						if(res.data.vaccineRecordGroupList && res.data.vaccineRecordGroupList.length > 0){
+							this.loginList = res.data.vaccineRecordGroupList;
+						}else{
+							this.loginList = [];
+						}
+					}else{
+						uni.showToast({
+							icon:"none",
+						    title: res.responseMsg
+						});
+					}
+				});
+			},
+			//用户未登录 或者无宝宝时调用接口
+			getNoLoginList(){
+				vaccineApi.getRecordNoLogin().then(res=>{
 					if(res.code == "0000"){
 						if(res.data.vaccineRecordGroupList && res.data.vaccineRecordGroupList.length > 0){
 							this.noLoginList = res.data.vaccineRecordGroupList;
@@ -118,6 +146,29 @@
 					}
 				});	
 			},
+			//更新接种证
+			updateRecord(obj){
+				const param={
+					id :this.selectItem.vaccineSchemeId,
+					vaccinationDate:obj.vaccinationStatus ? "" : obj.vaccinationDate,
+					vaccinationDateActual:obj.vaccinationStatus ? obj.vaccinationDate : "",
+					vaccinationStatus:obj.status
+				};
+				vaccineApi.updateRecord(param).then(res=>{
+					if(res.code == "0000"){
+						uni.showToast({
+							icon:"none",
+						    title: "更新成功"
+						});
+						this.getLoginList();
+					}else{
+						uni.showToast({
+							icon:"none",
+						    title: res.responseMsg
+						});
+					}
+				})
+			},
 			changePage(val) {
 				this.isShow = val;
 			},
@@ -131,6 +182,42 @@
 			//直接去设置接种方案
 			setPlan(){
 				this.$emit("changePage",2);
+			},
+			//去编辑当前疫苗状态
+			setTime(item){
+				this.showPopup = true;
+				this.selectItem = item;
+				const popData ={
+					status : item.vaccinationStatus,
+					curTime: item.vaccinationDate
+				};
+				this.$nextTick(()=>{
+					this.$refs.pop.setPopData(popData);
+				})	
+			},
+			//取消当前疫苗状态
+			cancelTime(item){
+				this.selectItem = item;
+				this.showCancelDialog = true;
+				this.updateRecord(this.selectItem);
+			},
+			doClear(){
+				this.selectItem.vaccinationStatus = false;
+				this.selectItem.vaccinationDate = "";
+				this.showCancelDialog = false;
+			},
+			//从时间组件传来的数据
+			getSelect(obj){
+				if(obj.status){
+					this.selectItem.vaccinationStatus = true;
+					this.selectItem.vaccinationDate = obj.curTime;
+				}else{
+					this.selectItem.vaccinationStatus = false;
+					this.selectItem.vaccinationDate = obj.curTime;
+				}
+				this.showPopup = false;
+				//更新接种证
+				this.updateRecord(this.selectItem);
 			}
 		}
 	}

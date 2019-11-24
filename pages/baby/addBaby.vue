@@ -18,26 +18,29 @@
 					:value="value"
 					placeholder="请输入宝宝出生日期"
 					:border="false"
-					@change="onChange"
+					:focus="onChange"
 				  />
-				<van-overlay :show="isShow" bind:click="onClickHide" >
+				<!-- <van-overlay :show="isShow" bind:click="onClickHide" > -->
 					<van-datetime-picker
 					  type="date"
 					  :value="currentDate"
 					  bind:input="onInput"
 					  :min-date="minDate"
+					  v-if="isShow"
 					  :formatter="formatter"
 					/>
-				</van-overlay>
+				<!-- </van-overlay> -->
 			</view>
 		</view>
 		<view class="">
-			<van-button color="#8686F7" round size="large" @click="toTask">添加</van-button>
+			<van-button color="#8686F7" round size="large" @click="savebabyBtn">添加</van-button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import babyApi from "../../service/baby";
+	
 	export default {
 		data() {
 			return {
@@ -64,10 +67,24 @@
 				  currentDate: event.detail
 				});
 			},
-			toTask(){
-				uni.reLaunch({
-				    url: '/pages/task/index'
-				});
+			savebabyBtn(){
+					let obj={
+						"birthday": "2019-11-24",
+						"sex": 0
+					};
+					babyApi.babySave(obj).then(res=>{
+						if(res.code == "0000"){
+							console.log(this.backUrl)
+							uni.switchTab({
+							    url: this.backUrl || '/pages/task/index'
+							});
+						}else{
+							uni.showToast({
+								icon:"none",
+							    title: res.responseMsg
+							});
+						}
+					});
 			}
 		},
 		onLoad(option){

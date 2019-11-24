@@ -1,10 +1,13 @@
 <template>
 	<view class="">
 		
-		<view v-if="!isLogin">
-			<LoginIn @isLogin="getLogin"></LoginIn>
+		<view v-if="isLogin==1">
+			<LoginIn></LoginIn>
 		</view>
-		<view v-if="isLogin" class="tackmain">
+		<view v-if="isLogin==2">
+			<Nobaby></Nobaby>
+		</view>
+		<view v-if="isLogin==3" class="tackmain">
 			<view class="header">
 				<text class="title">成长任务</text>
 				<view class="slider">
@@ -42,29 +45,33 @@
 
 <script>
 import LoginIn from './component/Login.vue';
+import Nobaby from './component/Nobaby.vue';
 import authApi from '../../service/auth';
+import babyApi from "../../service/baby";
 
 export default {
 	components:{
-		LoginIn
+		LoginIn,
+		Nobaby
 	},
 	data(){
 		return{
-			isLogin:false
+			isLogin:''
 		}
 	},
 	methods:{
 		//用户登录成功后执行的操作
-		getLogin(){
-			this.isLogin = true;
-		}
+		
 	},
 	async onLoad(options){
 	  const login = await authApi.login();
-	  if(login){
-		this.isLogin = true;
+	  const isHaveBaby = await babyApi.isHaveBaby();
+	  if(!login){
+		this.isLogin = 1;
+	  }else if(!isHaveBaby){
+		this.isLogin = 2; 
 	  }else{
-		this.isLogin = false; 
+		this.isLogin = 3;
 	  }
 	}
 }

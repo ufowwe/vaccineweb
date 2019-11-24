@@ -2,6 +2,7 @@ import storage from "./storage";
 
 const KEY_TOKEN = "_token";
 const KEY_USER_INFO = "user";
+const KEY_BABY_ID = "baby_Id"
 
 class global {
 
@@ -24,6 +25,14 @@ class global {
 
   static getUser () {
     return storage.get(KEY_USER_INFO);
+  }
+  
+  static setBabyId (id) {
+    return storage.set(KEY_BABY_ID, id);
+  }
+  
+  static getBabyId () {
+    return storage.get(KEY_BABY_ID);
   }
 }
 

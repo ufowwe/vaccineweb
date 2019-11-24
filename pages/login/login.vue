@@ -60,7 +60,7 @@
 			//用户登录 初始化页面数据
 			async init(userInfo){
 				const user = {
-					avatar:userInfo.avatar,
+					avatar:userInfo.avatarUrl,
 					nickName:userInfo.nickName,
 					sex:userInfo.gender
 				};
@@ -170,7 +170,6 @@
 		padding:0;
 		margin:70rpx 0;
 		.dialog-btn{
-			width:300rpx;
 			border:none;
 			&.dialog-btn-cacel{
 				border-top-left-radius:60rpx;

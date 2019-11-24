@@ -3,6 +3,7 @@
     "van-button": "/wxcomponents/vant/dist/button/index",
     "van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
     "van-image": "/wxcomponents/vant/dist/image/index",
-    "timer-picker": "/pages/components/timePicker"
+    "van-dialog": "/wxcomponents/vant/dist/dialog/index",
+    "t-picker": "/pages/components/timePicker"
   }
 }

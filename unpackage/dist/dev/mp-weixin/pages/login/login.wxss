@@ -70,7 +70,6 @@
   margin: 70rpx 0;
 }
 .tip-content.btn-content .dialog-btn {
-  width: 300rpx;
   border: none;
 }
 .tip-content.btn-content .dialog-btn.dialog-btn-cacel {

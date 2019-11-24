@@ -19,6 +19,27 @@
   font-size: 40rpx;
 }
 
+.header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.header image {
+  display: block;
+  width: 500rpx;
+  height: 700rpx;
+}
+.header .loginBtn {
+  width: 470rpx;
+  height: 110rpx;
+  font-size: 40rpx;
+}
+
 .tackmain .header {
   background: #8686F7;
   height: 450rpx;

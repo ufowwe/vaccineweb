@@ -7,10 +7,10 @@
 				<image src="../../static/img/desktop.jpg" mode=""></image>
 			</view>
 			<view class="groupmy">
-				<view class="line">
+				<view class="line" v-if="isShow">
 					<van-cell title-class="leftclass" :border="false" title="我的宝宝" icon="comment-o" is-link />
 				</view> 
-				<view class="line">
+				<view class="line" v-if="isShow">
 					<van-cell title-class="leftclass" :border="false" title="我的保单" icon="comment-o" is-link />
 				</view> 
 				<view class="line">
@@ -34,6 +34,7 @@
 
 <script>
 import Bar from '../../components/Bar.vue';
+import authApi from '../../service/auth';
 
 export default {
 	components:{
@@ -48,8 +49,17 @@ export default {
 				'isdisPlayNavTitle':true, //是否显示返回按钮，由于导航栏是共用的，把所有的东西封装好，
 				// 然后有些页面不需要的东西通过条件控制进行显示与隐藏
 				'navTitle':'标题栏' //导航标题
-			}
+			},
+			isShow: false,
 		}
+	},
+	async onLoad(options){
+	  const login = await authApi.login();
+	  if(login){
+		this.isShow = true;
+	  }else{
+		this.isShow = false
+	  }
 	}
 }
 </script>

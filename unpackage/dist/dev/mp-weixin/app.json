@@ -5,6 +5,7 @@
     "pages/inoculate/index",
     "pages/my/index",
     "pages/task/component/Login",
+    "pages/task/component/Nobaby",
     "pages/vaccine/component/VaPlan",
     "pages/vaccine/component/VaCertificate",
     "pages/login/login",
@@ -55,6 +56,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

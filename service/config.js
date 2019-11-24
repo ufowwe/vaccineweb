@@ -17,9 +17,12 @@ const config = {
 		},
 		vaccine:{
 			getRecordNoLogin:`${Base.baseUrl}/beforeLogin/getRecordNoLogin`,//获取接种证集合，未登录
-			getRecord:`${Base.baseUrl}/vaccineRecord/getRecord`,//获取接种证集合，已登录
-			getScheme:`${Base.baseUrl}/vaccineScheme/getScheme`,//获取接种基础方案
-			saveScheme:`${Base.baseUrl}/vaccineScheme/saveScheme`,//保存接种方案
+			getRecord:`${Base.appService}/vaccineRecord/getRecord`,//获取接种证集合，已登录
+			updateRecord:`${Base.appService}/vaccineRecord/updateRecord`,//更新接种证
+			
+			getScheme:`${Base.baseUrl}/beforeLogin/getSchemeNoLogin`, //获取接种基础方案 未登录
+			getScheme:`${Base.appService}/vaccineScheme/getScheme`,   //获取接基础方案 已登录
+			saveScheme:`${Base.appService}/vaccineScheme/saveScheme`,    //保存接种方案
 		}
 	}
 }

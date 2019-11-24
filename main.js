@@ -12,14 +12,14 @@ Vue.prototype.checkLogin = async function(path,type="nav"){
 			url:`/pages/login/login?backpath=${path}&type=${type}`
 		});
 		return false;
-	}else{
-		if(!isHaveBaby){
-			uni.reLaunch({
-			    url:'/pages/baby/addBaby?${path}&type=${type}'
-			});
-			return false;
-		}
 	}
+	if(!isHaveBaby){
+		uni.reLaunch({
+			url:'/pages/baby/addBaby?${path}&type=${type}'
+		});
+		return false;
+	}
+	return true;
 }
 
 const app = new Vue({

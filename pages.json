@@ -57,10 +57,17 @@
 					"van-button": "/wxcomponents/vant/dist/button/index"
 				}
 			}
+		}, {
+			"path": "pages/task/component/Nobaby",
+			"style": {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
 		}
 	    ,{
-            "path" : "pages/vaccine/component/VaPlan",
-            "style" : {
+			"path" : "pages/vaccine/component/VaPlan",
+			"style" : {
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
@@ -71,12 +78,13 @@
 			}
         }
         ,{
-            "path" : "pages/vaccine/component/VaCertificate",
-            "style" : {
+			"path" : "pages/vaccine/component/VaCertificate",
+			"style" : {
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-checkbox":"/wxcomponents/vant/dist/checkbox/index",
-					"van-image":"/wxcomponents/vant/dist/image/index"
+					"van-image":"/wxcomponents/vant/dist/image/index",
+					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
 				}
 			}
 			
