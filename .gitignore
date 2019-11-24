@@ -14,5 +14,3 @@ $RECYCLE.BIN/
 node_modules/
 .project
 unpackage/
-/unpackage/dist/**
-/wxcomponents/vant/dist/
