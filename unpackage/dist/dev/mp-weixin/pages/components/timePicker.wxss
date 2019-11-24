@@ -1,0 +1,12 @@
+.popup-top {
+  padding: 20rpx;
+  overflow: hidden;
+}
+.popup-top .popup-check {
+  margin-right: 30rpx;
+  display: inline-block;
+}
+.popup-top::after {
+  clear: both;
+}
+
