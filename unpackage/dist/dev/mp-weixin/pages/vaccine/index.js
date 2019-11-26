@@ -592,9 +592,9 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
     updateRecord: function updateRecord(obj) {var _this3 = this;
       var param = {
         id: this.selectItem.vaccineSchemeId,
-        vaccinationDate: obj.vaccinationStatus ? "" : obj.vaccinationDate,
-        vaccinationDateActual: obj.vaccinationStatus ? obj.vaccinationDate : "",
-        vaccinationStatus: obj.status };
+        vaccinationDate: obj.status ? "" : obj.vaccinationDate,
+        vaccinationDateActual: obj.status ? obj.vaccinationDate : "",
+        status: obj.status };
 
       _vaccine.default.updateRecord(param).then(function (res) {
         if (res.code == "0000") {
@@ -630,7 +630,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
       this.showPopup = true;
       this.selectItem = item;
       var popData = {
-        status: item.vaccinationStatus,
+        status: item.status,
         curTime: item.vaccinationDate };
 
       this.$nextTick(function () {
@@ -644,17 +644,17 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
       this.updateRecord(this.selectItem);
     },
     doClear: function doClear() {
-      this.selectItem.vaccinationStatus = false;
+      this.selectItem.status = false;
       this.selectItem.vaccinationDate = "";
       this.showCancelDialog = false;
     },
     //从时间组件传来的数据
     getSelect: function getSelect(obj) {
       if (obj.status) {
-        this.selectItem.vaccinationStatus = true;
+        this.selectItem.status = true;
         this.selectItem.vaccinationDate = obj.curTime;
       } else {
-        this.selectItem.vaccinationStatus = false;
+        this.selectItem.status = false;
         this.selectItem.vaccinationDate = obj.curTime;
       }
       this.showPopup = false;
@@ -673,7 +673,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var xflSelect = function xflSelect() {return __webpack_require__.e(/*! import() | components/xfl-select */ "components/xfl-select").then(__webpack_require__.bind(null, /*! ../../../components/xfl-select.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/components/xfl-select.vue"));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
 
 
 
@@ -728,1368 +728,409 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/baby.js"));
+var _global = _interopRequireDefault(__webpack_require__(/*! ../../../utils/global.js */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/utils/global.js"));
+var _auth = _interopRequireDefault(__webpack_require__(/*! ../../../service/auth */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/auth.js"));
+var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/vaccine */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/vaccine.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var xflSelect = function xflSelect() {return __webpack_require__.e(/*! import() | pages/components/xfl-select */ "pages/components/xfl-select").then(__webpack_require__.bind(null, /*! ../../components/xfl-select.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/components/xfl-select.vue"));};var _default =
 {
   components: {
     xflSelect: xflSelect },
 
   data: function data() {
     return {
-      list: [//要展示的数据
-      '国家免费方案',
-      // {value: '香蕉', disabled: true},
-      '常规推荐方案',
-      '最优推荐方案'],
-
-      num: 1000,
-      hospitalTimes: '',
-      totalDosageNum: '',
-      vaccineNum: '',
-      diseaseNum: '',
-      data: {
-        "code": "0000",
-        "responseMsg": "查询成功",
-        "data": {
-          "hospitalTimes": 12,
-          "totalDosageNum": 24,
-          "vaccineNum": 38,
-          "diseaseNum": 34,
-          "columnList": [
-          {
-            "vaccinationAge": "出生",
-            "monthNumS": 0,
-            "monthNumE": 0 },
-
-          {
-            "vaccinationAge": "1月龄",
-            "monthNumS": 1,
-            "monthNumE": 1 },
-
-          {
-            "vaccinationAge": "2月龄",
-            "monthNumS": 2,
-            "monthNumE": 2 },
-
-          {
-            "vaccinationAge": "3月龄",
-            "monthNumS": 3,
-            "monthNumE": 3 },
-
-          {
-            "vaccinationAge": "4月龄",
-            "monthNumS": 4,
-            "monthNumE": 4 },
-
-          {
-            "vaccinationAge": "5月龄",
-            "monthNumS": 5,
-            "monthNumE": 5 },
-
-          {
-            "vaccinationAge": "6月龄",
-            "monthNumS": 6,
-            "monthNumE": 6 },
-
-          {
-            "vaccinationAge": "7月龄",
-            "monthNumS": 7,
-            "monthNumE": 7 },
-
-          {
-            "vaccinationAge": "8月龄",
-            "monthNumS": 8,
-            "monthNumE": 8 },
-
-          {
-            "vaccinationAge": "9月龄",
-            "monthNumS": 9,
-            "monthNumE": 9 },
-
-          {
-            "vaccinationAge": "12月龄",
-            "monthNumS": 12,
-            "monthNumE": 12 },
-
-          {
-            "vaccinationAge": "14月龄",
-            "monthNumS": 14,
-            "monthNumE": 14 },
-
-          {
-            "vaccinationAge": "18~24月龄",
-            "monthNumS": 18,
-            "monthNumE": 24 },
-
-          {
-            "vaccinationAge": "18月龄",
-            "monthNumS": 18,
-            "monthNumE": 18 },
-
-          {
-            "vaccinationAge": "2周岁",
-            "monthNumS": 24,
-            "monthNumE": 24 },
-
-          {
-            "vaccinationAge": "26月龄",
-            "monthNumS": 26,
-            "monthNumE": 26 },
-
-          {
-            "vaccinationAge": "30月龄",
-            "monthNumS": 30,
-            "monthNumE": 30 },
-
-          {
-            "vaccinationAge": "3周岁",
-            "monthNumS": 36,
-            "monthNumE": 36 },
-
-          {
-            "vaccinationAge": "4周岁",
-            "monthNumS": 48,
-            "monthNumE": 48 },
-
-          {
-            "vaccinationAge": "4~6周岁",
-            "monthNumS": 48,
-            "monthNumE": 72 },
-
-          {
-            "vaccinationAge": "5周岁",
-            "monthNumS": 60,
-            "monthNumE": 60 },
-
-          {
-            "vaccinationAge": "6周岁",
-            "monthNumS": 72,
-            "monthNumE": 72 },
-
-          {
-            "vaccinationAge": "7周岁",
-            "monthNumS": 84,
-            "monthNumE": 84 },
-
-          {
-            "vaccinationAge": "8周岁",
-            "monthNumS": 96,
-            "monthNumE": 96 },
-
-          {
-            "vaccinationAge": "9周岁",
-            "monthNumS": 108,
-            "monthNumE": 108 },
-
-          {
-            "vaccinationAge": "9.5周岁",
-            "monthNumS": 114,
-            "monthNumE": 114 }],
-
-
-          "schemeVaccineInfoList": [
-          {
-            "vaccineName": "乙肝疫苗",
-            "vaccineDetailId": 1,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 3,
-            "status": 1,
-            "vaccineNum": 3,
-            "price": 0,
-            "cellMap": {
-              "1_0": {
-                "vaccineDetailId": 1,
-                "vaccineSchemeId": 1,
-                "times": 1,
-                "monthNumS": 0,
-                "monthNumE": 0,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "1_1": {
-                "vaccineDetailId": 1,
-                "vaccineSchemeId": 2,
-                "times": 2,
-                "monthNumS": 1,
-                "monthNumE": 1,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "1_6": {
-                "vaccineDetailId": 1,
-                "vaccineSchemeId": 3,
-                "times": 3,
-                "monthNumS": 6,
-                "monthNumE": 6,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "卡介苗",
-            "vaccineDetailId": 2,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 1,
-            "status": 1,
-            "vaccineNum": 1,
-            "price": 0,
-            "cellMap": {
-              "2_0": {
-                "vaccineDetailId": 2,
-                "vaccineSchemeId": 4,
-                "times": 1,
-                "monthNumS": 0,
-                "monthNumE": 0,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "脊灰灭活疫苗(1)",
-            "vaccineDetailId": 5,
-            "sameEffect": "12",
-            "relevant": "12",
-            "diseaseNum": 1,
-            "dosageTimes": 1,
-            "status": 1,
-            "vaccineNum": 1,
-            "price": 0,
-            "cellMap": {
-              "5_2": {
-                "vaccineDetailId": 5,
-                "vaccineSchemeId": 5,
-                "times": 1,
-                "monthNumS": 2,
-                "monthNumE": 2,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "脊灰灭活疫苗(2)",
-            "vaccineDetailId": 40,
-            "sameEffect": null,
-            "relevant": "6,12",
-            "diseaseNum": 1,
-            "dosageTimes": 3,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 198,
-            "cellMap": {
-              "40_3": {
-                "vaccineDetailId": 40,
-                "vaccineSchemeId": 6,
-                "times": 1,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "40_4": {
-                "vaccineDetailId": 40,
-                "vaccineSchemeId": 7,
-                "times": 2,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "40_48": {
-                "vaccineDetailId": 40,
-                "vaccineSchemeId": 8,
-                "times": 3,
-                "monthNumS": 48,
-                "monthNumE": 48,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "脊灰减毒疫苗",
-            "vaccineDetailId": 6,
-            "sameEffect": "12,40",
-            "relevant": "12,40",
-            "diseaseNum": 1,
-            "dosageTimes": 3,
-            "status": 1,
-            "vaccineNum": 3,
-            "price": 0,
-            "cellMap": {
-              "6_3": {
-                "vaccineDetailId": 6,
-                "vaccineSchemeId": 9,
-                "times": 1,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "6_4": {
-                "vaccineDetailId": 6,
-                "vaccineSchemeId": 10,
-                "times": 2,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "6_48": {
-                "vaccineDetailId": 6,
-                "vaccineSchemeId": 11,
-                "times": 3,
-                "monthNumS": 48,
-                "monthNumE": 48,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "Hib结合疫苗",
-            "vaccineDetailId": 7,
-            "sameEffect": null,
-            "relevant": "11,12,28",
-            "diseaseNum": 1,
-            "dosageTimes": 4,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 106,
-            "cellMap": {
-              "7_2": {
-                "vaccineDetailId": 7,
-                "vaccineSchemeId": 12,
-                "times": 1,
-                "monthNumS": 2,
-                "monthNumE": 2,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "7_3": {
-                "vaccineDetailId": 7,
-                "vaccineSchemeId": 13,
-                "times": 2,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "7_4": {
-                "vaccineDetailId": 7,
-                "vaccineSchemeId": 14,
-                "times": 3,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "7_18": {
-                "vaccineDetailId": 7,
-                "vaccineSchemeId": 15,
-                "times": 4,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "百白破疫苗",
-            "vaccineDetailId": 8,
-            "sameEffect": "11,12",
-            "relevant": "11,12",
-            "diseaseNum": 3,
-            "dosageTimes": 4,
-            "status": 1,
-            "vaccineNum": 12,
-            "price": 0,
-            "cellMap": {
-              "8_3": {
-                "vaccineDetailId": 8,
-                "vaccineSchemeId": 16,
-                "times": 1,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "8_4": {
-                "vaccineDetailId": 8,
-                "vaccineSchemeId": 17,
-                "times": 2,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "8_5": {
-                "vaccineDetailId": 8,
-                "vaccineSchemeId": 18,
-                "times": 3,
-                "monthNumS": 5,
-                "monthNumE": 5,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "8_18": {
-                "vaccineDetailId": 8,
-                "vaccineSchemeId": 19,
-                "times": 4,
-                "monthNumS": 18,
-                "monthNumE": 24,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "白破疫苗",
-            "vaccineDetailId": 9,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 2,
-            "dosageTimes": 1,
-            "status": 1,
-            "vaccineNum": 2,
-            "price": 0,
-            "cellMap": {
-              "9_72": {
-                "vaccineDetailId": 9,
-                "vaccineSchemeId": 20,
-                "times": 1,
-                "monthNumS": 72,
-                "monthNumE": 72,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "13价肺炎结合疫苗",
-            "vaccineDetailId": 10,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 4,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 698,
-            "cellMap": {
-              "10_2": {
-                "vaccineDetailId": 10,
-                "vaccineSchemeId": 21,
-                "times": 1,
-                "monthNumS": 2,
-                "monthNumE": 2,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "10_3": {
-                "vaccineDetailId": 10,
-                "vaccineSchemeId": 22,
-                "times": 2,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "10_4": {
-                "vaccineDetailId": 10,
-                "vaccineSchemeId": 23,
-                "times": 3,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "10_12": {
-                "vaccineDetailId": 10,
-                "vaccineSchemeId": 24,
-                "times": 4,
-                "monthNumS": 12,
-                "monthNumE": 12,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "AC-Hib三联疫苗",
-            "vaccineDetailId": 28,
-            "sameEffect": null,
-            "relevant": "7,12,20,22",
-            "diseaseNum": 2,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 182,
-            "cellMap": {
-              "28_6": {
-                "vaccineDetailId": 28,
-                "vaccineSchemeId": 25,
-                "times": 1,
-                "monthNumS": 6,
-                "monthNumE": 6,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "28_9": {
-                "vaccineDetailId": 28,
-                "vaccineSchemeId": 26,
-                "times": 2,
-                "monthNumS": 9,
-                "monthNumE": 9,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "四联疫苗",
-            "vaccineDetailId": 11,
-            "sameEffect": null,
-            "relevant": "7,8,12",
-            "diseaseNum": 4,
-            "dosageTimes": 4,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 285,
-            "cellMap": {
-              "11_3": {
-                "vaccineDetailId": 11,
-                "vaccineSchemeId": 27,
-                "times": 1,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "11_4": {
-                "vaccineDetailId": 11,
-                "vaccineSchemeId": 28,
-                "times": 2,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "11_5": {
-                "vaccineDetailId": 11,
-                "vaccineSchemeId": 29,
-                "times": 3,
-                "monthNumS": 5,
-                "monthNumE": 5,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "11_18": {
-                "vaccineDetailId": 11,
-                "vaccineSchemeId": 30,
-                "times": 4,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "五联疫苗",
-            "vaccineDetailId": 12,
-            "sameEffect": null,
-            "relevant": "5,40,6,7,8,11,28",
-            "diseaseNum": 5,
-            "dosageTimes": 4,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 599,
-            "cellMap": {
-              "12_2": {
-                "vaccineDetailId": 12,
-                "vaccineSchemeId": 31,
-                "times": 1,
-                "monthNumS": 2,
-                "monthNumE": 2,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "12_3": {
-                "vaccineDetailId": 12,
-                "vaccineSchemeId": 32,
-                "times": 2,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "12_4": {
-                "vaccineDetailId": 12,
-                "vaccineSchemeId": 33,
-                "times": 3,
-                "monthNumS": 4,
-                "monthNumE": 4,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "12_18": {
-                "vaccineDetailId": 12,
-                "vaccineSchemeId": 34,
-                "times": 4,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "单价轮状病毒疫苗",
-            "vaccineDetailId": 13,
-            "sameEffect": null,
-            "relevant": "14",
-            "diseaseNum": 1,
-            "dosageTimes": 3,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 168,
-            "cellMap": {
-              "13_2": {
-                "vaccineDetailId": 13,
-                "vaccineSchemeId": 35,
-                "times": 1,
-                "monthNumS": 2,
-                "monthNumE": 2,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "13_14": {
-                "vaccineDetailId": 13,
-                "vaccineSchemeId": 36,
-                "times": 2,
-                "monthNumS": 14,
-                "monthNumE": 14,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "13_26": {
-                "vaccineDetailId": 13,
-                "vaccineSchemeId": 37,
-                "times": 3,
-                "monthNumS": 26,
-                "monthNumE": 26,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "5价轮状病毒疫苗 ",
-            "vaccineDetailId": 14,
-            "sameEffect": null,
-            "relevant": "13",
-            "diseaseNum": 1,
-            "dosageTimes": 3,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 280,
-            "cellMap": {
-              "14_1": {
-                "vaccineDetailId": 14,
-                "vaccineSchemeId": 38,
-                "times": 1,
-                "monthNumS": 1,
-                "monthNumE": 1,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "14_2": {
-                "vaccineDetailId": 14,
-                "vaccineSchemeId": 39,
-                "times": 2,
-                "monthNumS": 2,
-                "monthNumE": 2,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "14_3": {
-                "vaccineDetailId": 14,
-                "vaccineSchemeId": 40,
-                "times": 3,
-                "monthNumS": 3,
-                "monthNumE": 3,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "麻风疫苗",
-            "vaccineDetailId": 15,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 2,
-            "dosageTimes": 1,
-            "status": 1,
-            "vaccineNum": 2,
-            "price": 0,
-            "cellMap": {
-              "15_8": {
-                "vaccineDetailId": 15,
-                "vaccineSchemeId": 41,
-                "times": 1,
-                "monthNumS": 8,
-                "monthNumE": 8,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "麻腮风疫苗",
-            "vaccineDetailId": 16,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 3,
-            "dosageTimes": 2,
-            "status": 1,
-            "vaccineNum": 6,
-            "price": 72,
-            "cellMap": {
-              "16_18": {
-                "vaccineDetailId": 16,
-                "vaccineSchemeId": 42,
-                "times": 1,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "16_72": {
-                "vaccineDetailId": 16,
-                "vaccineSchemeId": 43,
-                "times": 2,
-                "monthNumS": 72,
-                "monthNumE": 72,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "腮腺炎疫苗",
-            "vaccineDetailId": 17,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 1,
-            "status": 1,
-            "vaccineNum": 1,
-            "price": 0,
-            "cellMap": {
-              "17_48": {
-                "vaccineDetailId": 17,
-                "vaccineSchemeId": 44,
-                "times": 1,
-                "monthNumS": 48,
-                "monthNumE": 72,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "乙脑减毒疫苗",
-            "vaccineDetailId": 18,
-            "sameEffect": null,
-            "relevant": "19",
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 1,
-            "vaccineNum": 2,
-            "price": 0,
-            "cellMap": {
-              "18_8": {
-                "vaccineDetailId": 18,
-                "vaccineSchemeId": 45,
-                "times": 1,
-                "monthNumS": 8,
-                "monthNumE": 8,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "18_24": {
-                "vaccineDetailId": 18,
-                "vaccineSchemeId": 46,
-                "times": 2,
-                "monthNumS": 24,
-                "monthNumE": 24,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "乙脑灭活疫苗",
-            "vaccineDetailId": 19,
-            "sameEffect": null,
-            "relevant": "18",
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 45,
-            "cellMap": {
-              "19_8": {
-                "vaccineDetailId": 19,
-                "vaccineSchemeId": 47,
-                "times": 1,
-                "monthNumS": 8,
-                "monthNumE": 8,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "19_24": {
-                "vaccineDetailId": 19,
-                "vaccineSchemeId": 48,
-                "times": 2,
-                "monthNumS": 24,
-                "monthNumE": 24,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "A群流脑多糖疫苗",
-            "vaccineDetailId": 20,
-            "sameEffect": "22,28",
-            "relevant": "22",
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 1,
-            "vaccineNum": 2,
-            "price": 0,
-            "cellMap": {
-              "20_6": {
-                "vaccineDetailId": 20,
-                "vaccineSchemeId": 49,
-                "times": 1,
-                "monthNumS": 6,
-                "monthNumE": 6,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "20_9": {
-                "vaccineDetailId": 20,
-                "vaccineSchemeId": 50,
-                "times": 2,
-                "monthNumS": 9,
-                "monthNumE": 9,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "AC群流脑多糖疫苗",
-            "vaccineDetailId": 21,
-            "sameEffect": "23",
-            "relevant": "23",
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 1,
-            "vaccineNum": 2,
-            "price": 140,
-            "cellMap": {
-              "21_36": {
-                "vaccineDetailId": 21,
-                "vaccineSchemeId": 51,
-                "times": 1,
-                "monthNumS": 36,
-                "monthNumE": 36,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "21_72": {
-                "vaccineDetailId": 21,
-                "vaccineSchemeId": 52,
-                "times": 2,
-                "monthNumS": 72,
-                "monthNumE": 72,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "AC群流脑结合疫苗",
-            "vaccineDetailId": 22,
-            "sameEffect": null,
-            "relevant": "20,28",
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 0,
-            "cellMap": {
-              "22_6": {
-                "vaccineDetailId": 22,
-                "vaccineSchemeId": 53,
-                "times": 1,
-                "monthNumS": 6,
-                "monthNumE": 6,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "22_9": {
-                "vaccineDetailId": 22,
-                "vaccineSchemeId": 54,
-                "times": 2,
-                "monthNumS": 9,
-                "monthNumE": 9,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "4价流脑多糖疫苗",
-            "vaccineDetailId": 23,
-            "sameEffect": null,
-            "relevant": "21",
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 0,
-            "cellMap": {
-              "23_36": {
-                "vaccineDetailId": 23,
-                "vaccineSchemeId": 55,
-                "times": 1,
-                "monthNumS": 36,
-                "monthNumE": 36,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "23_72": {
-                "vaccineDetailId": 23,
-                "vaccineSchemeId": 56,
-                "times": 2,
-                "monthNumS": 72,
-                "monthNumE": 72,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "甲肝减毒疫苗",
-            "vaccineDetailId": 24,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 1,
-            "status": 1,
-            "vaccineNum": 1,
-            "price": 115,
-            "cellMap": {
-              "24_18": {
-                "vaccineDetailId": 24,
-                "vaccineSchemeId": 57,
-                "times": 1,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 1,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "甲肝灭活疫苗",
-            "vaccineDetailId": 25,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 61,
-            "cellMap": {
-              "25_18": {
-                "vaccineDetailId": 25,
-                "vaccineSchemeId": 58,
-                "times": 1,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "25_24": {
-                "vaccineDetailId": 25,
-                "vaccineSchemeId": 59,
-                "times": 2,
-                "monthNumS": 24,
-                "monthNumE": 24,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "EV71手足口疫苗",
-            "vaccineDetailId": 26,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 168,
-            "cellMap": {
-              "26_6": {
-                "vaccineDetailId": 26,
-                "vaccineSchemeId": 60,
-                "times": 1,
-                "monthNumS": 6,
-                "monthNumE": 6,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "26_7": {
-                "vaccineDetailId": 26,
-                "vaccineSchemeId": 61,
-                "times": 2,
-                "monthNumS": 7,
-                "monthNumE": 7,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "23价肺炎多糖疫苗",
-            "vaccineDetailId": 27,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 1,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 215,
-            "cellMap": {
-              "27_24": {
-                "vaccineDetailId": 27,
-                "vaccineSchemeId": 62,
-                "times": 1,
-                "monthNumS": 24,
-                "monthNumE": 24,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "水痘疫苗",
-            "vaccineDetailId": 29,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 136,
-            "cellMap": {
-              "29_12": {
-                "vaccineDetailId": 29,
-                "vaccineSchemeId": 63,
-                "times": 1,
-                "monthNumS": 12,
-                "monthNumE": 12,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "29_48": {
-                "vaccineDetailId": 29,
-                "vaccineSchemeId": 64,
-                "times": 2,
-                "monthNumS": 48,
-                "monthNumE": 48,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "2价HPV疫苗",
-            "vaccineDetailId": 30,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 2,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 580,
-            "cellMap": {
-              "30_108": {
-                "vaccineDetailId": 30,
-                "vaccineSchemeId": 65,
-                "times": 1,
-                "monthNumS": 108,
-                "monthNumE": 108,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "30_114": {
-                "vaccineDetailId": 30,
-                "vaccineSchemeId": 66,
-                "times": 2,
-                "monthNumS": 114,
-                "monthNumE": 114,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "4价流感疫苗",
-            "vaccineDetailId": 31,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 7,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 156,
-            "cellMap": {
-              "31_36": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 67,
-                "times": 1,
-                "monthNumS": 36,
-                "monthNumE": 36,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "31_48": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 68,
-                "times": 2,
-                "monthNumS": 48,
-                "monthNumE": 48,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "31_60": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 69,
-                "times": 3,
-                "monthNumS": 60,
-                "monthNumE": 60,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "31_72": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 70,
-                "times": 4,
-                "monthNumS": 72,
-                "monthNumE": 72,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "31_84": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 71,
-                "times": 5,
-                "monthNumS": 84,
-                "monthNumE": 84,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "31_96": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 72,
-                "times": 6,
-                "monthNumS": 96,
-                "monthNumE": 96,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "31_108": {
-                "vaccineDetailId": 31,
-                "vaccineSchemeId": 73,
-                "times": 7,
-                "monthNumS": 108,
-                "monthNumE": 108,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } },
-
-
-
-          {
-            "vaccineName": "3价流感疫苗",
-            "vaccineDetailId": 32,
-            "sameEffect": null,
-            "relevant": null,
-            "diseaseNum": 1,
-            "dosageTimes": 4,
-            "status": 0,
-            "vaccineNum": 0,
-            "price": 40,
-            "cellMap": {
-              "32_6": {
-                "vaccineDetailId": 32,
-                "vaccineSchemeId": 74,
-                "times": 1,
-                "monthNumS": 6,
-                "monthNumE": 6,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "32_7": {
-                "vaccineDetailId": 32,
-                "vaccineSchemeId": 75,
-                "times": 1,
-                "monthNumS": 7,
-                "monthNumE": 7,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "32_18": {
-                "vaccineDetailId": 32,
-                "vaccineSchemeId": 76,
-                "times": 1,
-                "monthNumS": 18,
-                "monthNumE": 18,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 },
-
-              "32_30": {
-                "vaccineDetailId": 32,
-                "vaccineSchemeId": 77,
-                "times": 1,
-                "monthNumS": 30,
-                "monthNumE": 30,
-                "status": 0,
-                "schemeType": 1,
-                "provinceId": 1 } } }] } } };
-
-
-
-
-
-
+      baby: {}, //当前宝宝
+      showSelect: false,
+      list: [
+      { value: '国家免费方案', type: 1 },
+      { value: '常规推荐方案', type: 2 },
+      { value: '最优推荐方案', type: 3 }],
+
+      initValue: "", //下拉菜单默认显示的数据
+      isLogin: false, //是否已登陆
+      isHaveBaby: false, //是否有宝宝
+      isHavePlan: false, //是否有接种方案
+      noLoginData: {}, //没有登录 或者 没有宝宝的时候 页面显示的数据
+      loginData: {}, //有宝宝的时候 页面显示的数据
+      schemeListMap: {}, //疫苗map
+
+      num: 0,
+      hospitalTimes: 0,
+      totalDosageNum: 0,
+      vaccineNum: 0,
+      diseaseNum: 0 };
 
   },
-  mounted: function mounted() {
-    this.hospitalTimes = this.data.data.hospitalTimes;
-    this.totalDosageNum = this.data.data.totalDosageNum;
-    this.vaccineNum = this.data.data.vaccineNum;
-    this.diseaseNum = this.data.data.diseaseNum;
-  },
+  mounted: function () {var _mounted = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                _auth.default.login());case 2:this.isLogin = _context.sent;if (!
+              this.isLogin) {_context.next = 18;break;}_context.next = 6;return (
+                _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
+              this.isHaveBaby) {_context.next = 11;break;}
+              this.getNoLoginData();_context.next = 16;break;case 11:
+
+              obj = {
+                id: _global.default.getBabyId() || 14 };_context.next = 14;return (
+
+                _baby.default.getBabyDetail(obj));case 14:this.baby = _context.sent;
+              this.getLoginData(this.baby.schemeType);case 16:_context.next = 19;break;case 18:
+
+
+              this.getNoLoginData();case 19:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
+
+
   methods: {
+    //获取未登录是页面列表数据
+    getNoLoginData: function getNoLoginData() {var _this = this;
+      var obj = {
+        provinceId: 0,
+        schemeType: 0 };
+
+      _vaccine.default.getSchemeNoLogin(obj).then(function (res) {
+        if (res.code == "0000") {
+          if (res.data) {
+            _this.noLoginData = res.data;
+            _this.setOrginNum(res.data);
+            _this.showSelect = true;
+          } else {
+            _this.noLoginData = {};
+          }
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: res.responseMsg });
+
+        }
+      });
+    },
+    //登陆时 获取页面列表数据
+    getLoginData: function getLoginData(type) {var _this2 = this;
+      var obj = {
+        babyId: _global.default.getBabyId() || 14,
+        schemeType: type || 1 };
+
+      _vaccine.default.getScheme(obj).then(function (res) {
+        if (res.code == "0000") {
+          if (res.data) {
+            _this2.loginData = res.data;
+            _this2.setOrginNum(res.data);
+            _this2.setSelectValue(_this2.baby.schemeType || 1);
+            //创建疫苗map
+            if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
+              _this2.creatSchemeListMap(res.data.schemeVaccineInfoList);
+              _this2.setPrice();
+            }
+            _this2.showSelect = true;
+          } else {
+            _this2.loginData = {};
+          }
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: res.responseMsg });
+
+        }
+      });
+    },
+    //创建疫苗map
+    creatSchemeListMap: function creatSchemeListMap(list) {
+      this.schemeListMap = {};
+      for (var i = 0; i < list.length; i++) {
+        this.schemeListMap[list[i].vaccineDetailId] = list[i];
+      }
+    },
+    //点击表格左侧设置状态
+    changeStatus: function changeStatus(status, item) {
+      switch (status) {
+        case 0:
+          this.setUnSelectStatus(item);
+          break;
+        case 1:
+          this.setSelectStatus(item);
+          break;
+        case 4:
+          this.showUnCancelMsg(item);
+          break;
+        case 5:
+          this.showUnCancelMsg(item);
+          break;
+        case 6:
+          this.showUnCancelMsg(item);
+          break;
+        default:
+          break;}
+
+      this.setPrice();
+    },
+    //计算总钱数
+    setPrice: function setPrice() {
+      var count = 0;
+      for (var key in this.schemeListMap) {
+        if (this.schemeListMap[key].status == 1 || this.schemeListMap[key].status == 4 || this.schemeListMap[key].status == 5 || this.schemeListMap[key].status == 6) {
+          count += Number(this.schemeListMap[key].price);
+        }
+      }
+      this.num = count;
+    },
+    //点击 已接种 已部分接种 或者遗漏接种的疫苗
+    showUnCancelMsg: function showUnCancelMsg() {
+      uni.showToast({
+        icon: "none",
+        title: "该疫苗已开始接种，无法取消" });
+
+    },
+    //点击已选择的疫苗
+    setSelectStatus: function setSelectStatus(obj) {
+      obj.status = 0; //取消当前疫苗选中状态
+      if (obj.cellMap) {
+        for (var key in obj.cellMap) {
+          obj.cellMap[key].status = 0;
+        }
+      }
+      if (obj.sameEffect) {
+        var arr = obj.sameEffect.split(",");
+        for (var i = 0; i < arr.length; i++) {
+          if (this.schemeListMap[arr[i]].status == 2) {
+            this.schemeListMap[arr[i]].status = 0; //取消其同效药标识
+            if (this.schemeListMap[arr[i]].cellMap) {
+              for (var key in this.schemeListMap[arr[i]].cellMap) {
+                this.schemeListMap[arr[i]].cellMap[key].status = 0;
+              }
+            }
+          }
+        }
+      }
+    },
+    //点击未选择的疫苗
+    setUnSelectStatus: function setUnSelectStatus(obj) {
+      //先判断有没有相关疫苗
+      var text = "";
+      var flag = true; //该疫苗是否可以被选择
+      if (obj.relevant) {
+        var arr = obj.relevant.split(",");
+        for (var i = 0; i < arr.length; i++) {
+          //如果相关疫苗 已经接种 或者部分接种 或者遗漏接种 改疫苗都不可选择
+          if (this.schemeListMap[arr[i]].status == 4 || this.schemeListMap[arr[i]].status == 5 || this.schemeListMap[arr[i]].status == 6) {//如果相关疫苗处于未选择状态
+            flag = false;
+            text = "该疫苗已选择相关疫苗，并且同效疫苗已接种无法取消";
+            break;
+          }
+          //如果相关疫苗 处于已选相关疫苗、 已种相关疫苗、已选择状态时  再去判断该疫苗的同效疫苗状态
+          if (this.schemeListMap[arr[i]].status == 2 || this.schemeListMap[arr[i]].status == 3 || this.schemeListMap[arr[i]].status == 1) {
+            var ret = this.judgeSameInfo(obj); //判断该疫苗的同效疫苗状态
+            if (!ret.flag) {
+              flag = false;
+              text = ret.msg;
+              break;
+            }
+          }
+        }
+        if (flag) {
+          obj.status = 1;
+          if (obj.cellMap) {
+            for (var key in obj.cellMap) {
+              obj.cellMap[key].status = 1;
+            }
+          }
+          for (var i = 0; i < arr.length; i++) {
+            if (this.schemeListMap[arr[i]].status == 1) {//自动取消相关疫苗
+              this.schemeListMap[arr[i]].status = 0;
+              if (this.schemeListMap[arr[i]].cellMap) {
+                for (var key in this.schemeListMap[arr[i]].cellMap) {
+                  this.schemeListMap[arr[i]].cellMap[key].status = 0;
+                }
+              }
+            }
+          }
+          this.setSameInfoStatus(obj);
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: text });
+
+        }
+      } else {
+        var _ret = this.judgeSameInfo(obj);
+        if (!_ret.flag) {
+          uni.showToast({
+            icon: "none",
+            title: _ret.msg });
+
+        } else {
+          obj.status = 1;
+          this.setSameInfoStatus(obj);
+          if (obj.cellMap) {
+            for (var key in obj.cellMap) {
+              obj.cellMap[key].status = 1;
+            }
+          }
+        }
+      }
+    },
+    //选择该疫苗 设置同效疫苗状态
+    setSameInfoStatus: function setSameInfoStatus(obj) {
+      if (obj.sameEffect) {
+        var arr = obj.sameEffect.split(",");
+        for (var i = 0; i < arr.length; i++) {
+          if (this.schemeListMap[arr[i]].status == 0) {
+            this.schemeListMap[arr[i]].status = 2;
+            if (this.schemeListMap[arr[i]].cellMap) {
+              for (var key in this.schemeListMap[arr[i]].cellMap) {
+                this.schemeListMap[arr[i]].cellMap[key].status = 2;
+              }
+            }
+          }
+        }
+      }
+    },
+    //判断同效 有没有被选择
+    judgeSameInfo: function judgeSameInfo(obj) {
+      var flag = true;
+      var text = "";
+      if (obj.sameEffect) {
+        var arr = obj.sameEffect.split(",");
+        for (var i = 0; i < arr.length; i++) {
+          //如果同效疫苗 已经接种 或者部分接种 或者遗漏接种 该疫苗都不可选择
+          if (this.schemeListMap[arr[i]].status == 4 || this.schemeListMap[arr[i]].status == 5 || this.schemeListMap[arr[i]].status == 6) {
+            flag = false;
+            text = "该疫苗已选择同效疫苗，并且同效疫苗已接种";
+            break;
+          }
+          //如果同效疫苗
+          if (this.schemeListMap[arr[i]].status == 2) {
+            flag = false;
+            break;
+            text = "该疫苗已选择同效疫苗，请取消同效疫苗后再进行选择";
+          }
+        }
+      } else {
+        flag = true;
+      }
+      return {
+        flag: flag,
+        msg: text };
+
+    },
+
+    //设置头部初始数量
+    setOrginNum: function setOrginNum(data) {
+      this.hospitalTimes = data.hospitalTimes;
+      this.totalDosageNum = data.totalDosageNum;
+      this.vaccineNum = data.vaccineNum;
+      this.diseaseNum = data.diseaseNum;
+    },
+    //设置页面下拉菜单回显值
+    setSelectValue: function setSelectValue(type) {
+      if (type == 0) {
+        this.initValue = "";
+      } else if (type == 1) {
+        this.initValue = "国家免费方案";
+      } else if (type == 2) {
+        this.initValue = "常规推荐方案";
+      } else if (type == 3) {
+        this.initValue = "最优推荐方案";
+      } else if (type == 4) {
+        this.initValue = "自定义方案";
+        var flag = false;
+        for (var i = 0; i < this.list.length; i++) {
+          if (this.list[i].type == 4) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) {
+          this.list.push({
+            value: "自定义方案",
+            type: 4 });
+
+        }
+        Array.from(new Set(this.list));
+      }
+    },
+    //未登录或者无宝宝时
+    doAddBabyOrLogin: function doAddBabyOrLogin() {
+      this.checkLogin("/pages/vaccine/index");
+    },
     changePage: function changePage(val) {
       this.isShow = val;
     },
     onChange: function onChange(event) {
-      // debugger
       console.log(event);
     },
     toggle: function toggle(event) {
-      // if(){
-
-      // }
       event.status = !event.status;
-      // debugger
       console.log(event);
     },
     changeSec: function changeSec(e) {
-      // debugger
-      console.log(e.newVal);
+      this.getLoginData(e.orignItem.type);
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

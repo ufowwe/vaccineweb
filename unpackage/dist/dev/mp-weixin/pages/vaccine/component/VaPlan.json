@@ -5,6 +5,7 @@
     "van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
     "van-row": "/wxcomponents/vant/dist/row/index",
     "van-col": "/wxcomponents/vant/dist/col/index",
-    "xfl-select": "/components/xfl-select"
+    "van-image": "/wxcomponents/vant/dist/image/index",
+    "xfl-select": "/pages/components/xfl-select"
   }
 }

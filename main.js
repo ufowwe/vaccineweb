@@ -4,7 +4,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 import authApi from "service/auth";
 import babyApi from "service/baby";
-Vue.prototype.checkLogin = async function(path,type="nav"){
+Vue.prototype.checkLogin = async function(path, type){
 	const isLogin = await authApi.login();
 	const isHaveBaby = await babyApi.isHaveBaby();
 	if(!isLogin){

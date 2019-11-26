@@ -139,7 +139,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/baby.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/baby.js"));
+var _city = _interopRequireDefault(__webpack_require__(/*! ../../dataDict/city.js */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/dataDict/city.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //
@@ -179,7 +199,81 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
 //
 //
 //
-var _default = { data: function data() {return { currentDate: new Date().getTime(), minDate: new Date().getTime(), formatter: function formatter(type, value) {if (type === 'year') {return "".concat(value, "\u5E74");} else if (type === 'month') {return "".concat(value, "\u6708");}return value;}, backUrl: "", isShow: false };}, methods: { onChange: function onChange() {this.isShow = true;}, onInput: function onInput(event) {this.setData({ currentDate: event.detail });}, savebabyBtn: function savebabyBtn() {var _this = this;var obj = { "birthday": "2019-11-24", "sex": 0 };_baby.default.babySave(obj).then(function (res) {if (res.code == "0000") {console.log(_this.backUrl);uni.switchTab({ url: _this.backUrl || '/pages/task/index' });} else {uni.showToast({
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { backUrl: "", areaList: _city.default, currentDate: new Date().getTime(), maxDate: new Date().getTime(), formatter: function formatter(type, value) {if (type === 'year') {return "".concat(value, "\u5E74");} else if (type === 'month') {return "".concat(value, "\u6708");}return value;}, type: 1, boyTyp: false, girlTyp: false, birthTyp: false, localTyp: false, show: false, sexname: '', sex: '', birthday: '请选择宝宝出生日期', local: '请选择宝宝所在地', "cityCode": "", "cityName": "", "countyCode": "", "countyName": "", "provinceCode": "", "provinceName": "" };}, methods: { showPopup: function showPopup(type) {this.type = type;this.show = true;}, onCancel: function onCancel() {this.show = false;}, //生日
+    ondateConfirm: function ondateConfirm(event) {var date = new Date(event.detail).toLocaleString();this.birthday = date.substr(0, date.indexOf(' '));this.birthTyp = true;this.show = false;}, //地区
+    onareaConfirm: function onareaConfirm(event) {this.cityCode = event.detail.values[1].code;this.cityName = event.detail.values[1].name;this.countyCode = event.detail.values[2].code;this.countyName = event.detail.values[2].name;this.provinceCode = event.detail.values[0].code;this.provinceName = event.detail.values[0].name;this.local = this.provinceName + '/' + this.cityName + '/' + this.countyName;this.localTyp = true;
+      this.show = false;
+    },
+    sexSelect: function sexSelect(typ) {
+      if (typ == 1) {
+        this.sex = 1;
+        this.boyTyp = true;
+        this.girlTyp = false;
+      } else if (typ == 2) {
+        this.sex = 2;
+        this.boyTyp = false;
+        this.girlTyp = true;
+      }
+    },
+    savebabyBtn: function savebabyBtn() {var _this = this;
+      if (this.sex == '') {
+        uni.showToast({
+          icon: "none",
+          title: '请选择宝宝性别' });
+
+        return;
+      }
+      if (this.birthday == '') {
+        uni.showToast({
+          icon: "none",
+          title: '请选择宝宝生日' });
+
+        return;
+      }
+      if (this.provinceCode == '') {
+        uni.showToast({
+          icon: "none",
+          title: '请选择宝宝所在地' });
+
+        return;
+      }
+      var obj = {
+        "birthday": this.birthday,
+        "sex": this.sex,
+        "cityCode": this.cityCode,
+        "cityName": this.cityName,
+        "countyCode": this.countyCode,
+        "countyName": this.countyName,
+        "provinceCode": this.provinceCode,
+        "provinceName": this.provinceName };
+
+      _baby.default.babySave(obj).then(function (res) {
+        if (res.code == "0000") {
+          console.log(_this.backUrl);
+          uni.switchTab({
+            url: _this.backUrl || '/pages/task/index' });
+
+        } else {
+          uni.showToast({
             icon: "none",
             title: res.responseMsg });
 

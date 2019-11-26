@@ -8,10 +8,12 @@
 			</view>
 			<view class="groupmy">
 				<view class="line" v-if="isShow">
-					<van-cell title-class="leftclass" :border="false" title="我的宝宝" icon="comment-o" is-link />
+					<van-cell title-class="leftclass" @click="toMybaby"
+					:border="false" title="我的宝宝" icon="comment-o" is-link />
 				</view> 
 				<view class="line" v-if="isShow">
-					<van-cell title-class="leftclass" :border="false" title="我的保单" icon="comment-o" is-link />
+					<van-cell title-class="leftclass" @click="toPolicy"
+					:border="false" title="我的保单" icon="comment-o" is-link />
 				</view> 
 				<view class="line">
 					<van-cell title-class="leftclass" :border="false" title="邀请好友" icon="friends-o" is-link >
@@ -33,7 +35,7 @@
 </template>
 
 <script>
-import Bar from '../../components/Bar.vue';
+import Bar from '../components/Bar.vue';
 import authApi from '../../service/auth';
 
 export default {
@@ -60,6 +62,23 @@ export default {
 	  }else{
 		this.isShow = false
 	  }
+	},
+	methods: {
+		toMybaby(){
+			if(this.checkLogin("/pages/baby/babyInfo")){
+				uni.navigateTo({
+					url: "/pages/my/myBaby"
+				});
+			}
+		},
+		toPolicy(){
+			if(this.checkLogin("/pages/my/insurancePolicy")){
+				uni.navigateTo({
+					url: "/pages/my/insurancePolicy"
+				});
+			}
+		}
+		
 	}
 }
 </script>

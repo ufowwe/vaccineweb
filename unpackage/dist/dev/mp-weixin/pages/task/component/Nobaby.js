@@ -163,12 +163,3 @@ render._withStripped = true
 
 },[["../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Ftask%2Fcomponent%2FNobaby\"}","common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../../.sourcemap/mp-weixin/pages/task/component/Nobaby.js.map
-;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
-    'pages/task/component/Nobaby-create-component',
-    {
-        'pages/task/component/Nobaby-create-component':(function(module, exports, __webpack_require__){
-            __webpack_require__('./node_modules/@dcloudio/uni-mp-weixin/dist/index.js')['createComponent'](__webpack_require__("../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/task/component/Nobaby.vue"))
-        })
-    },
-    [['pages/task/component/Nobaby-create-component']]
-]);                

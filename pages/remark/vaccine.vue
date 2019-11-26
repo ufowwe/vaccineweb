@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<bar :nav="setNav" @changePage="changePage"></bar>
+		<VaccBar :nav="setNav" @changePage="changePage"></VaccBar>
 		<view v-if="isShow" class="" style="">
 			接种证
 		</view>
@@ -37,10 +37,10 @@
 </template>
 
 <script>
-	import bar from './component/vaccBar.vue';
+	import VaccBar from './component/vaccBar.vue';
 	export default {
 	    components:{
-			bar
+			VaccBar
 		},
 		data(){
 			return{

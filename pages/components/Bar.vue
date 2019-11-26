@@ -2,7 +2,7 @@
 	<view>
 		<view class="header" :style="{'height':titleBarHeight,'padding-top':statusBarHeight,'background-color': nav.bg}">
 			<text class="iconfont leftArrow header-back weight"   :style="{'border':nav.color}" v-if="nav.isdisPlayNavTitle" @click="back"></text>
-			<view class="header-title weight">{{nav.navTitle}}</view>
+			<view class="header-title weight" :style="{'color':nav.color}">{{nav.navTitle}}</view>
 		</view>
 		<view  :style="{'height':titleBarHeight,'padding-top':statusBarHeight}"></view>
 	</view>
@@ -65,5 +65,9 @@
 		font-size:30upx;
 		padding: 10upx;
 		border-radius: 50%;
+	}
+	.leftArrow{
+		width: 40rpx;
+		height: 40rpx;
 	}
 </style>

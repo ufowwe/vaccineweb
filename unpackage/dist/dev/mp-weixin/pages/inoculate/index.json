@@ -2,6 +2,6 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "van-button": "/wxcomponents/vant/dist/button/index",
-    "bar": "/components/Bar"
+    "bar": "/pages/components/Bar"
   }
 }

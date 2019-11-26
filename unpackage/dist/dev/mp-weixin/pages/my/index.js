@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
 
 
 
@@ -134,7 +134,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/auth.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Bar = function Bar() {return __webpack_require__.e(/*! import() | components/Bar */ "components/Bar").then(__webpack_require__.bind(null, /*! ../../components/Bar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/components/Bar.vue"));};var _default =
+
+
+var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/auth.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Bar = function Bar() {return __webpack_require__.e(/*! import() | pages/components/Bar */ "pages/components/Bar").then(__webpack_require__.bind(null, /*! ../components/Bar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/components/Bar.vue"));};var _default =
 
 {
   components: {
@@ -159,7 +161,24 @@ var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */
                 this.isShow = true;
               } else {
                 this.isShow = false;
-              }case 4:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}() };exports.default = _default;
+              }case 4:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+
+  methods: {
+    toMybaby: function toMybaby() {
+      if (this.checkLogin("/pages/baby/babyInfo")) {
+        uni.navigateTo({
+          url: "/pages/my/myBaby" });
+
+      }
+    },
+    toPolicy: function toPolicy() {
+      if (this.checkLogin("/pages/my/insurancePolicy")) {
+        uni.navigateTo({
+          url: "/pages/my/insurancePolicy" });
+
+      }
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

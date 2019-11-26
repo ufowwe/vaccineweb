@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Bar from '../../components/Bar.vue';
+import Bar from '../components/Bar.vue';
 
 export default {
 	components:{

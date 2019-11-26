@@ -430,9 +430,9 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
     updateRecord: function updateRecord(obj) {var _this3 = this;
       var param = {
         id: this.selectItem.vaccineSchemeId,
-        vaccinationDate: obj.vaccinationStatus ? "" : obj.vaccinationDate,
-        vaccinationDateActual: obj.vaccinationStatus ? obj.vaccinationDate : "",
-        vaccinationStatus: obj.status };
+        vaccinationDate: obj.status ? "" : obj.vaccinationDate,
+        vaccinationDateActual: obj.status ? obj.vaccinationDate : "",
+        status: obj.status };
 
       _vaccine.default.updateRecord(param).then(function (res) {
         if (res.code == "0000") {
@@ -468,7 +468,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
       this.showPopup = true;
       this.selectItem = item;
       var popData = {
-        status: item.vaccinationStatus,
+        status: item.status,
         curTime: item.vaccinationDate };
 
       this.$nextTick(function () {
@@ -482,17 +482,17 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
       this.updateRecord(this.selectItem);
     },
     doClear: function doClear() {
-      this.selectItem.vaccinationStatus = false;
+      this.selectItem.status = false;
       this.selectItem.vaccinationDate = "";
       this.showCancelDialog = false;
     },
     //从时间组件传来的数据
     getSelect: function getSelect(obj) {
       if (obj.status) {
-        this.selectItem.vaccinationStatus = true;
+        this.selectItem.status = true;
         this.selectItem.vaccinationDate = obj.curTime;
       } else {
-        this.selectItem.vaccinationStatus = false;
+        this.selectItem.status = false;
         this.selectItem.vaccinationDate = obj.curTime;
       }
       this.showPopup = false;

@@ -10,7 +10,11 @@
     "pages/vaccine/component/VaCertificate",
     "pages/login/login",
     "pages/baby/addBaby",
-    "pages/components/timePicker"
+    "pages/components/timePicker",
+    "pages/baby/babyInfo",
+    "pages/my/insurancePolicy",
+    "pages/my/component/PolicyInfo",
+    "pages/my/myBaby"
   ],
   "subPackages": [],
   "window": {

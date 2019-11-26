@@ -102,11 +102,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/xfl-select":1,"pages/vaccine/component/VaccBar":1,"components/Bar":1};
+/******/ 		var cssChunks = {"pages/components/xfl-select":1,"pages/vaccine/component/VaccBar":1,"pages/components/Bar":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/xfl-select":"components/xfl-select","pages/vaccine/component/VaccBar":"pages/vaccine/component/VaccBar","components/Bar":"components/Bar"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"pages/components/xfl-select":"pages/components/xfl-select","pages/vaccine/component/VaccBar":"pages/vaccine/component/VaccBar","pages/components/Bar":"pages/components/Bar"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

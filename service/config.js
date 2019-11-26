@@ -14,13 +14,14 @@ const config = {
 			babySave:`${Base.appService}/baby/save`,//保存
 			babyUpdate:`${Base.appService}/baby/update`,//更新
 			babyUpdateTop:`${Base.appService}/baby/updateTop`,//更新置顶状态
+			getBabyDetail:`${Base.appService}/baby/getDetail` //获取宝宝详情
 		},
 		vaccine:{
 			getRecordNoLogin:`${Base.baseUrl}/beforeLogin/getRecordNoLogin`,//获取接种证集合，未登录
 			getRecord:`${Base.appService}/vaccineRecord/getRecord`,//获取接种证集合，已登录
 			updateRecord:`${Base.appService}/vaccineRecord/updateRecord`,//更新接种证
 			
-			getScheme:`${Base.baseUrl}/beforeLogin/getSchemeNoLogin`, //获取接种基础方案 未登录
+			getSchemeNoLogin:`${Base.baseUrl}/beforeLogin/getSchemeNoLogin`, //获取接种基础方案 未登录
 			getScheme:`${Base.appService}/vaccineScheme/getScheme`,   //获取接基础方案 已登录
 			saveScheme:`${Base.appService}/vaccineScheme/saveScheme`,    //保存接种方案
 		}

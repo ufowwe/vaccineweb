@@ -3,12 +3,12 @@
 		<view class="header" :style="{'height':titleBarHeight,'padding-top':statusBarHeight,'background-color': nav.bg}">
 			<text class="iconfont leftArrow header-back weight"   :style="{'border':nav.color}" v-if="nav.isdisPlayNavTitle" @click="back"></text>
 			<view class="header-title weight">
-				<view class="tit" @click="checkTab(1)">
+				<view class="tit" @tap="checkTab(1)">
 					{{nav.vaCertificate}}
 					<text v-show="isCheck == 1" class="heng hengF"></text>
 				</view>
 				
-				<view class="tit" @click="checkTab(2)">
+				<view class="tit" @tap="checkTab(2)">
 					{{nav.vaPlan}}
 					<text v-show="isCheck == 2" class="heng hengS"></text>
 				</view>

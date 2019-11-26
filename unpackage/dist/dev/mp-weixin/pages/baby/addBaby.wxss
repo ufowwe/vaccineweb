@@ -1,20 +1,74 @@
 .addBaby {
-  padding: 28rpx 50rpx;
+  padding: 20rpx 6%;
 }
-.addBaby .title {
+.addBaby .text_area {
+  padding-left: 20rpx;
+  margin-bottom: 10%;
+}
+.addBaby .text_area .title {
   font-size: 54rpx;
   color: #000;
-  margin-bottom: 20%;
+  position: relative;
+  z-index: 9999;
+}
+.addBaby .text_area .underline {
+  width: 155rpx;
+  height: 24rpx;
+  background: #8686F7;
+  position: relative;
+  top: -22rpx;
+  left: 30rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
 }
 .addBaby .addselect {
+  color: #999;
   padding: 0 30rpx;
   margin-bottom: 10%;
 }
 .addBaby .addselect .addselect_title {
+  line-height: 100rpx;
   font-size: 36rpx;
   color: #666;
 }
 .addBaby .addselect .sexBtn {
-  width: 50%;
+  padding: 20rpx 8%;
+  display: inline-block;
+  background: #F2F2F2;
+  -webkit-border-radius: 50rpx;
+          border-radius: 50rpx;
+  margin-right: 20rpx;
+}
+.addBaby .addselect .sexBtn image {
+  width: 38rpx;
+  height: 38rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.addBaby .addselect .boy {
+  background: #86D9F0;
+  color: #fff;
+}
+.addBaby .addselect .girl {
+  background: #E088FF;
+  color: #fff;
+}
+.addBaby .addselect .birthdayBtn {
+  padding: 20rpx 5%;
+  width: 80%;
+  background: #F2F2F2;
+  -webkit-border-radius: 100rpx;
+          border-radius: 100rpx;
+  margin-right: 20rpx;
+}
+.addBaby .addselect .birthdayBtn image {
+  width: 38rpx;
+  height: 38rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.addBaby .addselect .birth {
+  background: #8686F7;
+  color: #fff;
 }
 

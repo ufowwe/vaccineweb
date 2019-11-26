@@ -98,7 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Bar = function Bar() {return __webpack_require__.e(/*! import() | components/Bar */ "components/Bar").then(__webpack_require__.bind(null, /*! ../../components/Bar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/components/Bar.vue"));};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Bar = function Bar() {return __webpack_require__.e(/*! import() | pages/components/Bar */ "pages/components/Bar").then(__webpack_require__.bind(null, /*! ../components/Bar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/components/Bar.vue"));};var _default =
 
 
 

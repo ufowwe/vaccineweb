@@ -29,8 +29,8 @@
 					</view>
 					<view class="time-img-box">
 						<!-- <text class="itm-time">2017-01-01</text> -->
-						<van-image class="itm-img" v-if="!itm.vaccinationStatus" round width="40rpx" height="40rpx" src="/static/img/my.png" />
-						<van-image class="itm-img" v-if="itm.vaccinationStatus" round  width="40rpx" height="40rpx" src="/static/img/myActive.png" />
+						<van-image class="itm-img" v-if="!itm.status" round width="40rpx" height="40rpx" src="/static/img/unselected.png" />
+						<van-image class="itm-img" v-if="itm.status" round  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
 					</view>
 				</view>
 			</view>
@@ -48,8 +48,8 @@
 					</view>
 					<view class="time-img-box">
 						<text @click="setTime(itm)" v-if="itm.vaccinationDate" class="itm-time">{{itm.vaccinationDate}}</text>
-						<van-image @click="setTime(itm)"  class="itm-img" v-if="!itm.vaccinationStatus" round width="40rpx" height="40rpx" src="/static/img/my.png" />
-						<van-image @click="cancelTime(itm)" class="itm-img" v-if="itm.vaccinationStatus" round width="40rpx" height="40rpx"  src="/static/img/myActive.png" />
+						<van-image @click="setTime(itm)"  class="itm-img" v-if="!itm.status" round width="40rpx" height="40rpx" src="/static/img/unselected.png" />
+						<van-image @click="cancelTime(itm)" class="itm-img" v-if="itm.status" round width="40rpx" height="40rpx"  src="/static/img/vaccinated.png" />
 					</view>
 				</view>
 			</view>
@@ -150,9 +150,9 @@
 			updateRecord(obj){
 				const param={
 					id :this.selectItem.vaccineSchemeId,
-					vaccinationDate:obj.vaccinationStatus ? "" : obj.vaccinationDate,
-					vaccinationDateActual:obj.vaccinationStatus ? obj.vaccinationDate : "",
-					vaccinationStatus:obj.status
+					vaccinationDate:obj.status ? "" : obj.vaccinationDate,
+					vaccinationDateActual:obj.status ? obj.vaccinationDate : "",
+					status:obj.status
 				};
 				vaccineApi.updateRecord(param).then(res=>{
 					if(res.code == "0000"){
@@ -188,7 +188,7 @@
 				this.showPopup = true;
 				this.selectItem = item;
 				const popData ={
-					status : item.vaccinationStatus,
+					status : item.status,
 					curTime: item.vaccinationDate
 				};
 				this.$nextTick(()=>{
@@ -202,17 +202,17 @@
 				this.updateRecord(this.selectItem);
 			},
 			doClear(){
-				this.selectItem.vaccinationStatus = false;
+				this.selectItem.status = false;
 				this.selectItem.vaccinationDate = "";
 				this.showCancelDialog = false;
 			},
 			//从时间组件传来的数据
 			getSelect(obj){
 				if(obj.status){
-					this.selectItem.vaccinationStatus = true;
+					this.selectItem.status = true;
 					this.selectItem.vaccinationDate = obj.curTime;
 				}else{
-					this.selectItem.vaccinationStatus = false;
+					this.selectItem.status = false;
 					this.selectItem.vaccinationDate = obj.curTime;
 				}
 				this.showPopup = false;

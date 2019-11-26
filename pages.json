@@ -73,7 +73,8 @@
 					"van-checkbox": "/wxcomponents/vant/dist/checkbox/index",
 					"van-checkbox-group": "/wxcomponents/vant/dist/checkbox-group/index",
 					"van-row": "/wxcomponents/vant/dist/row/index",
-					"van-col": "/wxcomponents/vant/dist/col/index"
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-image":"/wxcomponents/vant/dist/image/index"
 				}
 			}
         }
@@ -101,12 +102,11 @@
 		},{
 		    "path" : "pages/baby/addBaby",
 		    "style" : {
-				"navigationBarTitleText": "添加宝宝",
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-field": "/wxcomponents/vant/dist/field/index",
-					"van-overlay": "/wxcomponents/vant/dist/overlay/index",
-					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index"
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
+					"van-area": "/wxcomponents/vant/dist/area/index"
 				}
 			}
 		},{
@@ -119,6 +119,48 @@
 				}
 			}
 		}
+		,{
+            "path" : "pages/baby/babyInfo",
+            "style" : {
+				"usingComponents":{
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-picker": "/wxcomponents/vant/dist/picker/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
+					"van-area": "/wxcomponents/vant/dist/area/index",
+					"van-field": "/wxcomponents/vant/dist/field/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/my/insurancePolicy",
+            "style" : {
+				"navigationStyle":"custom",
+				"usingComponents":{
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
+				}
+			}
+        }
+		,{
+            "path" : "pages/my/component/PolicyInfo",
+            "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-card": "/wxcomponents/vant/dist/card/index",
+					"van-panel": "/wxcomponents/vant/dist/panel/index"
+				}
+			}
+        }
+		
+        ,{
+            "path" : "pages/my/myBaby",
+            "style" : {
+				"usingComponents":{
+					
+				}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
