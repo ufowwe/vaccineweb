@@ -3492,6 +3492,23 @@ createPage(_login.default);
 
 /***/ }),
 
+/***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fmy%2Fadvice\"}":
+/*!************************************************************************************!*\
+  !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fmy%2Fadvice"} ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _advice = _interopRequireDefault(__webpack_require__(/*! ./pages/my/advice.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/my/advice.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_advice.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
 /***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fmy%2Fcomponent%2FPolicyInfo\"}":
 /*!****************************************************************************************************!*\
   !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fmy%2Fcomponent%2FPolicyInfo"} ***!
@@ -3560,6 +3577,57 @@ createPage(_myBaby.default);
 
 /***/ }),
 
+/***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fmy%2Fsetup\"}":
+/*!***********************************************************************************!*\
+  !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fmy%2Fsetup"} ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _setup = _interopRequireDefault(__webpack_require__(/*! ./pages/my/setup.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/my/setup.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_setup.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fmy%2Fsetup-remind\"}":
+/*!******************************************************************************************!*\
+  !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fmy%2Fsetup-remind"} ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _setupRemind = _interopRequireDefault(__webpack_require__(/*! ./pages/my/setup-remind.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/my/setup-remind.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_setupRemind.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fmy%2Fsetup-useragree\"}":
+/*!*********************************************************************************************!*\
+  !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fmy%2Fsetup-useragree"} ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _setupUseragree = _interopRequireDefault(__webpack_require__(/*! ./pages/my/setup-useragree.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/my/setup-useragree.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_setupUseragree.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
 /***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Ftask%2Fcomponent%2FLogin\"}":
 /*!*************************************************************************************************!*\
   !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Ftask%2Fcomponent%2FLogin"} ***!
@@ -3590,6 +3658,23 @@ createPage(_Login.default);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
 var _Nobaby = _interopRequireDefault(__webpack_require__(/*! ./pages/task/component/Nobaby.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/task/component/Nobaby.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_Nobaby.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Ftask%2Fcomponent%2FTaskBar\"}":
+/*!***************************************************************************************************!*\
+  !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Ftask%2Fcomponent%2FTaskBar"} ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _TaskBar = _interopRequireDefault(__webpack_require__(/*! ./pages/task/component/TaskBar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/task/component/TaskBar.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_TaskBar.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
 
 /***/ }),

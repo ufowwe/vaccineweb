@@ -46,7 +46,7 @@
 			  :value="currentDate"
 			  :max-date="maxDate"
 			  :formatter="formatter"
-			  @cancel="onCancel"
+			  @cancel="onClose"
 			  @confirm="ondateConfirm"
 			/>
 			<van-area 
@@ -101,13 +101,14 @@
 				this.type = type;
 				this.show = true;	
 			},
-			onCancel() {
+			onClose() {
 				this.show = false;
 			},
 			//生日
 			ondateConfirm(event) {
 				var date = new Date(event.detail).toLocaleString();
-				this.birthday = date.substr(0,date.indexOf(' '))
+				this.birthday = date.substr(0,date.indexOf(' ')).split('/').join('-');
+			
 				this.birthTyp = true;
 				this.show = false;
 			},
@@ -156,29 +157,33 @@
 					});
 					return;
 				}
-					let obj={
-						"birthday": this.birthday,
-						"sex": this.sex,
-						"cityCode": this.cityCode,
-						"cityName": this.cityName,
-						"countyCode": this.countyCode,
-						"countyName": this.countyName,
-						"provinceCode": this.provinceCode,
-						"provinceName": this.provinceName,
-					};
-					babyApi.babySave(obj).then(res=>{
-						if(res.code == "0000"){
-							console.log(this.backUrl)
-							uni.switchTab({
-							    url: this.backUrl || '/pages/task/index'
-							});
-						}else{
-							uni.showToast({
-								icon:"none",
-							    title: res.responseMsg
-							});
-						}
-					});
+				let obj={
+					"birthday": this.birthday,
+					"sex": this.sex,
+					"cityCode": this.cityCode,
+					"cityName": this.cityName,
+					"countyCode": this.countyCode,
+					"countyName": this.countyName,
+					"provinceCode": this.provinceCode,
+					"provinceName": this.provinceName,
+				};
+				babyApi.babySave(obj).then(res=>{
+					if(res.code == "0000"){
+						uni.reLaunch({
+							url: this.backUrl || '/pages/task/index'
+						});
+						uni.showToast({
+							icon:"success",
+							title: '添加成功',
+							duration: 2000
+						});
+					}else{
+						uni.showToast({
+							icon:"none",
+							title: res.responseMsg
+						});
+					}
+				});
 			}
 		},
 		onLoad(option){

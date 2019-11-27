@@ -218,9 +218,10 @@ var _city = _interopRequireDefault(__webpack_require__(/*! ../../dataDict/city.j
 //
 //
 //
-var _default = { data: function data() {return { backUrl: "", areaList: _city.default, currentDate: new Date().getTime(), maxDate: new Date().getTime(), formatter: function formatter(type, value) {if (type === 'year') {return "".concat(value, "\u5E74");} else if (type === 'month') {return "".concat(value, "\u6708");}return value;}, type: 1, boyTyp: false, girlTyp: false, birthTyp: false, localTyp: false, show: false, sexname: '', sex: '', birthday: '请选择宝宝出生日期', local: '请选择宝宝所在地', "cityCode": "", "cityName": "", "countyCode": "", "countyName": "", "provinceCode": "", "provinceName": "" };}, methods: { showPopup: function showPopup(type) {this.type = type;this.show = true;}, onCancel: function onCancel() {this.show = false;}, //生日
-    ondateConfirm: function ondateConfirm(event) {var date = new Date(event.detail).toLocaleString();this.birthday = date.substr(0, date.indexOf(' '));this.birthTyp = true;this.show = false;}, //地区
-    onareaConfirm: function onareaConfirm(event) {this.cityCode = event.detail.values[1].code;this.cityName = event.detail.values[1].name;this.countyCode = event.detail.values[2].code;this.countyName = event.detail.values[2].name;this.provinceCode = event.detail.values[0].code;this.provinceName = event.detail.values[0].name;this.local = this.provinceName + '/' + this.cityName + '/' + this.countyName;this.localTyp = true;
+var _default = { data: function data() {return { backUrl: "", areaList: _city.default, currentDate: new Date().getTime(), maxDate: new Date().getTime(), formatter: function formatter(type, value) {if (type === 'year') {return "".concat(value, "\u5E74");} else if (type === 'month') {return "".concat(value, "\u6708");}return value;}, type: 1, boyTyp: false, girlTyp: false, birthTyp: false, localTyp: false, show: false, sexname: '', sex: '', birthday: '请选择宝宝出生日期', local: '请选择宝宝所在地', "cityCode": "", "cityName": "", "countyCode": "", "countyName": "", "provinceCode": "", "provinceName": "" };}, methods: { showPopup: function showPopup(type) {this.type = type;this.show = true;}, onClose: function onClose() {this.show = false;}, //生日
+    ondateConfirm: function ondateConfirm(event) {var date = new Date(event.detail).toLocaleString();this.birthday = date.substr(0, date.indexOf(' ')).split('/').join('-');this.birthTyp = true;this.show = false;}, //地区
+    onareaConfirm: function onareaConfirm(event) {this.cityCode = event.detail.values[1].code;this.cityName = event.detail.values[1].name;this.countyCode = event.detail.values[2].code;this.countyName = event.detail.values[2].name;this.provinceCode = event.detail.values[0].code;this.provinceName = event.detail.values[0].name;this.local = this.provinceName + '/' + this.cityName + '/' + this.countyName;
+      this.localTyp = true;
       this.show = false;
     },
     sexSelect: function sexSelect(typ) {
@@ -268,9 +269,13 @@ var _default = { data: function data() {return { backUrl: "", areaList: _city.de
 
       _baby.default.babySave(obj).then(function (res) {
         if (res.code == "0000") {
-          console.log(_this.backUrl);
-          uni.switchTab({
+          uni.reLaunch({
             url: _this.backUrl || '/pages/task/index' });
+
+          uni.showToast({
+            icon: "success",
+            title: '添加成功',
+            duration: 2000 });
 
         } else {
           uni.showToast({

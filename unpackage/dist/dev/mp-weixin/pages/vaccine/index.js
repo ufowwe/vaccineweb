@@ -808,6 +808,9 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
     return {
       baby: {}, //当前宝宝
       showSelect: false,
+      orginSelectType: 0, //初始方案类型
+      actualSchemeType: 0, //实际方案类型
+      orginSelectIdList: [], //初始返回的id列表
       list: [
       { value: '国家免费方案', type: 1 },
       { value: '常规推荐方案', type: 2 },
@@ -830,20 +833,50 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
   },
   mounted: function () {var _mounted = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 _auth.default.login());case 2:this.isLogin = _context.sent;if (!
-              this.isLogin) {_context.next = 18;break;}_context.next = 6;return (
+              this.isLogin) {_context.next = 20;break;}_context.next = 6;return (
                 _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
               this.isHaveBaby) {_context.next = 11;break;}
-              this.getNoLoginData();_context.next = 16;break;case 11:
+              this.getNoLoginData();_context.next = 18;break;case 11:
 
               obj = {
-                id: _global.default.getBabyId() || 14 };_context.next = 14;return (
+                id: _global.default.getBabyId() };_context.next = 14;return (
 
                 _baby.default.getBabyDetail(obj));case 14:this.baby = _context.sent;
-              this.getLoginData(this.baby.schemeType);case 16:_context.next = 19;break;case 18:
+              this.orginSelectType = this.baby.data.actualSchemeType || 0;
+              this.actualSchemeType = this.baby.data.actualSchemeType || 0;
+              this.getLoginData(this.baby.schemeType);case 18:_context.next = 21;break;case 20:
 
 
-              this.getNoLoginData();case 19:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
+              this.getNoLoginData();case 21:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
 
+
+  onTabItemTap: function onTabItemTap() {
+    debugger;
+    uni.showToast({
+      icon: "none",
+      title: "hahahha" });
+
+    //next();
+  },
+  computed: {
+    showExtend: function showExtend() {
+      var list = [];
+      if (this.actualSchemeType != 4) {
+        list = [
+        { value: '国家免费方案', type: 1 },
+        { value: '常规推荐方案', type: 2 },
+        { value: '最优推荐方案', type: 3 }];
+
+      } else {
+        list = [
+        { value: '国家免费方案', type: 1 },
+        { value: '常规推荐方案', type: 2 },
+        { value: '最优推荐方案', type: 3 },
+        { value: '自定义方案', type: 4 }];
+
+      }
+      return list;
+    } },
 
   methods: {
     //获取未登录是页面列表数据
@@ -872,7 +905,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
     //登陆时 获取页面列表数据
     getLoginData: function getLoginData(type) {var _this2 = this;
       var obj = {
-        babyId: _global.default.getBabyId() || 14,
+        babyId: _global.default.getBabyId(),
         schemeType: type || 1 };
 
       _vaccine.default.getScheme(obj).then(function (res) {
@@ -880,7 +913,12 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
           if (res.data) {
             _this2.loginData = res.data;
             _this2.setOrginNum(res.data);
-            _this2.setSelectValue(_this2.baby.schemeType || 1);
+            if (res.data.schemeType) {
+              _this2.orginSelectType = res.data.schemeType;
+              _this2.actualSchemeType = res.data.schemeType;
+            }
+            _this2.setSelectValue(_this2.actualSchemeType);
+            _this2.orginSelectIdList = _this2.setSelectIdList(res.data.schemeVaccineInfoList);
             //创建疫苗map
             if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
               _this2.creatSchemeListMap(res.data.schemeVaccineInfoList);
@@ -898,6 +936,42 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         }
       });
     },
+    //创建初始方案id列表
+    setSelectIdList: function setSelectIdList(list) {
+      var ret = [];
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].status == 1 || list[i].status == 4 || list[i].status == 6 || list[i].status == 6) {
+          ret.push(list[i].vaccineDetailId);
+        }
+      }
+      return ret;
+    },
+    //保存
+    doSave: function doSave() {
+      var obj = {
+        babyId: _global.default.getBabyId(),
+        vaccineRecordReqList: this.getVaccineList() };
+
+      _vaccine.default.saveScheme(obj).then(function (res) {
+        if (res.code == "0000") {
+          uni.showToast({
+            icon: "success",
+            title: res.responseMsg });
+
+        }
+      });
+    },
+    //创建要保存的信息
+    getVaccineList: function getVaccineList() {
+      var ret = [];
+      for (var key in this.schemeListMap) {
+        var obj = this.schemeListMap[key];
+        for (var k in obj.cellMap) {
+          ret.push(obj.cellMap[k]);
+        }
+      }
+      return ret;
+    },
     //创建疫苗map
     creatSchemeListMap: function creatSchemeListMap(list) {
       this.schemeListMap = {};
@@ -906,13 +980,16 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       }
     },
     //点击表格左侧设置状态
-    changeStatus: function changeStatus(status, item) {
+    changeStatus: function changeStatus(status, item) {var _this3 = this;
       switch (status) {
         case 0:
           this.setUnSelectStatus(item);
           break;
         case 1:
           this.setSelectStatus(item);
+          break;
+        case 2:
+          this.setSelectSame(item);
           break;
         case 4:
           this.showUnCancelMsg(item);
@@ -926,7 +1003,65 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         default:
           break;}
 
+      //统计金钱
       this.setPrice();
+      //统计数量
+      this.setTotalInfoNum();
+      //强制刷新页面
+      this.$nextTick(function () {
+        _this3.$forceUpdate();
+      });
+      //获取最新所选择的id列表 判断是否是自定义
+      this.getCurrentIdList(this.loginData.schemeVaccineInfoList);
+
+    },
+    getCurrentIdList: function getCurrentIdList(list) {
+      this.showSelect = false;
+      var newSelectIdList = this.setSelectIdList(list);
+      var newIdsStr = newSelectIdList.join(",");
+      var orginIdsStr = this.orginSelectIdList.join(",");
+      if (newIdsStr != orginIdsStr) {
+        this.actualSchemeType = 4;
+      } else {
+        this.actualSchemeType = this.orginSelectType;
+      }
+      this.setMapType(this.actualSchemeType);
+      this.setSelectValue(this.actualSchemeType);
+      this.showSelect = true;
+
+    },
+    //改变map里面的type类型 用于保存
+    setMapType: function setMapType(type) {
+      for (var key in this.schemeListMap) {
+        var obj = this.schemeListMap[key];
+        for (var k in obj.cellMap) {
+          obj.cellMap[k].schemeType = type;
+        }
+      }
+    },
+    //统计信息
+    setTotalInfoNum: function setTotalInfoNum() {
+      this.hospitalTimes = 0;
+      this.totalDosageNum = 0;
+      this.vaccineNum = 0;
+      this.diseaseNum = 0;
+      var hosNumArr = []; //保存所有去接种点的 最小月 monthNumS
+      for (var key in this.schemeListMap) {
+        var obj = this.schemeListMap[key];
+        if (obj.status == 1 || obj.status == 4 || obj.status == 5 || obj.status == 6) {
+          this.totalDosageNum += obj.dosageTimes;
+          this.vaccineNum += obj.vaccineNum;
+          this.diseaseNum += obj.diseaseNum;
+          if (obj.cellMap) {
+            for (var key in obj.cellMap) {
+              if (obj.cellMap[key].monthNumS != 0) {
+                hosNumArr.push(obj.cellMap[key].monthNumS);
+              }
+            }
+          }
+        }
+      }
+      this.hospitalTimes = Array.from(new Set(hosNumArr)).length; //数组去重
     },
     //计算总钱数
     setPrice: function setPrice() {
@@ -943,6 +1078,13 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       uni.showToast({
         icon: "none",
         title: "该疫苗已开始接种，无法取消" });
+
+    },
+    //点击已选同效疫苗
+    setSelectSame: function setSelectSame() {
+      uni.showToast({
+        icon: "none",
+        title: "已选同效疫苗，请取消后再选" });
 
     },
     //点击已选择的疫苗
@@ -1065,8 +1207,8 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
           //如果同效疫苗
           if (this.schemeListMap[arr[i]].status == 2) {
             flag = false;
-            break;
             text = "该疫苗已选择同效疫苗，请取消同效疫苗后再进行选择";
+            break;
           }
         }
       } else {
@@ -1097,20 +1239,6 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         this.initValue = "最优推荐方案";
       } else if (type == 4) {
         this.initValue = "自定义方案";
-        var flag = false;
-        for (var i = 0; i < this.list.length; i++) {
-          if (this.list[i].type == 4) {
-            flag = true;
-            break;
-          }
-        }
-        if (!flag) {
-          this.list.push({
-            value: "自定义方案",
-            type: 4 });
-
-        }
-        Array.from(new Set(this.list));
       }
     },
     //未登录或者无宝宝时
@@ -1128,6 +1256,8 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       console.log(event);
     },
     changeSec: function changeSec(e) {
+      this.actualSchemeType = e.orignItem.type;
+      this.setMapType(this.actualSchemeType);
       this.getLoginData(e.orignItem.type);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))

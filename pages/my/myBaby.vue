@@ -7,17 +7,16 @@
 			<view class="underline"></view>
 		</view>
 		<view class="babyInfo">
-			<view class="babyInfoList" v-for="(item,index) in babaList" :key="index" @click="toBabyInfo(item.id)">
+			<view class="babyInfoList" v-for="(item,index) in babyList" :key="index" @click="toBabyInfo(item.id)">
 				<image class="head" src="../../static/img/1.jpeg" mode=""></image>
 				<view class="">
-					<view class="babytop">{{item.nickname}}
-						<image v-if="!!item.topStatus" style="width: 40rpx;height: 40rpx;" src="../../static/img/first.png" mode=""></image>
-					</view>
+					<view class="babytop">{{item.nickname}}</view>
+					<image v-if="!!item.topStatus" class="first" src="../../static/img/first.png" mode=""></image>
 					<view class="babybottom">
 						<text>{{item.age}}</text>
 						<image style="width: 40rpx;height: 40rpx;" src="../../static/img/修改.png" mode=""></image>
 						<image @click.stop="del(item.id)" style="width: 40rpx;height: 40rpx;" src="../../static/img/删除.png" mode=""></image>
-						<text class="nofirst" v-if="!!!item.topStatus">我要优先</text>
+						<text class="nofirst" v-if="!!!item.topStatus" @click.stop="toTop(item.id)">我要优先</text>
 					</view>
 				</view>
 			</view>
@@ -35,7 +34,7 @@
 	export default {
 		data() {
 			return {
-				babaList: []
+				babyList: []
 			};
 		},
 		onLoad(option){
@@ -46,7 +45,7 @@
 			getbabyList(){
 				babyApi.getBabyList().then(res=>{
 					if(res.code == "0000"){
-						this.babaList = res.data;
+						this.babyList = res.data;
 					}else{
 						uni.showToast({
 							icon:"none",
@@ -56,16 +55,48 @@
 				});
 			},
 			del(id){
-				
+				let _this = this;
+				uni.showModal({
+				    title: '提示',
+				    content: '是否删除宝宝',
+				    success: function (res) {
+				        if (res.confirm) {
+				            babyApi.babyDelete({'id':id}).then(res=>{
+				            	if(res.code == "0000"){
+				            		_this.getbabyList()
+				            	}else{
+				            		uni.showToast({
+				            			icon:"none",
+				            			title: res.responseMsg
+				            		});
+				            	}
+				            });
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
+			toTop(id){
+				babyApi.babyUpdateTop({'id':id}).then(res=>{
+					if(res.code == "0000"){
+						this.getbabyList()
+					}else{
+						uni.showToast({
+							icon:"none",
+							title: res.responseMsg
+						});
+					}
+				});
 			},
 			toBabyInfo(id){
 				uni.navigateTo({
-					url: '/pages/baby/babyInfo?id='+id
+					url: '/pages/baby/babyInfo?id='+id+'&backpath=/pages/my/myBaby'
 				});
 			},
 			toaddBaby(){
 				uni.navigateTo({
-					url: '/pages/baby/addBaby'
+					url: '/pages/baby/addBaby?backpath=/pages/my/myBaby'
 				});
 			}
 		}
@@ -99,18 +130,25 @@
 		.babyInfoList{
 			padding: 15px 0;
 			width: 100%;
-			// height: 110rpx;
 			background: #FAFAFB;
 			margin-bottom:30rpx;
 			border-radius: 20rpx;
 			display: flex;
 			flex-direction: row;
+			position: relative;
 			.head{
 				width: 100rpx;
 				height: 100rpx;
 				border-radius: 200rpx;
 				margin-left: 30rpx;
 				margin-right: 10rpx;
+			}
+			.first{
+				width: 50rpx;
+				height: 60rpx;
+				position: absolute;
+				top: 0;
+				right: 30rpx;
 			}
 			.babytop{
 				font-size: 32rpx;

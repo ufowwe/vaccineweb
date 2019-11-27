@@ -1,18 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		// {
-		// 	"path": "pages/index/index",
-		// 	"style": {
-		// 		"navigationBarTitleText": "首页",
-		// 		"usingComponents":{
-		// 			"van-button": "/wxcomponents/vant/dist/button/index"
-		// 		}
-		// 	}
-		// }, 
 		{
 			"path": "pages/task/index",
 			"style": {
-				// "navigationStyle":"custom",
+				"navigationStyle":"custom",
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-slider": "/wxcomponents/vant/dist/slider/index",
@@ -20,7 +11,8 @@
 					"van-cell": "/wxcomponents/vant/dist/cell/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/vaccine/index",
 			"style": {
 				"navigationStyle":"custom",
@@ -32,7 +24,8 @@
 					"van-col": "/wxcomponents/vant/dist/col/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/inoculate/index",
 			"style": {
 				"navigationStyle":"custom",
@@ -40,7 +33,8 @@
 					"van-button": "/wxcomponents/vant/dist/button/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/my/index",
 			"style": {
 				"navigationBarTitleText": "我爱我家",
@@ -50,14 +44,16 @@
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
 				}
 			}
-		}, {
+		}
+		,{
 			"path": "pages/task/component/Login",
 			"style": {
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index"
 				}
 			}
-		}, {
+		}, 
+		{
 			"path": "pages/task/component/Nobaby",
 			"style": {
 				"usingComponents":{
@@ -65,7 +61,19 @@
 				}
 			}
 		}
-	    ,{
+		,{
+		    "path" : "pages/task/component/TaskBar",
+		    "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-radio": "/wxcomponents/vant/dist/radio/index",
+					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}
+		,{
 			"path" : "pages/vaccine/component/VaPlan",
 			"style" : {
 				"usingComponents":{
@@ -88,9 +96,52 @@
 					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
 				}
 			}
-			
         },
 		{
+		    "path" : "pages/my/insurancePolicy",
+		    "style" : {
+				"navigationStyle":"custom",
+				"usingComponents":{
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
+				}
+			}
+		}
+		,{
+		    "path" : "pages/my/component/PolicyInfo",
+		    "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-card": "/wxcomponents/vant/dist/card/index",
+					"van-panel": "/wxcomponents/vant/dist/panel/index"
+				}
+			}
+		}
+		,{
+		    "path" : "pages/my/myBaby",
+		    "style" : {}
+		}
+		,{
+            "path" : "pages/my/setup",
+            "style" : {
+				"usingComponents":{
+					"van-cell": "/wxcomponents/vant/dist/cell/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/my/setup-remind",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/my/setup-useragree",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/my/advice",
+            "style" : {}
+        }
+	    ,{
 		    "path" : "pages/login/login",
 		    "style" : {
 				"navigationStyle":"custom",
@@ -99,17 +150,8 @@
 					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
 				}
 			}
-		},{
-		    "path" : "pages/baby/addBaby",
-		    "style" : {
-				"usingComponents":{
-					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-popup": "/wxcomponents/vant/dist/popup/index",
-					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
-					"van-area": "/wxcomponents/vant/dist/area/index"
-				}
-			}
-		},{
+		}
+		,{
 		    "path" : "pages/components/timePicker",
 		    "style" : {
 				"usingComponents":{
@@ -120,44 +162,27 @@
 			}
 		}
 		,{
+		    "path" : "pages/baby/addBaby",
+		    "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
+					"van-area": "/wxcomponents/vant/dist/area/index"
+				}
+			}
+		}
+		,{
             "path" : "pages/baby/babyInfo",
             "style" : {
 				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
 					"van-picker": "/wxcomponents/vant/dist/picker/index",
 					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
 					"van-area": "/wxcomponents/vant/dist/area/index",
 					"van-field": "/wxcomponents/vant/dist/field/index"
-				}
-			}
-        }
-        ,{
-            "path" : "pages/my/insurancePolicy",
-            "style" : {
-				"navigationStyle":"custom",
-				"usingComponents":{
-					"van-tab": "/wxcomponents/vant/dist/tab/index",
-					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
-				}
-			}
-        }
-		,{
-            "path" : "pages/my/component/PolicyInfo",
-            "style" : {
-				"usingComponents":{
-					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-card": "/wxcomponents/vant/dist/card/index",
-					"van-panel": "/wxcomponents/vant/dist/panel/index"
-				}
-			}
-        }
-		
-        ,{
-            "path" : "pages/my/myBaby",
-            "style" : {
-				"usingComponents":{
-					
 				}
 			}
         }

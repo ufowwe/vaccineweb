@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<view class="header" :style="{'height':titleBarHeight,'padding-top':statusBarHeight,'background-color': nav.bg}">
-			<text class="iconfont leftArrow header-back weight"   :style="{'border':nav.color}" v-if="nav.isdisPlayNavTitle" @click="back"></text>
+			<text class="iconfont leftArrow header-back " 
+			  :style="{'border-right-color':nav.color,'border-top-color':nav.color}" @click="back"></text>
 			<view class="header-title weight" :style="{'color':nav.color}">{{nav.navTitle}}</view>
 		</view>
 		<view  :style="{'height':titleBarHeight,'padding-top':statusBarHeight}"></view>
@@ -56,18 +57,25 @@
 	.header .header-title {
 		position: absolute;
 		left: 50%;
-		font-size: 38upx;
+		font-size: 38rpx;
 		transform: translateX(-50%);
 	}
 	.header-back{
 		position: absolute;
-		left:15upx;
-		font-size:30upx;
-		padding: 10upx;
-		border-radius: 50%;
+		left:30rpx;
 	}
 	.leftArrow{
-		width: 40rpx;
-		height: 40rpx;
+		border-right: 2px solid #000000;
+		border-top: 2px solid #000000; 
+		height: 20rpx; 
+		width: 20rpx; 
+		transform: rotate(-135deg);
+		-webkit-transform: rotate(-135deg); 
+		border-left: 2px solid transparent;
+		border-bottom: 2px solid transparent; 
+		display: inline-block;
+		-moz-transform: rotate(-135deg); 
+		-ms-transform: rotate(-135deg);
+		-o-transform: rotate(-135deg);
 	}
 </style>

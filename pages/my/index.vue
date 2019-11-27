@@ -3,8 +3,16 @@
 	<view class="">
 		<!-- <bar :nav="setNav"></bar> -->
 		<view class="mymain" style="">
-			<view class="myHead">
-				<image src="../../static/img/desktop.jpg" mode=""></image>
+			<view class="myHead" v-if="!isShow">
+				<van-button round type="default" custom-class="nologin" @click="toLogin">登录 / 注册</van-button>
+			</view>
+			<view class="myHead" v-if="isShow">
+				<view class="">
+					{{userInfo.nickName}}
+				</view>
+				<view class="">
+					
+				</view>
 			</view>
 			<view class="groupmy">
 				<view class="line" v-if="isShow">
@@ -24,10 +32,12 @@
 				  </van-cell>
 				</view>
 				<view class="line">
-					<van-cell title-class="leftclass" :border="false" title="意见建议" icon="comment-o" is-link />
+					<van-cell title-class="leftclass" @click="toAdvice"
+					 :border="false" title="意见建议" icon="comment-o" is-link />
 				</view> 
 				<view class="line">
-				 	<van-cell title-class="leftclass" :border="false" title="设置" icon="setting-o" is-link />
+				 	<van-cell title-class="leftclass" @click="toSetup"
+					 :border="false" title="设置" icon="setting-o" is-link />
 				</view>
 			</view>
 		</view>
@@ -37,6 +47,7 @@
 <script>
 import Bar from '../components/Bar.vue';
 import authApi from '../../service/auth';
+import global from '../../utils/global.js';
 
 export default {
 	components:{
@@ -53,15 +64,19 @@ export default {
 				'navTitle':'标题栏' //导航标题
 			},
 			isShow: false,
+			userInfo: {},
 		}
 	},
 	async onLoad(options){
 	  const login = await authApi.login();
 	  if(login){
+		this.userInfo = JSON.parse(global.getUser());
+		console.log(this.userInfo);
 		this.isShow = true;
 	  }else{
 		this.isShow = false
 	  }
+	  
 	},
 	methods: {
 		toMybaby(){
@@ -77,8 +92,22 @@ export default {
 					url: "/pages/my/insurancePolicy"
 				});
 			}
+		},
+		toSetup(){
+			uni.navigateTo({
+				url: "/pages/my/setup"
+			});
+		},
+		toAdvice(){
+			uni.navigateTo({
+				url: "/pages/my/advice"
+			});
+		},
+		toLogin(){
+			uni.redirectTo({
+				url:"/pages/login/login"
+			});
 		}
-		
 	}
 }
 </script>
@@ -86,10 +115,22 @@ export default {
 <style lang="less">
 	.mymain{
 		.myHead{
+			background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574887922823&di=c5c81a1ac84332cbe63568da0a9748a6&imgtype=0&src=http%3A%2F%2Fp4.qhimg.com%2Ft0112f665ca2d2d5e74.jpg%3Fsize%3D640x400');
+			background-size: 100%;
 			height: 400rpx;
+			color: #fff;
 			image{
 				width: 100%;
 				height: 100%;
+			}
+			.nologin{
+				width: 50%;
+				text-align: center;
+				font-size: 32rpx;
+				color: #666666;
+				position:relative;
+				top:40%;
+				left:25%;
 			}
 		}
 		.groupmy{

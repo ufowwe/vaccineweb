@@ -5,7 +5,7 @@
 			<view style="width: 60%;margin-bottom: 20rpx;padding-left:30rpx;">
 				<xfl-select 
 					v-if="showSelect"
-					:list="list"
+					:list="showExtend"
 					:clearable="false"
 					:showItemNum="5"  
 					:initValue="initValue"
@@ -21,8 +21,8 @@
 		</view>
 		<view class="vaccTotal">
 		  <van-col span="12">去接种点次数:<text class="textcol"> {{hospitalTimes}}</text></van-col>
-		  <van-col span="12">接种疫苗种数:<text class="textcol">{{totalDosageNum}}</text></van-col>
-		  <van-col span="12">累计接种疫苗:<text class="textcol">{{vaccineNum}}</text></van-col>
+		  <van-col span="12">累计接种疫苗种数:<text class="textcol">{{vaccineNum}}</text></van-col>
+		  <van-col span="12">累计接种剂次:<text class="textcol">{{totalDosageNum}}</text></van-col>
 		  <van-col span="12">预防疾病种数:<text class="textcol">{{diseaseNum}}</text></van-col>
 		</view>
 		<!--无登录 或者 无宝宝时-->
@@ -81,7 +81,7 @@
 							<view class="table-dt">
 								<van-image @click="changeStatus(0,item)" v-if="item.status == 0"  width="40rpx" height="40rpx" src="/static/img/unselected.png" />
 								<van-image @click="changeStatus(1,item)" v-if="item.status == 1"  width="40rpx" height="40rpx" src="/static/img/selected.png" />
-								<van-image v-if="item.status == 2"  width="40rpx" height="40rpx" src="/static/img/same_effect_selected.png" />
+								<van-image @click="changeStatus(2)" v-if="item.status == 2"  width="40rpx" height="40rpx" src="/static/img/same_effect_selected.png" />
 								<van-image v-if="item.status == 3"  width="40rpx" height="40rpx" src="/static/img/same_effect_vaccinated.png" />
 								<van-image @click="changeStatus(4)" v-if="item.status == 4"  width="40rpx" height="40rpx" src="/static/img/part_vaccinated.png" />
 								<van-image @click="changeStatus(5)" v-if="item.status == 5"  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
@@ -114,7 +114,7 @@
 		<view class="cost">
 			<text class="moneyNum">参考接种成本:{{num}}元</text>
 			<van-button @click="doAddBabyOrLogin" v-if="!isLogin || !isHaveBaby" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
-			<van-button v-else class="vaccBtn" style="width: 40%;" color="#8686F7">保存接种方案</van-button>
+			<van-button @click="doSave" v-else class="vaccBtn" style="width: 40%;" color="#8686F7">保存接种方案</van-button>
 		</view>
 	</view>
 </template>
@@ -133,6 +133,9 @@
 			return {
 				baby:{},  //当前宝宝
 				showSelect:false,
+				orginSelectType:0,     //初始方案类型
+				actualSchemeType:0,    //实际方案类型
+				orginSelectIdList:[],  //初始返回的id列表
 				list:[
 					{value: '国家免费方案', type: 1},
 					{value: '常规推荐方案', type: 2},
@@ -161,13 +164,43 @@
 					this.getNoLoginData();
 				}else{
 					const obj={
-						id:global.getBabyId() || 14
+						id:global.getBabyId()
 					};
 					this.baby = await babyApi.getBabyDetail(obj);
+					this.orginSelectType = this.baby.data.actualSchemeType || 0;
+					this.actualSchemeType = this.baby.data.actualSchemeType || 0;
 					this.getLoginData(this.baby.schemeType);
 				}
 			}else{
 				this.getNoLoginData();
+			}
+		},
+		onTabItemTap() {
+			debugger;
+			uni.showToast({
+				icon:"none",
+			    title: "hahahha"
+			});
+			//next();
+		},
+		computed:{
+			showExtend:function(){
+				let list = [];
+				if(this.actualSchemeType != 4){
+					list = [
+						{value: '国家免费方案', type: 1},
+						{value: '常规推荐方案', type: 2},
+						{value: '最优推荐方案', type: 3},
+					]
+				}else{
+					list = [
+						{value: '国家免费方案', type: 1},
+						{value: '常规推荐方案', type: 2},
+						{value: '最优推荐方案', type: 3},
+						{value: '自定义方案', type: 4}
+					]
+				}
+				return list;
 			}
 		},
 		methods: {
@@ -197,7 +230,7 @@
 			//登陆时 获取页面列表数据
 			getLoginData(type){
 				const obj={
-					babyId:global.getBabyId() || 14,
+					babyId:global.getBabyId(),
 					schemeType:type || 1
 				};
 				vaccineApi.getScheme(obj).then(res=>{
@@ -205,7 +238,12 @@
 						if(res.data){
 							this.loginData = res.data;
 							this.setOrginNum(res.data);
-							this.setSelectValue(this.baby.schemeType || 1);
+							if(res.data.schemeType){
+								this.orginSelectType = res.data.schemeType;
+								this.actualSchemeType = res.data.schemeType;
+							}
+							this.setSelectValue(this.actualSchemeType);
+							this.orginSelectIdList = this.setSelectIdList(res.data.schemeVaccineInfoList);
 							//创建疫苗map
 							if(res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length>0){
 								this.creatSchemeListMap(res.data.schemeVaccineInfoList);
@@ -223,6 +261,42 @@
 					}
 				});
 			},
+			//创建初始方案id列表
+			setSelectIdList(list){
+				let ret = [];
+				for(var i=0;i<list.length;i++){
+					if(list[i].status == 1 || list[i].status == 4 || list[i].status == 6 || list[i].status == 6){
+						ret.push(list[i].vaccineDetailId);
+					}
+				}
+				return ret;
+			},
+			//保存
+			doSave(){
+				const obj={
+					babyId : global.getBabyId(),
+					vaccineRecordReqList : this.getVaccineList()
+				}
+				vaccineApi.saveScheme(obj).then(res=>{
+					if(res.code == "0000"){
+						uni.showToast({
+							icon:"success",
+						    title: res.responseMsg
+						});
+					}
+				})
+			},
+			//创建要保存的信息
+			getVaccineList(){
+				let ret = [];
+				for(var key in this.schemeListMap){
+					let obj = this.schemeListMap[key];
+					for(var k in obj.cellMap){
+						ret.push(obj.cellMap[k]);
+					}
+				}
+				return ret;
+			},
 			//创建疫苗map
 			creatSchemeListMap(list){
 				this.schemeListMap = {};
@@ -239,6 +313,9 @@
 					case 1:
 						this.setSelectStatus(item);
 						break;
+					case 2:
+						this.setSelectSame(item);
+						break;
 					case 4:
 						this.showUnCancelMsg(item);
 						break;
@@ -251,7 +328,65 @@
 					default:
 						break;
 				}
+				//统计金钱
 				this.setPrice();
+				//统计数量
+				this.setTotalInfoNum();
+				//强制刷新页面
+				this.$nextTick(()=>{
+					this.$forceUpdate();
+				});
+				//获取最新所选择的id列表 判断是否是自定义
+				this.getCurrentIdList(this.loginData.schemeVaccineInfoList);
+				
+			},
+			getCurrentIdList(list){
+				this.showSelect = false;
+				let newSelectIdList = this.setSelectIdList(list);
+				let newIdsStr = newSelectIdList.join(",");
+				let orginIdsStr = this.orginSelectIdList.join(",");
+				if(newIdsStr!=orginIdsStr){
+					this.actualSchemeType = 4;
+				}else{
+					this.actualSchemeType = this.orginSelectType;
+				}
+				this.setMapType(this.actualSchemeType);
+				this.setSelectValue(this.actualSchemeType);
+				this.showSelect = true;
+				
+			},
+			//改变map里面的type类型 用于保存
+			setMapType(type){
+				for(var key in this.schemeListMap){
+					let obj = this.schemeListMap[key];
+					for(var k in obj.cellMap){
+						obj.cellMap[k].schemeType = type;
+					}
+				}
+			},
+			//统计信息
+			setTotalInfoNum(){
+				this.hospitalTimes = 0
+				this.totalDosageNum = 0;
+				this.vaccineNum = 0;
+				this.diseaseNum = 0;
+				let hosNumArr = [];   //保存所有去接种点的 最小月 monthNumS
+				for(var key in this.schemeListMap){
+					let obj = this.schemeListMap[key];
+					if( obj.status == 1 || obj.status == 4 || obj.status == 5 || obj.status == 6){
+						this.totalDosageNum += obj.dosageTimes;
+						this.vaccineNum += obj.vaccineNum;
+						this.diseaseNum += obj.diseaseNum;
+						if(obj.cellMap){
+							for(var key in obj.cellMap){
+								if(obj.cellMap[key].monthNumS!=0){
+									hosNumArr.push(obj.cellMap[key].monthNumS);
+								}
+							}
+						}
+					}
+				}
+				this.hospitalTimes = Array.from(new Set(hosNumArr)).length; //数组去重
 			},
 			//计算总钱数
 			setPrice(){
@@ -268,6 +403,13 @@
 				uni.showToast({
 					icon:"none",
 				    title: "该疫苗已开始接种，无法取消"
+				});
+			},
+			//点击已选同效疫苗
+			setSelectSame(){
+				uni.showToast({
+					icon:"none",
+				    title: "已选同效疫苗，请取消后再选"
 				});
 			},
 			//点击已选择的疫苗
@@ -390,8 +532,8 @@
 						//如果同效疫苗
 						if(this.schemeListMap[arr[i]].status == 2){
 							flag = false;
-							break;
 							text = "该疫苗已选择同效疫苗，请取消同效疫苗后再进行选择";
+							break;
 						}
 					}
 				}else{
@@ -422,20 +564,6 @@
 					this.initValue = "最优推荐方案";
 				}else if(type == 4){
 					this.initValue = "自定义方案";
-					let flag = false;
-					for(var i=0;i<this.list.length;i++){
-						if(this.list[i].type == 4){
-							flag = true;
-							break;
-						}
-					}
-					if(!flag){
-						this.list.push({
-							value:"自定义方案",
-							type:4
-						});
-					}
-					Array.from(new Set(this.list));
 				}
 			},
 			//未登录或者无宝宝时
@@ -453,6 +581,8 @@
 				console.log(event);
 			},
 			changeSec(e) {
+				this.actualSchemeType = e.orignItem.type;
+				this.setMapType(this.actualSchemeType);
 				this.getLoginData(e.orignItem.type);
 			},
 		}

@@ -136,7 +136,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/auth.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Bar = function Bar() {return __webpack_require__.e(/*! import() | pages/components/Bar */ "pages/components/Bar").then(__webpack_require__.bind(null, /*! ../components/Bar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/components/Bar.vue"));};var _default =
+
+
+
+
+
+
+
+
+
+
+var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/auth.js"));
+var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.js */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/utils/global.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Bar = function Bar() {return __webpack_require__.e(/*! import() | pages/components/Bar */ "pages/components/Bar").then(__webpack_require__.bind(null, /*! ../components/Bar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/components/Bar.vue"));};var _default =
 
 {
   components: {
@@ -152,16 +163,20 @@ var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */
         // 然后有些页面不需要的东西通过条件控制进行显示与隐藏
         'navTitle': '标题栏' //导航标题
       },
-      isShow: false };
+      isShow: false,
+      userInfo: {} };
 
   },
   onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var login;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 _auth.default.login());case 2:login = _context.sent;
               if (login) {
+                this.userInfo = JSON.parse(_global.default.getUser());
+                console.log(this.userInfo);
                 this.isShow = true;
               } else {
                 this.isShow = false;
               }case 4:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+
 
   methods: {
     toMybaby: function toMybaby() {
@@ -177,6 +192,21 @@ var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */
           url: "/pages/my/insurancePolicy" });
 
       }
+    },
+    toSetup: function toSetup() {
+      uni.navigateTo({
+        url: "/pages/my/setup" });
+
+    },
+    toAdvice: function toAdvice() {
+      uni.navigateTo({
+        url: "/pages/my/advice" });
+
+    },
+    toLogin: function toLogin() {
+      uni.redirectTo({
+        url: "/pages/login/login" });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
