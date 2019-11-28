@@ -3,10 +3,10 @@
 	<view class="">
 		<!-- <bar :nav="setNav"></bar> -->
 		<view class="mymain" style="">
-			<view class="myHead" v-if="!isShow">
+			<view class="myHead" v-if="!isShow" :style="{'background-size': '100%','background': 'url('+imageURL+')'}">
 				<van-button round type="default" custom-class="nologin" @click="toLogin">登录 / 注册</van-button>
 			</view>
-			<view class="myHead" v-if="isShow">
+			<view class="myHead" v-if="isShow" :style="{'background-size': '100%','background': 'url('+imageURL+')'}">
 				<view class="">
 					{{userInfo.nickName}}
 				</view>
@@ -65,6 +65,7 @@ export default {
 			},
 			isShow: false,
 			userInfo: {},
+			imageURL: '../../static/img/5.jpg'
 		}
 	},
 	async onLoad(options){
@@ -115,7 +116,7 @@ export default {
 <style lang="less">
 	.mymain{
 		.myHead{
-			background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574887922823&di=c5c81a1ac84332cbe63568da0a9748a6&imgtype=0&src=http%3A%2F%2Fp4.qhimg.com%2Ft0112f665ca2d2d5e74.jpg%3Fsize%3D640x400');
+			// background-image:url('../');
 			background-size: 100%;
 			height: 400rpx;
 			color: #fff;

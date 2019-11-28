@@ -74,6 +74,18 @@
 			}
 		}
 		,{
+			"path" : "pages/vaccine/component/VaccBar",
+			"style" : {
+				"usingComponents":{
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-radio": "/wxcomponents/vant/dist/radio/index",
+					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		}
+		,{
 			"path" : "pages/vaccine/component/VaPlan",
 			"style" : {
 				"usingComponents":{
@@ -96,8 +108,8 @@
 					"van-dialog": "/wxcomponents/vant/dist/dialog/index"
 				}
 			}
-        },
-		{
+        }
+		,{
 		    "path" : "pages/my/insurancePolicy",
 		    "style" : {
 				"navigationStyle":"custom",

@@ -1,4 +1,9 @@
 {
-  "usingComponents": {},
-  "component": true
+  "usingComponents": {
+    "van-icon": "/wxcomponents/vant/dist/icon/index",
+    "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-radio": "/wxcomponents/vant/dist/radio/index",
+    "van-radio-group": "/wxcomponents/vant/dist/radio-group/index",
+    "van-popup": "/wxcomponents/vant/dist/popup/index"
+  }
 }

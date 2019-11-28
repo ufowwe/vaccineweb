@@ -93,8 +93,8 @@ export default {
 		this.isLogin = 2; 
 	  }else{
 		this.isLogin = 3;
+		this.getbabyList();
 	  }
-	  this.getbabyList();
 	}
 }
 </script>

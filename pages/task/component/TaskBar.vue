@@ -60,7 +60,6 @@
 		 	if(global.getBabyId()){
 				this.radio = global.getBabyId();
 			}
-			debugger
 		},
 		methods: {
 			onChange(event) {

@@ -504,8 +504,7 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby
 //
 //
 //
-var _default = { props: ["babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId();}debugger;
-  },
+var _default = { props: ["babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId();}},
   methods: {
     onChange: function onChange(event) {
       this.radio = event.detail;
@@ -644,8 +643,8 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
                 this.isLogin = 2;
               } else {
                 this.isLogin = 3;
-              }
-              this.getbabyList();case 8:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}() };exports.default = _default;
+                this.getbabyList();
+              }case 7:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}() };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),

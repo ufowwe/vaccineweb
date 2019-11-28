@@ -98,51 +98,108 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  props: ["nav"],
-  data: function data() {
-    return {
-      statusBarHeight: 0,
-      titleBarHeight: 0,
-      isCheck: 1 };
-
-  },
-  created: function created() {
-    var that = this;
-    uni.getSystemInfo({
-      success: function success(res) {
-        if (res.model.indexOf('iPhone') !== -1) {
-          that.titleBarHeight = 44 + 'px';
-        } else {
-          that.titleBarHeight = 48 + 'px';
-        }
-        that.statusBarHeight = res.statusBarHeight + 'px';
-      } });
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-  },
-  methods: {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _global = _interopRequireDefault(__webpack_require__(/*! ../../../utils/global.js */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/utils/global.js"));
+var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/service/baby.js"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId();}}, methods: { onChange: function onChange(event) {this.radio = event.detail;_global.default.setBabyId(this.radio);this.show = false; //点击刷新组件内页面
+      // uni.$emit('refresh',true)
+    }, onClose: function onClose() {this.show = false;}, showPopup: function showPopup(type) {
+      this.show = true;
+      if (_global.default.getBabyId()) {
+        this.radio = _global.default.getBabyId();
+      }
+    },
+    addBaby: function addBaby() {
+      uni.navigateTo({
+        url: '/pages/baby/addBaby' });
+
+    },
+    tomyBaby: function tomyBaby() {
+      uni.navigateTo({
+        url: '/pages/my/myBaby' });
+
+    },
     // 回到上一页
     back: function back() {
       uni.navigateBack({
@@ -194,14 +251,5 @@ render._withStripped = true
 
 /***/ })
 
-}]);
+},[["../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fvaccine%2Fcomponent%2FVaccBar\"}","common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../../.sourcemap/mp-weixin/pages/vaccine/component/VaccBar.js.map
-;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
-    'pages/vaccine/component/VaccBar-create-component',
-    {
-        'pages/vaccine/component/VaccBar-create-component':(function(module, exports, __webpack_require__){
-            __webpack_require__('./node_modules/@dcloudio/uni-mp-weixin/dist/index.js')['createComponent'](__webpack_require__("../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/vaccine/component/VaccBar.vue"))
-        })
-    },
-    [['pages/vaccine/component/VaccBar-create-component']]
-]);                

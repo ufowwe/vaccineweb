@@ -58,7 +58,7 @@
 				let _this = this;
 				uni.showModal({
 				    title: '提示',
-				    content: '是否删除宝宝',
+				    content: '相应的宝宝信息及接种记录数据都将被清除，确认删除',
 				    success: function (res) {
 				        if (res.confirm) {
 				            babyApi.babyDelete({'id':id}).then(res=>{

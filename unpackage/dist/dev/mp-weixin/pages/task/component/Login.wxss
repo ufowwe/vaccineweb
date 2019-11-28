@@ -1,4 +1,4 @@
-.header {
+.tackhead {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8,12 +8,13 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
-.header image {
+.tackhead image {
   display: block;
   width: 500rpx;
   height: 700rpx;
+  margin-top: 120rpx;
 }
-.header .loginBtn {
+.tackhead .loginBtn {
   width: 470rpx;
   height: 110rpx;
   font-size: 40rpx;

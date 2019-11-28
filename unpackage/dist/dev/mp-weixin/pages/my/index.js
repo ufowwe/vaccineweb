@@ -164,7 +164,8 @@ var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.
         'navTitle': '标题栏' //导航标题
       },
       isShow: false,
-      userInfo: {} };
+      userInfo: {},
+      imageURL: '../../static/img/5.jpg' };
 
   },
   onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var login;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (

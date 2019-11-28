@@ -3730,6 +3730,23 @@ createPage(_VaPlan.default);
 
 /***/ }),
 
+/***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fvaccine%2Fcomponent%2FVaccBar\"}":
+/*!******************************************************************************************************!*\
+  !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fvaccine%2Fcomponent%2FVaccBar"} ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _VaccBar = _interopRequireDefault(__webpack_require__(/*! ./pages/vaccine/component/VaccBar.vue */ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/pages/vaccine/component/VaccBar.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_VaccBar.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
 /***/ "../../../../../../Users/caoyuejuan/Desktop/uniappfirst/main.js?{\"page\":\"pages%2Fvaccine%2Findex\"}":
 /*!****************************************************************************************!*\
   !*** /Users/caoyuejuan/Desktop/uniappfirst/main.js?{"page":"pages%2Fvaccine%2Findex"} ***!
