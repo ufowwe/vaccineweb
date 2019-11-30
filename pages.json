@@ -131,11 +131,14 @@
 		}
 		,{
 		    "path" : "pages/my/myBaby",
-		    "style" : {}
+		    "style" : {
+				"navigationBarTextStyle": "black"
+			}
 		}
 		,{
             "path" : "pages/my/setup",
             "style" : {
+				"navigationBarTextStyle": "black",
 				"usingComponents":{
 					"van-cell": "/wxcomponents/vant/dist/cell/index"
 				}
@@ -143,23 +146,39 @@
         }
         ,{
             "path" : "pages/my/setup-remind",
-            "style" : {}
+            "style" : {
+				"navigationBarTextStyle": "black"
+			}
         }
         ,{
             "path" : "pages/my/setup-useragree",
-            "style" : {}
+            "style" : {
+				"navigationBarTextStyle": "black"
+			}
         }
 		,{
 		    "path" : "pages/my/setup-conceal",
-		    "style" : {}
+		    "style" : {
+				"navigationBarTextStyle": "black"
+			}
 		}
 		,{
 		    "path" : "pages/my/setup-aboutus",
-		    "style" : {}
+		    "style" : {
+				"navigationBarTextStyle": "black"
+			}
 		}
         ,{
             "path" : "pages/my/advice",
-            "style" : {}
+            "style" : {
+				"navigationBarTextStyle": "black",
+				"usingComponents":{
+					"van-radio": "/wxcomponents/vant/dist/radio/index",
+					"van-radio-group": "/wxcomponents/vant/dist/radio-group/index",
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index"
+				}
+			}
         }
 	    ,{
 		    "path" : "pages/login/login",
@@ -184,6 +203,7 @@
 		,{
 		    "path" : "pages/baby/addBaby",
 		    "style" : {
+				"navigationBarTextStyle": "black",
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
@@ -195,6 +215,7 @@
 		,{
             "path" : "pages/baby/babyInfo",
             "style" : {
+				"navigationBarTextStyle": "black",
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
@@ -238,7 +259,9 @@
 		}
         ,{
             "path" : "pages/vaccine/scheme",
-            "style" : {}
+            "style" : {
+				"navigationStyle":"custom"
+			}
         }
         ,{
             "path" : "pages/vaccine/vaccKnow",

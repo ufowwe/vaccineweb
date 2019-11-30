@@ -22,40 +22,49 @@
 					/>
 					<view class="tab">
 						<view class="td" @click="toList(1)">
-							<van-icon size="80rpx" name="clock" color="#fff" />
-							<text>待完成</text>
+							<van-icon size="80rpx" name="clock" :color="listShow==1?'#8686F7':'#fff'" />
+							<text :style="{'color':listShow==1?'#8686F7':'#666'}">待完成</text>
 						</view>
 						<view class="td" @click="toList(2)">
-							<van-icon size="80rpx" name="checked" color="#fff" />
-							<text>已完成</text>
+							<van-icon size="80rpx" name="checked" :color="listShow==2?'#8686F7':'#fff'" />
+							<text :style="{'color':listShow==2?'#8686F7':'#666'}">已完成</text>
 						</view>
 						<view class="td" @click="toList(3)">
-							<van-icon size="80rpx" name="more" color="#fff" />
-							<text>全部</text>
+							<van-icon size="80rpx" name="more" :color="listShow==3?'#8686F7':'#fff'" />
+							<text :style="{'color':listShow==3?'#8686F7':'#666'}">全部</text>
 						</view>
 					</view>
 				</view>
 			</view>
 			<view class="task_box">
 				<view v-if="listShow==1" class="cellCla" v-for="item in 3" :key="item">
-					<view class="tit">办理免疫预防接种证</view>
+					<image src="../../static/img/vaccinated.png" mode=""></image>
 					<view class="">
-						<text class="babyname">linda</text>
-						<text class="date">2019-10-12</text>
+						<view class="tit">办理免疫预防接种证</view>
+						<view class="">
+							<text class="babyname">linda</text>
+							<text class="date">2019-10-12</text>
+						</view>
 					</view>
 				</view>
 				<view v-if="listShow==2" class="cellCla" v-for="item in 2" :key="item">
-					<view class="tit">办理免疫预防接种证</view>
+					<image src="../../static/img/vaccinated.png" mode=""></image>
 					<view class="">
-						<text class="babyname">linda</text>
-						<text class="date">2019-10-12</text>
+						<view class="tit">办理免疫预防接种证</view>
+						<view class="">
+							<text class="babyname">linda</text>
+							<text class="date">2019-10-12</text>
+						</view>
 					</view>
 				</view>
 				<view v-if="listShow==3" class="cellCla" v-for="item in 4" :key="item">
-					<view class="tit">办理免疫预防接种证</view>
+					<image src="../../static/img/vaccinated.png" mode=""></image>
 					<view class="">
-						<text class="babyname">linda</text>
-						<text class="date">2019-10-12</text>
+						<view class="tit">办理免疫预防接种证</view>
+						<view class="">
+							<text class="babyname">linda</text>
+							<text class="date">2019-10-12</text>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -80,7 +89,7 @@ export default {
 		return{
 			isLogin:'',
 			babyList: [],
-			listShow: 1
+			listShow: 1,
 		}
 	},
 	methods:{
@@ -159,11 +168,22 @@ export default {
 	.task_box{
 		margin: 30rpx;
 	}
+	.task_box_flex{
+		
+	}
 	.cellCla{
 		padding: 15px;
 		background: #FAFAFB;
 		margin-bottom:30rpx;
 		border-radius: 20rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		image{
+			margin-right: 30rpx;
+			height: 40rpx;
+			width: 40rpx;
+		}
 		.tit{
 			color: #666;
 			font-size: 32rpx;

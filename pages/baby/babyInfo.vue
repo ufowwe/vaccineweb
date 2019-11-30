@@ -49,6 +49,7 @@
 			  <van-cell title="接种点" 
 				  custom-class="cellCla" 
 				  value-class="valueCla" 
+				  @click="toMap" 
 				  value="未填写" 
 				  size="large" />
 			</view>
@@ -89,6 +90,7 @@
 
 <script>
 	import babyApi from "../../service/baby";
+	import authApi from "../../service/auth.js";
 	import city from "../../dataDict/city.js"
 	
 	export default {
@@ -191,6 +193,12 @@
 				this.provinceName = event.detail.values[0].name;
 				this.local = this.provinceName+'/'+this.cityName+'/'+this.countyName;
 				this.show = false;
+			},
+			toMap(){
+				authApi.getLocation((res)=>{
+				 //res就是 具体位置信息  
+				 console.log(res)
+				})
 			},
 			savebabyBtn(){
 				let obj={

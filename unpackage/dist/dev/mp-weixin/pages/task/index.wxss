@@ -136,6 +136,24 @@
   background: #FAFAFB;
   margin-bottom: 30rpx;
   border-radius: 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.tackmain .cellCla image {
+  margin-right: 30rpx;
+  height: 40rpx;
+  width: 40rpx;
 }
 .tackmain .cellCla .tit {
   color: #666;

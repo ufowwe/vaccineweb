@@ -182,6 +182,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
 var _Login = _interopRequireDefault(__webpack_require__(/*! ./component/Login.vue */ 31));
 var _Nobaby = _interopRequireDefault(__webpack_require__(/*! ./component/Nobaby.vue */ 38));
 var _TaskBar = _interopRequireDefault(__webpack_require__(/*! ./component/TaskBar.vue */ 45));
@@ -716,6 +725,10 @@ var _default = { props: ["babyList"], data: function data() {return { statusBarH
     onChange: function onChange(event) {
       this.radio = event.detail;
       _global.default.setBabyId(this.radio);
+      if (getCurrentPages().length != 0) {
+        //刷新当前页面的数据
+        getCurrentPages()[getCurrentPages().length - 1].onLoad();
+      }
       this.show = false;
     },
     onClose: function onClose() {

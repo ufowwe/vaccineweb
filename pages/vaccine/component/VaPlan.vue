@@ -190,6 +190,7 @@
 				y:true,
 				isFixed:true,
 				headerHeight:0,
+				address:"未知",
 				baby:{},  //当前宝宝
 				// canEdit:false,    //当前是否可以进行编辑
 				showSelect:false,

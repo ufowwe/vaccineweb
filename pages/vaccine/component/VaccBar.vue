@@ -77,9 +77,11 @@
 			onChange(event) {
 			    this.radio = event.detail;
 				global.setBabyId(this.radio);
+				if (getCurrentPages().length != 0) {
+					//刷新当前页面的数据
+					getCurrentPages()[getCurrentPages().length - 1].onLoad()
+				  }
 				this.show = false;
-				//点击刷新组件内页面
-				// uni.$emit('refresh',true)
 			},
 			onClose() {
 				this.show = false;

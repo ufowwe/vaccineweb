@@ -8,30 +8,30 @@
 		</view>
 		<view class="babyInfo">
 			<view class="babyInfoList">
-			  <van-cell title="提醒设置" 
-				  custom-class="cellCla" 
-				  :border="false" 
-				  @click="toRemind"
-				  is-link 
-				  size="large" />
-			  <van-cell title="用户协议" 
-				  custom-class="cellCla"
-				  :border="false" 
-				  @click="toUseragree"
-				  is-link 
-				  size="large" />
-			  <van-cell title="隐私政策" 
-				  custom-class="cellCla"
-				  :border="false"
-				   @click="toConceal"
-				  is-link 
-				  size="large" />
-			  <van-cell title="关于我们" 
-				  custom-class="cellCla"
-				  :border="false" 
-				  @click="toAboutus"
-				  is-link 
-				  size="large" />
+				<van-cell @click="toRemind" :border="false" is-link size="large" custom-class="cellCla" >
+				  <view slot="title">
+					<image class="cellImg" src="../../static/img/提醒设置.png" mode=""></image>
+					<text class="celltext">提醒设置</text>
+				  </view>
+				</van-cell>
+				<van-cell @click="toUseragree" :border="false" is-link size="large" custom-class="cellCla" >
+				  <view slot="title">
+					<image class="cellImg" src="../../static/img/用户协议.png" mode=""></image>
+					<text class="celltext">用户协议</text>
+				  </view>
+				</van-cell>
+				<van-cell @click="toConceal" :border="false" is-link size="large" custom-class="cellCla" >
+				  <view slot="title">
+					<image class="cellImg" src="../../static/img/隐私政策.png" mode=""></image>
+					<text class="celltext">隐私政策</text>
+				  </view>
+				</van-cell>
+				<van-cell @click="toAboutus" :border="false" is-link size="large" custom-class="cellCla" >
+				  <view slot="title">
+					<image class="cellImg" src="../../static/img/关于我们.png" mode=""></image>
+					<text class="celltext">关于我们</text>
+				  </view>
+				</van-cell>
 			</view>
 		</view>
 	</view>
@@ -112,6 +112,18 @@
 			width: 100rpx;
 			height: 100rpx;
 			float: right;
+		}
+		.cellImg{
+			width: 50rpx;
+			height: 50rpx;
+			display: inline-block;
+		}
+		.celltext{
+			color: #666666;
+			font-size: 32rpx;
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 20rpx;
 		}
 	}
 }

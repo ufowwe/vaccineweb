@@ -99,7 +99,7 @@
 		methods: {
 			showPopup(type) {
 				this.type = type;
-				this.show = true;	
+				this.show = true;
 			},
 			onClose() {
 				this.show = false;

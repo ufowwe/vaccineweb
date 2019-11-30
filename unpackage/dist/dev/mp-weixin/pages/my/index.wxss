@@ -81,12 +81,20 @@
   margin-top: -30rpx;
   background: #fff;
 }
-.mymain .groupmy .leftclass {
-  color: #666666;
-  font-size: 32rpx;
-}
 .mymain .groupmy .line {
   height: 100rpx;
   line-height: 100rpx;
+}
+.mymain .cellImg {
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+}
+.mymain .celltext {
+  color: #666666;
+  font-size: 32rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20rpx;
 }
 

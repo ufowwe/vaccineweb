@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<VaccBar ref="bar" :babyList="babyList" :babyShow="babyShow" :nav="setNav" @changePage="changePage"></VaccBar>
+		<VaccBar ref="bar" :babyList="babyList" :navStatus="isShow" :babyShow="babyShow" :nav="setNav" @changePage="changePage"></VaccBar>
 		<VaCertificate @changePage="changePage" v-if="isShow == 1"></VaCertificate>	
 		<VaPlan :scrollTop="scrollTop" @changePage="changePage"  v-if="isShow == 2"></VaPlan>	
 	</view>
@@ -32,7 +32,7 @@
 					'vaCertificate':'接种证', //导航标题
 					'vaPlan':'接种方案', //导航标题
 				},
-				isShow: true,
+				isShow: 1,
 				babyShow: true,
 				babyList: [],
 			}

@@ -1508,7 +1508,7 @@ uni$1;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/task/index": { "navigationStyle": "custom" }, "pages/vaccine/index": { "navigationStyle": "custom" }, "pages/inoculate/index": { "navigationStyle": "custom" }, "pages/my/index": { "navigationStyle": "custom" }, "pages/task/component/Login": {}, "pages/task/component/Nobaby": {}, "pages/task/component/TaskBar": {}, "pages/vaccine/component/VaccBar": {}, "pages/vaccine/component/VaPlan": {}, "pages/vaccine/component/VaCertificate": {}, "pages/my/insurancePolicy": { "navigationStyle": "custom" }, "pages/my/component/PolicyInfo": {}, "pages/my/myBaby": {}, "pages/my/setup": {}, "pages/my/setup-remind": {}, "pages/my/setup-useragree": {}, "pages/my/setup-conceal": {}, "pages/my/setup-aboutus": {}, "pages/my/advice": {}, "pages/login/login": { "navigationStyle": "custom" }, "pages/components/timePicker": {}, "pages/baby/addBaby": {}, "pages/baby/babyInfo": {}, "pages/vaccine/vaccineInfo": { "navigationStyle": "custom" }, "pages/vaccine/component/Infojieshao": {}, "pages/vaccine/component/Infoyimiao": {}, "pages/vaccine/component/Infojici": {}, "pages/vaccine/scheme": {}, "pages/vaccine/vaccKnow": { "navigationStyle": "custom" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/task/index": { "navigationStyle": "custom", "usingComponents": { "login-in": "/pages/task/component/Login", "nobaby": "/pages/task/component/Nobaby", "task-bar": "/pages/task/component/TaskBar" } }, "pages/vaccine/index": { "navigationStyle": "custom", "usingComponents": { "vacc-bar": "/pages/vaccine/component/VaccBar", "va-certificate": "/pages/vaccine/component/VaCertificate", "va-plan": "/pages/vaccine/component/VaPlan" } }, "pages/inoculate/index": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } }, "pages/my/index": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } }, "pages/task/component/Login": { "usingComponents": {} }, "pages/task/component/Nobaby": { "usingComponents": {} }, "pages/task/component/TaskBar": { "usingComponents": {} }, "pages/vaccine/component/VaccBar": { "usingComponents": {} }, "pages/vaccine/component/VaPlan": { "usingComponents": { "xfl-select": "/pages/components/xfl-select" } }, "pages/vaccine/component/VaCertificate": { "usingComponents": { "t-picker": "/pages/components/timePicker" } }, "pages/my/insurancePolicy": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar", "policy-info": "/pages/my/component/PolicyInfo" } }, "pages/my/component/PolicyInfo": { "usingComponents": {} }, "pages/my/myBaby": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-remind": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-useragree": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-conceal": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-aboutus": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/advice": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/components/timePicker": { "usingComponents": {} }, "pages/baby/addBaby": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/baby/babyInfo": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/vaccine/vaccineInfo": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar", "infojieshao": "/pages/vaccine/component/Infojieshao", "infojici": "/pages/vaccine/component/Infojici", "infoyimiao": "/pages/vaccine/component/Infoyimiao" } }, "pages/vaccine/component/Infojieshao": { "usingComponents": {} }, "pages/vaccine/component/Infoyimiao": { "usingComponents": {} }, "pages/vaccine/component/Infojici": { "usingComponents": {} }, "pages/vaccine/scheme": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } }, "pages/vaccine/vaccKnow": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 
@@ -1711,7 +1711,69 @@ Auth = /*#__PURE__*/function (_Base) {_inherits(Auth, _Base);function Auth() {_c
                                                                                                                                                                                                                                                                                              * 设置用户
                                                                                                                                                                                                                                                                                              * **/ }, { key: "setUser", value: function () {var _setUser = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5(
       data) {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:_context5.next = 2;return (
-                  this.post(_config.default.auth.updateUserByWx, data));case 2:return _context5.abrupt("return", _context5.sent);case 3:case "end":return _context5.stop();}}}, _callee5, this);}));function setUser(_x3) {return _setUser.apply(this, arguments);}return setUser;}() }]);return Auth;}(_base.default);exports.default = Auth;
+                  this.post(_config.default.auth.updateUserByWx, data));case 2:return _context5.abrupt("return", _context5.sent);case 3:case "end":return _context5.stop();}}}, _callee5, this);}));function setUser(_x3) {return _setUser.apply(this, arguments);}return setUser;}()
+
+    /***
+                                                                                                                                                                                                                                                                                      **获取地理位置
+                                                                                                                                                                                                                                                                                      * **/ }, { key: "getLocation", value: function getLocation(
+    cb) {
+      wx.chooseLocation({
+        success: function success(res) {
+          if (cb && typeof cb == "function") {
+            cb(res);
+          }
+        },
+        fail: function fail() {
+          wx.getSetting({
+            success: function success(res) {
+              var statu = res.authSetting;
+              if (!statu['scope.userLocation']) {
+                wx.showModal({
+                  title: '是否授权当前位置',
+                  content: '需要获取您的地理位置，请确认授权，否则地图功能将无法使用',
+                  success: function success(tip) {
+                    if (tip.confirm) {
+                      wx.openSetting({
+                        success: function success(data) {
+                          if (data.authSetting["scope.userLocation"] === true) {
+                            wx.showToast({
+                              title: '授权成功',
+                              icon: 'success',
+                              duration: 1000 });
+
+                            //授权成功之后，再调用chooseLocation选择地方
+                            wx.chooseLocation({
+                              success: function success(res) {
+                                obj.setData({
+                                  addr: res.address });
+
+                              } });
+
+                          } else {
+                            wx.showToast({
+                              title: '授权失败',
+                              icon: 'success',
+                              duration: 1000 });
+
+                          }
+                        } });
+
+                    }
+                  } });
+
+              }
+            },
+            fail: function fail() {
+              wx.showToast({
+                title: '调用授权窗口失败',
+                icon: 'success',
+                duration: 1000 });
+
+            } });
+
+        } });
+
+    } }]);return Auth;}(_base.default);exports.default = Auth;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

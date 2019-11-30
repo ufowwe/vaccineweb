@@ -127,9 +127,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */ 18));
 var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.js */ 19));
-var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Bar = function Bar() {return __webpack_require__.e(/*! import() | pages/components/Bar */ "pages/components/Bar").then(__webpack_require__.bind(null, /*! ../components/Bar.vue */ 263));};var _default =
+var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Bar = function Bar() {return __webpack_require__.e(/*! import() | pages/components/Bar */ "pages/components/Bar").then(__webpack_require__.bind(null, /*! ../components/Bar.vue */ 265));};var _default =
 
 {
   components: {
@@ -143,7 +158,7 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
         'color': '#fff', //字体颜色
         'isdisPlayNavTitle': true, //是否显示返回按钮，由于导航栏是共用的，把所有的东西封装好，
         // 然后有些页面不需要的东西通过条件控制进行显示与隐藏
-        'navTitle': '标题栏' //导航标题
+        'navTitle': '' //导航标题
       },
       isShow: false,
       userInfo: {},
@@ -156,6 +171,7 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
               if (login) {
                 this.userInfo = JSON.parse(_global.default.getUser());
                 console.log(this.userInfo);
+                this.getbabyList();
                 this.isShow = true;
               } else {
                 this.isShow = false;

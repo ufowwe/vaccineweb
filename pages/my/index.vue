@@ -29,29 +29,44 @@
 			</view>
 			<view class="groupmy">
 				<view class="line" v-if="isShow">
-					<van-cell title-class="leftclass" @click="toMybaby"
-					:border="false" title="我的宝宝" icon="comment-o" is-link />
+					<van-cell @click="toMybaby" :border="false" is-link >
+					  <view slot="title">
+						<image class="cellImg" src="../../static/img/我的宝宝.png" mode=""></image>
+						<text class="celltext">我的宝宝</text>
+					  </view>
+					</van-cell>
 				</view> 
 				<view class="line" v-if="isShow">
-					<van-cell title-class="leftclass" @click="toPolicy"
-					:border="false" title="我的保单" icon="comment-o" is-link />
+					<van-cell @click="toPolicy" :border="false" is-link >
+					<view slot="title">
+						<image class="cellImg" src="../../static/img/我的保单.png" mode=""></image>
+						<text class="celltext">我的保单</text>
+					  </view>
+					</van-cell>
 				</view> 
 				<view class="line">
-					<van-cell title-class="leftclass" @click="toceshi"
-					 :border="false" title="邀请好友" icon="friends-o" is-link >
-					<!-- <view slot="icon">
-					  <image src="../../static/img/invite.png" mode=""></image>
-					  <van-icon name="../../static/img/invite.png" />
-					</view> -->
-				  </van-cell>
+					<van-cell :border="false" is-link >
+					  <view slot="title">
+						<image class="cellImg" src="../../static/img/invite.png" mode=""></image>
+						<text class="celltext">邀请好友</text>
+					  </view>
+					</van-cell>
 				</view>
 				<view class="line">
-					<van-cell title-class="leftclass" @click="toAdvice"
-					 :border="false" title="意见建议" icon="comment-o" is-link />
+					<van-cell @click="toAdvice" :border="false" is-link >
+					   <view slot="title">
+					 	<image class="cellImg" src="../../static/img/意见建议.png" mode=""></image>
+					 	<text class="celltext">意见建议</text>
+					   </view>
+					 </van-cell>
 				</view> 
 				<view class="line">
-				 	<van-cell title-class="leftclass" @click="toSetup"
-					 :border="false" title="设置" icon="setting-o" is-link />
+				 	<van-cell @click="toSetup" :border="false" is-link >
+					   <view slot="title">
+					 	<image class="cellImg" src="../../static/img/设置.png" mode=""></image>
+					 	<text class="celltext">设置</text>
+					   </view>
+					 </van-cell>
 				</view>
 			</view>
 		</view>
@@ -76,7 +91,7 @@ export default {
 				'color':'#fff',  //字体颜色
 				'isdisPlayNavTitle':true, //是否显示返回按钮，由于导航栏是共用的，把所有的东西封装好，
 				// 然后有些页面不需要的东西通过条件控制进行显示与隐藏
-				'navTitle':'标题栏' //导航标题
+				'navTitle':'' //导航标题
 			},
 			isShow: false,
 			userInfo: {},
@@ -89,6 +104,7 @@ export default {
 	  if(login){
 		this.userInfo = JSON.parse(global.getUser());
 		console.log(this.userInfo);
+		this.getbabyList();
 		this.isShow = true;
 	  }else{
 		this.isShow = false
@@ -211,14 +227,22 @@ export default {
 			border-radius: 30rpx;
 			margin-top: -30rpx;
 			background: #fff;
-			.leftclass{
-				color: #666666;
-				font-size: 32rpx;
-			}
 			.line{
 				height: 100rpx;
 				line-height: 100rpx;
 			}
+		}
+		.cellImg{
+			width: 50rpx;
+			height: 50rpx;
+			display: inline-block;
+		}
+		.celltext{
+			color: #666666;
+			font-size: 32rpx;
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 20rpx;
 		}
 	}
 	
