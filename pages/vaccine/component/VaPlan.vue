@@ -147,9 +147,9 @@
 		</scroll-view>
 		<view class="cost">
 			<text class="moneyNum">参考接种成本:{{num}}元</text>
-			<van-button @click="doAddBabyOrLogin" v-if="!isLogin || !isHaveBaby" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
-			<van-button v-if="!orginSelectType" @click="toDoSave" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
-			<van-button v-if="orginSelectType" @click="toDoSave" class="vaccBtn" style="width: 40%;" color="#8686F7">保存接种方案</van-button>
+			<van-button v-if="(!isLogin) || (!isHaveBaby)" @click="doAddBabyOrLogin" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
+			<van-button v-else-if="!orginSelectType && isLogin && isHaveBaby" @click="toDoSave" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
+			<van-button v-else-if="orginSelectType && isLogin && isHaveBaby" @click="toDoSave" class="vaccBtn" style="width: 40%;" color="#8686F7">保存接种方案</van-button>
 		</view>
 	</view>
 </template>
@@ -204,8 +204,8 @@
 					{value: '最优推荐方案', type: 3},
 				],
 				initValue:"",      //下拉菜单默认显示的数据
-				isLogin:false,     //是否已登陆
-				isHaveBaby:false,  //是否有宝宝
+				isLogin:0,     //是否已登陆
+				isHaveBaby:0,  //是否有宝宝
 				isHavePlan:false,  //是否有接种方案
 				noLoginData:{},    //没有登录 或者 没有宝宝的时候 页面显示的数据
 				loginData:{},      //有宝宝的时候 页面显示的数据
@@ -219,6 +219,7 @@
 			};
 		},
 		async mounted() {
+			debugger;
 			this.isLogin = await authApi.login();
 			if(this.isLogin){
 				this.isHaveBaby = await babyApi.isHaveBaby();
@@ -238,7 +239,6 @@
 			}
 		},
 		onTabItemTap() {
-			debugger;
 			uni.showToast({
 				icon:"none",
 			    title: "hahahha"

@@ -1325,8 +1325,8 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       { value: '最优推荐方案', type: 3 }],
 
       initValue: "", //下拉菜单默认显示的数据
-      isLogin: false, //是否已登陆
-      isHaveBaby: false, //是否有宝宝
+      isLogin: 0, //是否已登陆
+      isHaveBaby: 0, //是否有宝宝
       isHavePlan: false, //是否有接种方案
       noLoginData: {}, //没有登录 或者 没有宝宝的时候 页面显示的数据
       loginData: {}, //有宝宝的时候 页面显示的数据
@@ -1339,27 +1339,27 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       diseaseNum: 0 };
 
   },
-  mounted: function () {var _mounted = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _auth.default.login());case 2:this.isLogin = _context.sent;if (!
-              this.isLogin) {_context.next = 20;break;}_context.next = 6;return (
-                _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
-              this.isHaveBaby) {_context.next = 11;break;}
-              this.getNoLoginData();_context.next = 18;break;case 11:
+  mounted: function () {var _mounted = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              debugger;_context.next = 3;return (
+                _auth.default.login());case 3:this.isLogin = _context.sent;if (!
+              this.isLogin) {_context.next = 21;break;}_context.next = 7;return (
+                _baby.default.isHaveBaby());case 7:this.isHaveBaby = _context.sent;if (
+              this.isHaveBaby) {_context.next = 12;break;}
+              this.getNoLoginData();_context.next = 19;break;case 12:
 
               obj = {
-                id: _global.default.getBabyId() };_context.next = 14;return (
+                id: _global.default.getBabyId() };_context.next = 15;return (
 
-                _baby.default.getBabyDetail(obj));case 14:this.baby = _context.sent;
+                _baby.default.getBabyDetail(obj));case 15:this.baby = _context.sent;
               this.orginSelectType = this.baby.data.actualSchemeType || 0;
               this.actualSchemeType = this.baby.data.actualSchemeType || 0;
-              this.getLoginData(this.baby.data.actualSchemeType);case 18:_context.next = 21;break;case 20:
+              this.getLoginData(this.baby.data.actualSchemeType);case 19:_context.next = 22;break;case 21:
 
 
-              this.getNoLoginData();case 21:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
+              this.getNoLoginData();case 22:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
 
 
   onTabItemTap: function onTabItemTap() {
-    debugger;
     uni.showToast({
       icon: "none",
       title: "hahahha" });
