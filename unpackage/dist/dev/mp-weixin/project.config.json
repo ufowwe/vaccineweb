@@ -62,6 +62,13 @@
 					"id": -1,
 					"name": "pages/my/setup",
 					"pathName": "pages/my/setup",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/setup-remind",
+					"pathName": "pages/my/setup-remind",
 					"scene": null
 				}
 			]

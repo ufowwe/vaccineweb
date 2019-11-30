@@ -1,4 +1,5 @@
 {
+  "navigationBarTextStyle": "black",
   "navigationStyle": "custom",
   "usingComponents": {
     "van-button": "/wxcomponents/vant/dist/button/index",

@@ -8,7 +8,19 @@
 		</view>
 		<view class="babyInfo">
 			<view class="babyInfoList">
-				
+				<text class="shu"></text>
+				提醒模式
+				<view class="">
+					<!-- <van-cell title="单元格" >
+						<view slot="default">
+							<van-switch :checked="checked" @change="onChange" />
+						</view> 
+					</van-cell> -->
+				</view>
+			</view>
+			<view class="babyInfoList">
+				<text class="shu"></text>
+				提醒时间
 			</view>
 		</view>
 	</view>
@@ -19,14 +31,17 @@
 	export default {
 		data() {
 			return {
-				
+				checked: true
 			};
 		},
 		onLoad(option){
 			
 		},
 		methods:{
-			
+			onChange({ detail }) {
+			    // 需要手动对 checked 状态进行更新
+			    this.checked = detail;
+			  }
 		}
 	}
 </script>
@@ -56,13 +71,22 @@
 	.babyInfo{
 		margin-top: 60rpx;
 		.babyInfoList{
-			padding: 15px 0;
-			width: 100%;
+			padding: 15px;
+			// width: 100%;
 			background: #FAFAFB;
 			margin-bottom:30rpx;
 			border-radius: 20rpx;
 			display: flex;
 			flex-direction: row;
+		}
+		.shu{
+			display: inline-block;
+			width: 8rpx;
+			height: 30rpx;
+			background: #8686F7;
+			border-radius: 8rpx;
+			margin-right: 20rpx;
+			margin-top: 5px;
 		}
 	}
 }

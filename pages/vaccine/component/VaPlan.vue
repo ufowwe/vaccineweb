@@ -194,8 +194,8 @@
 				baby:{},  //当前宝宝
 				// canEdit:false,    //当前是否可以进行编辑
 				showSelect:false,
-				orginSelectType:"0",      //初始方案类型
-				actualSchemeType:"0",     //实际方案类型
+				orginSelectType:0,      //初始方案类型
+				actualSchemeType:0,     //实际方案类型
 				orginSelectIdList:[],   //页面初始化返回的 已选择的id列表
 				selectSelectIdList:[],  //下拉菜单发生变化时返回的 已选择的id列表
 				list:[
@@ -229,9 +229,9 @@
 						id:global.getBabyId()
 					};
 					this.baby = await babyApi.getBabyDetail(obj);
-					this.orginSelectType = this.baby.data.actualSchemeType || "0";
-					this.actualSchemeType = this.baby.data.actualSchemeType || "0";
-					this.getLoginData(this.baby.actualSchemeType);
+					this.orginSelectType = this.baby.data.actualSchemeType || 0;
+					this.actualSchemeType = this.baby.data.actualSchemeType || 0;
+					this.getLoginData(this.baby.data.actualSchemeType);
 				}
 			}else{
 				this.getNoLoginData();
@@ -309,8 +309,8 @@
 			//获取未登录是页面列表数据
 			getNoLoginData(){
 				const obj={
-					provinceId:'0',
-					schemeType:'0'
+					provinceId:0,
+					schemeType:0
 				};
 				vaccineApi.getSchemeNoLogin(obj).then(res=>{
 					if(res.code == "0000"){
@@ -361,7 +361,7 @@
 			getLoginData(type){
 				const obj={
 					babyId:global.getBabyId(),
-					schemeType:type || "0"
+					schemeType:type || 0
 				};
 				vaccineApi.getScheme(obj).then(res=>{
 					if(res.code == "0000"){

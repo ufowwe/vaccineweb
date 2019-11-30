@@ -28,6 +28,7 @@
 		{
 			"path": "pages/inoculate/index",
 			"style": {
+				"navigationBarTextStyle": "black",
 				"navigationStyle":"custom",
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index"
@@ -147,7 +148,11 @@
         ,{
             "path" : "pages/my/setup-remind",
             "style" : {
-				"navigationBarTextStyle": "black"
+				"navigationBarTextStyle": "black",
+				"usingComponents":{
+					 "van-switch": "/wxcomponents/vant/dist/switch/index",
+					 "van-cell": "/wxcomponents/vant/dist/cell/index"
+				}
 			}
         }
         ,{

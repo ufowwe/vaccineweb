@@ -318,8 +318,8 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       baby: {}, //当前宝宝
       // canEdit:false,    //当前是否可以进行编辑
       showSelect: false,
-      orginSelectType: "0", //初始方案类型
-      actualSchemeType: "0", //实际方案类型
+      orginSelectType: 0, //初始方案类型
+      actualSchemeType: 0, //实际方案类型
       orginSelectIdList: [], //页面初始化返回的 已选择的id列表
       selectSelectIdList: [], //下拉菜单发生变化时返回的 已选择的id列表
       list: [
@@ -353,9 +353,9 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
                 id: _global.default.getBabyId() };_context.next = 14;return (
 
                 _baby.default.getBabyDetail(obj));case 14:this.baby = _context.sent;
-              this.orginSelectType = this.baby.data.actualSchemeType || "0";
-              this.actualSchemeType = this.baby.data.actualSchemeType || "0";
-              this.getLoginData(this.baby.actualSchemeType);case 18:_context.next = 21;break;case 20:
+              this.orginSelectType = this.baby.data.actualSchemeType || 0;
+              this.actualSchemeType = this.baby.data.actualSchemeType || 0;
+              this.getLoginData(this.baby.data.actualSchemeType);case 18:_context.next = 21;break;case 20:
 
 
               this.getNoLoginData();case 21:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
@@ -433,8 +433,8 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
     //获取未登录是页面列表数据
     getNoLoginData: function getNoLoginData() {var _this = this;
       var obj = {
-        provinceId: '0',
-        schemeType: '0' };
+        provinceId: 0,
+        schemeType: 0 };
 
       _vaccine.default.getSchemeNoLogin(obj).then(function (res) {
         if (res.code == "0000") {
@@ -485,7 +485,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
     getLoginData: function getLoginData(type) {var _this3 = this;
       var obj = {
         babyId: _global.default.getBabyId(),
-        schemeType: type || "0" };
+        schemeType: type || 0 };
 
       _vaccine.default.getScheme(obj).then(function (res) {
         if (res.code == "0000") {
