@@ -309,7 +309,7 @@
 			//获取未登录是页面列表数据
 			getNoLoginData(){
 				const obj={
-					provinceId:0,
+					provinceId:1,
 					schemeType:0
 				};
 				vaccineApi.getSchemeNoLogin(obj).then(res=>{
