@@ -10,7 +10,7 @@
 			<view class="babyInfoList">
 				<view class="">
 					<view class="" style="display: inline-block;padding: 10px 16px;">宝宝头像</view>
-					<image class="babyImg" src="../../static/img/1.jpeg"></image>
+					<image class="babyImg" src="../../static/img/4.jpg"></image>
 				</view>
 			  <van-field 
 				  label="宝宝爱称" 

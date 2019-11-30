@@ -16,15 +16,23 @@
     "pages/my/setup",
     "pages/my/setup-remind",
     "pages/my/setup-useragree",
+    "pages/my/setup-conceal",
+    "pages/my/setup-aboutus",
     "pages/my/advice",
     "pages/login/login",
     "pages/components/timePicker",
     "pages/baby/addBaby",
-    "pages/baby/babyInfo"
+    "pages/baby/babyInfo",
+    "pages/vaccine/vaccineInfo",
+    "pages/vaccine/component/Infojieshao",
+    "pages/vaccine/component/Infoyimiao",
+    "pages/vaccine/component/Infojici",
+    "pages/vaccine/scheme",
+    "pages/vaccine/vaccKnow"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"

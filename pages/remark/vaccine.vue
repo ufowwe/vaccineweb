@@ -15,10 +15,10 @@
 			<view class="table">
 			  <view class="tr bg-w">
 				<view class="th thHead">儿童疫苗</view>
-				<view class="th overauto" v-for="(item,index) in data.data.columnList">{{item.vaccinationAge}}</view>
+				<view class="th overauto" v-for="(item,index) in data.data.columnList" :key="index">{{item.vaccinationAge}}</view>
 			  </view>
 			  <block>
-				<view class="tr bg-g" v-for="(item,index) in data.data.schemeVaccineInfoList">
+				<view class="tr bg-g" v-for="(item,index) in data.data.schemeVaccineInfoList" :key="index">
 				    <view class="td tdHead ">
 					  <van-checkbox :value="checked" @change="onChange">
 					    <text>{{item.vaccineName}}</text>
@@ -46,7 +46,7 @@
 			return{
 				// 自定义导航栏对象
 				setNav:{
-					'bg':'#5D58FF',  //背景色
+					'bg':'#8686F7',  //背景色
 					'color':'#fff',  //字体颜色
 					'navTitleLeft':'接种证', //导航标题
 					'navTitleRight':'接种方案', //导航标题

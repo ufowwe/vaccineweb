@@ -7,11 +7,24 @@
 				<van-button round type="default" custom-class="nologin" @click="toLogin">登录 / 注册</van-button>
 			</view>
 			<view class="myHead" v-if="isShow" :style="{'background-size': '100%','background': 'url('+imageURL+')'}">
-				<view class="">
-					{{userInfo.nickName}}
+				<view class="myname">
+					<view class="myname-box">
+						<view class="myname-box-name">{{userInfo.nickName}}</view>
+						<view class="myname-box-sex">({{userInfo.gender==1?'宝爸':'宝妈'}})</view>
+					</view>  
+					<view class="myImg">
+						<image :src="userInfo.avatarUrl" mode=""></image>
+					</view>
 				</view>
-				<view class="">
-					
+				<view class="babybox">
+					<view class="babybox-sum">
+						<view class="">{{babyList}}</view>
+						<view class="babybox-sum-name">宝宝数</view>
+					</view>
+					<view class="babybox-sum">
+						<view class="">10</view>
+						<view class="babybox-sum-name">任务数</view>
+					</view>
 				</view>
 			</view>
 			<view class="groupmy">
@@ -24,7 +37,8 @@
 					:border="false" title="我的保单" icon="comment-o" is-link />
 				</view> 
 				<view class="line">
-					<van-cell title-class="leftclass" :border="false" title="邀请好友" icon="friends-o" is-link >
+					<van-cell title-class="leftclass" @click="toceshi"
+					 :border="false" title="邀请好友" icon="friends-o" is-link >
 					<!-- <view slot="icon">
 					  <image src="../../static/img/invite.png" mode=""></image>
 					  <van-icon name="../../static/img/invite.png" />
@@ -48,6 +62,7 @@
 import Bar from '../components/Bar.vue';
 import authApi from '../../service/auth';
 import global from '../../utils/global.js';
+import babyApi from "../../service/baby";
 
 export default {
 	components:{
@@ -57,7 +72,7 @@ export default {
 		return{
 			// 自定义导航栏对象
 			setNav:{
-				'bg':'#5D58FF',  //背景色
+				'bg':'#8686F7',  //背景色
 				'color':'#fff',  //字体颜色
 				'isdisPlayNavTitle':true, //是否显示返回按钮，由于导航栏是共用的，把所有的东西封装好，
 				// 然后有些页面不需要的东西通过条件控制进行显示与隐藏
@@ -65,7 +80,8 @@ export default {
 			},
 			isShow: false,
 			userInfo: {},
-			imageURL: '../../static/img/5.jpg'
+			imageURL: '../../static/img/5.jpg',
+			babyList: 0
 		}
 	},
 	async onLoad(options){
@@ -80,6 +96,19 @@ export default {
 	  
 	},
 	methods: {
+		//列表
+		getbabyList(){
+		 	babyApi.getBabyList().then(res=>{
+		 		if(res.code == "0000"){
+		 			this.babyList = res.data.length;
+		 		}else{
+		 			uni.showToast({
+		 				icon:"none",
+		 				title: res.responseMsg
+		 			});
+		 		}
+		 	});
+		},
 		toMybaby(){
 			if(this.checkLogin("/pages/baby/babyInfo")){
 				uni.navigateTo({
@@ -105,10 +134,15 @@ export default {
 			});
 		},
 		toLogin(){
-			uni.redirectTo({
+			uni.navigateTo({
 				url:"/pages/login/login"
 			});
-		}
+		},
+		toceshi(){
+			uni.navigateTo({
+				url:"/pages/vaccine/vaccKnow"
+			});
+		},
 	}
 }
 </script>
@@ -116,9 +150,9 @@ export default {
 <style lang="less">
 	.mymain{
 		.myHead{
-			// background-image:url('../');
+			padding: 140rpx 100rpx 20rpx;
 			background-size: 100%;
-			height: 400rpx;
+			height: 300rpx;
 			color: #fff;
 			image{
 				width: 100%;
@@ -134,8 +168,49 @@ export default {
 				left:25%;
 			}
 		}
+		.myname{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			.myname-box{
+				height: 120rpx;
+				.myname-box-name{
+					display: inline-block;
+					font-size: 54rpx;
+				}
+				.myname-box-sex{
+					display: inline-block;
+					margin-left: 20rpx;
+					font-size: 30rpx;
+				}
+			}
+			.myImg{
+				width: 100rpx;
+				height: 100rpx;
+				image{
+					border-radius: 100rpx;
+				}
+			}
+		}
+		.babybox{
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			.babybox-sum{
+				text-align: center;
+				margin-right: 40rpx;
+				height: 100rpx;
+				font-size: 54rpx;
+			}
+			.babybox-sum-name{
+				font-size: 28rpx;
+			}
+		}
 		.groupmy{
 			padding: 6%;
+			border-radius: 30rpx;
+			margin-top: -30rpx;
+			background: #fff;
 			.leftclass{
 				color: #666666;
 				font-size: 32rpx;
@@ -146,6 +221,5 @@ export default {
 			}
 		}
 	}
-	
 	
 </style>

@@ -23,17 +23,39 @@
   font-size: 30rpx;
   line-height: 70rpx;
   margin: 15rpx 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.certmain .certmain_box .certmain_btn {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 120rpx;
+      -ms-flex: 0 0 120rpx;
+          flex: 0 0 120rpx;
 }
 .certmain .certmain_box .linemain {
   margin-left: 20rpx;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 340rpx;
+      -ms-flex: 0 0 340rpx;
+          flex: 0 0 340rpx;
   display: inline-block;
 }
 .certmain .certmain_box .linemain .linemaindesc {
   color: #3f3f3f;
 }
 .certmain .certmain_box .time-img-box {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 220rpx;
+      -ms-flex: 0 0 220rpx;
+          flex: 0 0 220rpx;
   display: inline-block;
-  float: right;
+  text-align: right;
 }
 .certmain .certmain_box .itm-img {
   margin-top: 12rpx;

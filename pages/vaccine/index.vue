@@ -2,7 +2,7 @@
 	<view class="">
 		<VaccBar ref="bar" :babyList="babyList" :babyShow="babyShow" :nav="setNav" @changePage="changePage"></VaccBar>
 		<VaCertificate @changePage="changePage" v-if="isShow == 1"></VaCertificate>	
-		<VaPlan v-if="isShow == 2"></VaPlan>	
+		<VaPlan :scrollTop="scrollTop" @changePage="changePage"  v-if="isShow == 2"></VaPlan>	
 	</view>
 </template>
 
@@ -10,19 +10,24 @@
 	import VaccBar from './component/VaccBar.vue';
 	import VaCertificate from './component/VaCertificate.vue';
 	import VaPlan from './component/VaPlan.vue';
+	import authApi from '../../service/auth';
 	import babyApi from "../../service/baby";
 	
 	export default {
-	  components:{
+		components:{
 			VaccBar,
 			VaCertificate,
 			VaPlan,
 		},
+		onPageScroll(obj){
+			this.scrollTop = obj.scrollTop;
+		},
 		data(){
 			return{
+				scrollTop:0,
 				// 自定义导航栏对象
 				setNav:{
-					'bg':'#5D58FF',  //背景色
+					'bg':'#8686F7',  //背景色
 					'color':'#fff',  //字体颜色
 					'vaCertificate':'接种证', //导航标题
 					'vaPlan':'接种方案', //导航标题
@@ -32,11 +37,19 @@
 				babyList: [],
 			}
 		},
-		onLoad() {
-			if(this.checkLogin('pages/vaccine/index','nav')){
-				this.babyShow = true;
-				this.getbabyList();
-			}
+		// onLoad() {
+		// 	if(this.checkLogin('pages/vaccine/index','nav')){
+		// 		this.babyShow = true;
+		// 		this.getbabyList();
+		// 	}
+		// },
+		async onLoad(options){
+		  const login = await authApi.login();
+		  const isHaveBaby = await babyApi.isHaveBaby();
+		  if(login&&isHaveBaby){
+			this.babyShow = true;
+			this.getbabyList();
+		  }
 		},
 		methods: {
 			changePage(val) {

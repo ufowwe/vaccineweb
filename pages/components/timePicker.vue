@@ -47,7 +47,7 @@
 				this.$emit("getSelect",obj);
 			},
 			checkStatus(obj){
-				if(obj.status){
+				if(obj.status == 5 || obj.status == 6){
 					this.isSelect = true;
 					this.tipText = "选择实际接种日期";
 					this.currentDate = new Date(obj.curTime).getTime() ? new Date(obj.curTime).getTime() : new Date().getTime();

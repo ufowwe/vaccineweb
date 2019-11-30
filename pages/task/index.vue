@@ -21,15 +21,15 @@
 					  active-color="#E088FF"
 					/>
 					<view class="tab">
-						<view class="td">
+						<view class="td" @click="toList(1)">
 							<van-icon size="80rpx" name="clock" color="#fff" />
 							<text>待完成</text>
 						</view>
-						<view class="td">
+						<view class="td" @click="toList(2)">
 							<van-icon size="80rpx" name="checked" color="#fff" />
 							<text>已完成</text>
 						</view>
-						<view class="td">
+						<view class="td" @click="toList(3)">
 							<van-icon size="80rpx" name="more" color="#fff" />
 							<text>全部</text>
 						</view>
@@ -37,7 +37,21 @@
 				</view>
 			</view>
 			<view class="task_box">
-				<view class="cellCla" v-for="item in 3" :key="item">
+				<view v-if="listShow==1" class="cellCla" v-for="item in 3" :key="item">
+					<view class="tit">办理免疫预防接种证</view>
+					<view class="">
+						<text class="babyname">linda</text>
+						<text class="date">2019-10-12</text>
+					</view>
+				</view>
+				<view v-if="listShow==2" class="cellCla" v-for="item in 2" :key="item">
+					<view class="tit">办理免疫预防接种证</view>
+					<view class="">
+						<text class="babyname">linda</text>
+						<text class="date">2019-10-12</text>
+					</view>
+				</view>
+				<view v-if="listShow==3" class="cellCla" v-for="item in 4" :key="item">
 					<view class="tit">办理免疫预防接种证</view>
 					<view class="">
 						<text class="babyname">linda</text>
@@ -65,7 +79,8 @@ export default {
 	data(){
 		return{
 			isLogin:'',
-			babyList: []
+			babyList: [],
+			listShow: 1
 		}
 	},
 	methods:{
@@ -83,6 +98,15 @@ export default {
 		 		}
 		 	});
 		},
+		toList(type){
+			if(type==1){
+				this.listShow = 1
+			}else if(type==2){
+				this.listShow = 2
+			}else if(type==3){
+				this.listShow = 3
+			}
+		}
 	},
 	async onLoad(options){
 	  const login = await authApi.login();

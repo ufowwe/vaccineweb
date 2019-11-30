@@ -31,15 +31,13 @@
   left: 15rpx;
   font-size: 30rpx;
   padding: 10rpx;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .header .babyImg {
   display: inline-block;
   width: 80rpx;
   height: 80rpx;
-  -webkit-border-radius: 80rpx;
-          border-radius: 80rpx;
+  border-radius: 80rpx;
 }
 .header .header-title {
   cursor: pointer;
@@ -76,8 +74,7 @@
   left: 15rpx;
   font-size: 30rpx;
   padding: 10rpx;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .popupCla {
   width: 92%;

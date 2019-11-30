@@ -8,7 +8,7 @@
 		</view>
 		<view class="babyInfo">
 			<view class="babyInfoList" v-for="(item,index) in babyList" :key="index" @click="toBabyInfo(item.id)">
-				<image class="head" src="../../static/img/1.jpeg" mode=""></image>
+				<image class="head" src="../../static/img/4.jpg" mode=""></image>
 				<view class="">
 					<view class="babytop">{{item.nickname}}</view>
 					<image v-if="!!item.topStatus" class="first" src="../../static/img/first.png" mode=""></image>

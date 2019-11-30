@@ -86,5 +86,5 @@ function creatTime () {
 export {
   formatNumber,
   formatTime,
-  creatTime
+  creatTime,
 }

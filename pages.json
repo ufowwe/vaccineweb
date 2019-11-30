@@ -37,7 +37,7 @@
 		{
 			"path": "pages/my/index",
 			"style": {
-				"navigationBarTitleText": "我爱我家",
+				"navigationStyle":"custom",
 				"usingComponents":{
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
@@ -123,9 +123,9 @@
 		    "path" : "pages/my/component/PolicyInfo",
 		    "style" : {
 				"usingComponents":{
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-button": "/wxcomponents/vant/dist/button/index",
-					"van-card": "/wxcomponents/vant/dist/card/index",
-					"van-panel": "/wxcomponents/vant/dist/panel/index"
+					"van-card": "/wxcomponents/vant/dist/card/index"
 				}
 			}
 		}
@@ -149,6 +149,14 @@
             "path" : "pages/my/setup-useragree",
             "style" : {}
         }
+		,{
+		    "path" : "pages/my/setup-conceal",
+		    "style" : {}
+		}
+		,{
+		    "path" : "pages/my/setup-aboutus",
+		    "style" : {}
+		}
         ,{
             "path" : "pages/my/advice",
             "style" : {}
@@ -198,9 +206,49 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/vaccine/vaccineInfo",
+            "style" : {
+				"navigationStyle":"custom",
+				"usingComponents":{
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/vaccine/component/Infojieshao",
+            "style" : {
+				"usingComponents":{
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+        }
+		,{
+            "path" : "pages/vaccine/component/Infoyimiao",
+            "style" : {
+				"usingComponents":{
+					"van-cell": "/wxcomponents/vant/dist/cell/index"
+				}
+			}
+        }
+		,{
+		    "path" : "pages/vaccine/component/Infojici",
+		    "style" : {}
+		}
+        ,{
+            "path" : "pages/vaccine/scheme",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/vaccine/vaccKnow",
+            "style" : {
+				"navigationStyle":"custom"
+			}
+        }
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"

@@ -34,13 +34,13 @@ export default {
 		return{
 			// 自定义导航栏对象
 			setNav:{
-				'bg':'#5D58FF',  //背景色
+				'bg':'#8686F7',  //背景色				5D58FF//背景色
 				'color':'#fff',  //字体颜色
 				'isdisPlayNavTitle':true, //是否显示返回按钮，由于导航栏是共用的，把所有的东西封装好，
 				'navTitle': '我的保单'
 				// 然后有些页面不需要的东西通过条件控制进行显示与隐藏
 			},
-			status: '全部'
+			status: '待付款'
 		}
 	},
 	methods: {

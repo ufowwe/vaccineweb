@@ -8,7 +8,7 @@
 			</view>
 			<view v-else>
 				<view v-if="!isHavePlan">
-					<view class="card-top-tip">请在下面完善【<text> 宝宝昵称</text>】的接种记录，为您推荐后续接种方案</view>
+					<view class="card-top-tip">请在下面完善【<text v-if="baby.data && baby.data.nickname">{{baby.data.nickname}}</text><text v-else>宝宝昵称</text>】的接种记录，为您推荐后续接种方案</view>
 					<van-button @click="setPlan" custom-class="card-top-btn" color="#8686F7" round icon="add" type="info">直接去设置接种方案</van-button>
 				</view>
 				<view v-else>
@@ -22,15 +22,20 @@
 			<view :class="['certmain',index%2?'':'certmainb']" :key="index" v-for="(item,index) in noLoginList">
 				<view class="certmain_title">{{item.vaccinationAge}}</view>
 				<view class="certmain_box" :key="idx" v-for="(itm,idx) in item.vaccineRecordDetailList">
-					<van-button v-if="itm.freeStatus == 1" size="mini" color="#4BD2B6">免费</van-button>
-					<van-button v-if="itm.freeStatus == 2" size="mini" color="#E088FF">自费</van-button>
+					<van-button class="certmain_btn" v-if="itm.freeStatus == 1" size="mini" color="#4BD2B6">免费</van-button>
+					<van-button class="certmain_btn" v-if="itm.freeStatus == 2" size="mini" color="#E088FF">自费</van-button>
 					<view class="linemain">{{itm.name}}
 						<text class="linemaindesc">(第{{itm.currTimes}}/{{itm.totalTimes}}剂)</text>
 					</view>
 					<view class="time-img-box">
 						<!-- <text class="itm-time">2017-01-01</text> -->
-						<van-image class="itm-img" v-if="!itm.status" round width="40rpx" height="40rpx" src="/static/img/unselected.png" />
-						<van-image class="itm-img" v-if="itm.status" round  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
+						<van-image class="itm-img" v-if="itm.status == 0" round  width="40rpx" height="40rpx" src="/static/img/unselected.png" />
+						<van-image class="itm-img" v-if="itm.status == 1" round  width="40rpx" height="40rpx" src="/static/img/selected.png" />
+						<van-image class="itm-img" v-if="itm.status == 2" round  width="40rpx" height="40rpx" src="/static/img/same_effect_selected.png" />
+						<van-image class="itm-img" v-if="itm.status == 3" round  width="40rpx" height="40rpx" src="/static/img/same_effect_vaccinated.png" />
+						<van-image class="itm-img" v-if="itm.status == 4" round  width="40rpx" height="40rpx" src="/static/img/part_vaccinated.png" />
+						<van-image class="itm-img" v-if="itm.status == 5" round  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
+						<van-image class="itm-img" v-if="itm.status == 6" round  width="40rpx" height="40rpx" src="/static/img/missed.png" />
 					</view>
 				</view>
 			</view>
@@ -41,15 +46,21 @@
 			<view :class="['certmain',index%2?'':'certmainb']" :key="index" v-for="(item,index) in loginList">
 				<view class="certmain_title">{{item.vaccinationAge}}</view>
 				<view class="certmain_box" :key="idx" v-for="(itm,idx) in item.vaccineRecordDetailList">
-					<van-button v-if="itm.freeStatus == 1" size="mini" color="#4BD2B6">免费</van-button>
-					<van-button v-if="itm.freeStatus == 2" size="mini" color="#E088FF">自费</van-button>
+					<van-button class="certmain_btn" v-if="itm.freeStatus == 1" size="mini" color="#4BD2B6">免费</van-button>
+					<van-button class="certmain_btn" v-if="itm.freeStatus == 2" size="mini" color="#E088FF">自费</van-button>
 					<view class="linemain">{{itm.name}}
 						<text class="linemaindesc">(第{{itm.currTimes}}/{{itm.totalTimes}}剂)</text>
 					</view>
 					<view class="time-img-box">
 						<text @click="setTime(itm)" v-if="itm.vaccinationDate" class="itm-time">{{itm.vaccinationDate}}</text>
-						<van-image @click="setTime(itm)"  class="itm-img" v-if="!itm.status" round width="40rpx" height="40rpx" src="/static/img/unselected.png" />
-						<van-image @click="cancelTime(itm)" class="itm-img" v-if="itm.status" round width="40rpx" height="40rpx"  src="/static/img/vaccinated.png" />
+						
+						<van-image @click="setTime(itm)"  class="itm-img" v-if="itm.status == 0" round  width="40rpx" height="40rpx" src="/static/img/unselected.png" />
+						<van-image class="itm-img" v-if="itm.status == 1" round  width="40rpx" height="40rpx" src="/static/img/selected.png" />
+						<van-image class="itm-img" v-if="itm.status == 2" round  width="40rpx" height="40rpx" src="/static/img/same_effect_selected.png" />
+						<van-image class="itm-img" v-if="itm.status == 3" round  width="40rpx" height="40rpx" src="/static/img/same_effect_vaccinated.png" />
+						<van-image @click="cancelTime(itm)" class="itm-img" v-if="itm.status == 4" round  width="40rpx" height="40rpx" src="/static/img/part_vaccinated.png" />
+						<van-image @click="cancelTime(itm)" class="itm-img" v-if="itm.status == 5" round  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
+						<van-image class="itm-img" v-if="itm.status == 6" round  width="40rpx" height="40rpx" src="/static/img/missed.png" />
 					</view>
 				</view>
 			</view>
@@ -76,8 +87,10 @@
 	export default {
 		data() {
 			return {
+				top:0,
 				isLogin:false,     //是否已登陆
 				isHaveBaby:false,  //是否有宝宝
+				baby:{},           //宝宝详情
 				isHavePlan:false,  //是否有接种方案
 				isMe:false,        //只显示我选择的疫苗
 				noLoginList:[],    //没有登录 或者 没有宝宝的时候 页面显示的数据
@@ -102,6 +115,11 @@
 				if(!this.isHaveBaby){
 					this.getNoLoginList();
 				}else{
+					const obj={
+						id:global.getBabyId()
+					};
+					this.baby = await babyApi.getBabyDetail(obj);
+					console.log(this.baby);
 					this.getLoginList();
 				}
 			}else{
@@ -112,7 +130,7 @@
 			//用户登录后 有宝宝调用接口
 			getLoginList(){
 				let obj={
-					babyId:global.getBabyId() || 14
+					babyId:global.getBabyId()
 				};
 				vaccineApi.getRecordByLogin(obj).then(res=>{
 					if(res.code == "0000"){
@@ -150,9 +168,8 @@
 			updateRecord(obj){
 				const param={
 					id :this.selectItem.vaccineSchemeId,
-					vaccinationDate:obj.status ? "" : obj.vaccinationDate,
-					vaccinationDateActual:obj.status ? obj.vaccinationDate : "",
-					status:obj.status
+					vaccinationDate:obj.status ? obj.vaccinationDate : "",
+					status:obj.status ? 5 : 0
 				};
 				vaccineApi.updateRecord(param).then(res=>{
 					if(res.code == "0000"){
@@ -199,20 +216,19 @@
 			cancelTime(item){
 				this.selectItem = item;
 				this.showCancelDialog = true;
-				this.updateRecord(this.selectItem);
 			},
 			doClear(){
-				this.selectItem.status = false;
+				this.selectItem.status = 0;
 				this.selectItem.vaccinationDate = "";
 				this.showCancelDialog = false;
 			},
 			//从时间组件传来的数据
 			getSelect(obj){
 				if(obj.status){
-					this.selectItem.status = true;
+					this.selectItem.status = 5;
 					this.selectItem.vaccinationDate = obj.curTime;
 				}else{
-					this.selectItem.status = false;
+					this.selectItem.status = 0;
 					this.selectItem.vaccinationDate = obj.curTime;
 				}
 				this.showPopup = false;
@@ -236,16 +252,23 @@
 		font-size: 30rpx;
 		line-height: 70rpx;
 		margin:15rpx 0;
+		display:flex;
+		align-items: center;
+		.certmain_btn{
+			flex:0 0 120rpx;
+		}
 		.linemain{
 			margin-left: 20rpx;
+			flex:0 0 340rpx;
 			display:inline-block;
 			.linemaindesc{
 				color:#3f3f3f;
 			}
 		}
 		.time-img-box{
+			flex:0 0 220rpx;
 			display:inline-block;
-			float:right;
+			text-align:right;
 		}
 		.itm-img{
 			margin-top:12rpx;

@@ -38,4 +38,10 @@ export default class Vaccine extends Base {
 			return Promise.resolve(res)
 		})
 	}
+	//获取疫苗明细
+	static getvaccDetail(data){
+		return this.post(config.vaccine.getvaccDetail,data).then(function(res) {
+			return Promise.resolve(res)
+		})
+	}
 }

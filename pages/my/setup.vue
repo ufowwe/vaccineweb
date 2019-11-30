@@ -22,12 +22,14 @@
 				  size="large" />
 			  <van-cell title="隐私政策" 
 				  custom-class="cellCla"
-				  :border="false" 
+				  :border="false"
+				   @click="toConceal"
 				  is-link 
 				  size="large" />
 			  <van-cell title="关于我们" 
 				  custom-class="cellCla"
 				  :border="false" 
+				  @click="toAboutus"
 				  is-link 
 				  size="large" />
 			</view>
@@ -55,6 +57,16 @@
 			toUseragree(){
 				uni.navigateTo({
 					url: "/pages/my/setup-useragree"
+				});
+			},
+			toConceal(){
+				uni.navigateTo({
+					url: "/pages/my/setup-conceal"
+				});
+			},
+			toAboutus(){
+				uni.navigateTo({
+					url: "/pages/my/setup-aboutus"
 				});
 			},
 		}

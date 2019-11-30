@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="va-plan" @scroll="setScrollInfo">
 		<view class="vaccSelect">
 			<!-- :initValue="" -->
 			<view style="width: 60%;margin-bottom: 20rpx;padding-left:30rpx;">
@@ -16,8 +16,8 @@
 				>
 				</xfl-select>
 			</view>
-			<text class="knowledge">方案说明</text>
-			<text class="knowledge">| 疫苗知识</text>
+			<text class="knowledge" @click="toScheme">方案说明 </text>
+			<text class="knowledge" @click="toVaccknow">| 疫苗知识</text>
 		</view>
 		<view class="vaccTotal">
 		  <van-col span="12">去接种点次数:<text class="textcol"> {{hospitalTimes}}</text></van-col>
@@ -44,7 +44,7 @@
 								<van-image v-if="item.status == 5"  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
 								<van-image v-if="item.status == 6"  width="40rpx" height="40rpx" src="/static/img/missed.png" />
 							</view>
-							<view class="table-dd">
+							<view class="table-dd" @click="tovaccInfo(item.vaccineDetailId)">
 								<text class="table-title">{{item.vaccineName}}</text>
 								<view>
 									<text class="table-free table-price" v-if="item.price==0">免费</text>
@@ -69,7 +69,41 @@
 			</block>
 		</view>
 		<!--有宝宝时-->
-		<view class="table" v-else>
+		<scroll-view :scroll-x="true" ref="table" :scroll-y="true" @scroll="setScrollInfo" class="table" v-else>
+			<view class="table-fixed" :style="styleH">
+				<view class="tr bg-w">
+					<view class="th thHead">儿童疫苗</view>
+					<view class="th overauto" :key="index" v-for="(item,index) in loginData.columnList">{{item.vaccinationAge}}</view>
+				</view>
+			</view>
+			<view class="scroll-left" :style="styleQ">
+				<view class="tr bg-w">
+					<view class="th thHead">儿童疫苗</view>
+				</view>
+				<view class="tr bg-g" :key="index" v-for="(item,index) in loginData.schemeVaccineInfoList">
+					<view class="td thHead">
+						<view class="table-dl">
+							<view class="table-dt">
+								<van-image @click="changeStatus(0,item)" v-if="item.status == 0"  width="40rpx" height="40rpx" src="/static/img/unselected.png" />
+								<van-image @click="changeStatus(1,item)" v-if="item.status == 1"  width="40rpx" height="40rpx" src="/static/img/selected.png" />
+								<van-image @click="changeStatus(2)" v-if="item.status == 2"  width="40rpx" height="40rpx" src="/static/img/same_effect_selected.png" />
+								<van-image v-if="item.status == 3"  width="40rpx" height="40rpx" src="/static/img/same_effect_vaccinated.png" />
+								<van-image @click="changeStatus(4)" v-if="item.status == 4"  width="40rpx" height="40rpx" src="/static/img/part_vaccinated.png" />
+								<van-image @click="changeStatus(5)" v-if="item.status == 5"  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
+								<van-image @click="changeStatus(6)" v-if="item.status == 6"  width="40rpx" height="40rpx" src="/static/img/missed.png" />
+							</view>
+							<view class="table-dd" @click="tovaccInfo(item.vaccineDetailId)">
+								<text class="table-title">{{item.vaccineName}}</text>
+								<view>
+									<text class="table-free table-price" v-if="item.freeStatus==1">免费</text>
+									<text class="table-self table-price" v-if="item.freeStatus == 2">自费</text>
+									<text class="table-total">共{{item.dosageTimes}}剂</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
 			<view class="tr bg-w">
 				<view class="th thHead">儿童疫苗</view>
 				<view class="th overauto" :key="index" v-for="(item,index) in loginData.columnList">{{item.vaccinationAge}}</view>
@@ -87,7 +121,7 @@
 								<van-image @click="changeStatus(5)" v-if="item.status == 5"  width="40rpx" height="40rpx" src="/static/img/vaccinated.png" />
 								<van-image @click="changeStatus(6)" v-if="item.status == 6"  width="40rpx" height="40rpx" src="/static/img/missed.png" />
 							</view>
-							<view class="table-dd">
+							<view class="table-dd" @click="tovaccInfo(item.vaccineDetailId)">
 								<text class="table-title">{{item.vaccineName}}</text>
 								<view>
 									<text class="table-free table-price" v-if="item.freeStatus==1">免费</text>
@@ -110,11 +144,12 @@
 					</view>
 				</view>
 			</block>
-		</view>
+		</scroll-view>
 		<view class="cost">
 			<text class="moneyNum">参考接种成本:{{num}}元</text>
 			<van-button @click="doAddBabyOrLogin" v-if="!isLogin || !isHaveBaby" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
-			<van-button @click="doSave" v-else class="vaccBtn" style="width: 40%;" color="#8686F7">保存接种方案</van-button>
+			<van-button v-if="!orginSelectType" @click="toDoSave" class="vaccBtn" style="width: 40%;" color="#8686F7">设置接种方案</van-button>
+			<van-button v-if="orginSelectType" @click="toDoSave" class="vaccBtn" style="width: 40%;" color="#8686F7">保存接种方案</van-button>
 		</view>
 	</view>
 </template>
@@ -129,13 +164,39 @@
 		components:{
 			xflSelect
 		},
+		props:["scrollTop"],
+		watch:{
+			scrollTop:function(top){
+				this.top = top;
+				this.y = true;
+			}
+		},
+		created() {
+			var  that = this;
+			uni.getSystemInfo({
+				success: function(res) {
+					if (res.model.indexOf('iPhone') !== -1) {
+						that.headerHeight = 44 + res.statusBarHeight + 'px';
+					} else {
+						that.headerHeight = 48  + res.statusBarHeight + 'px'; 
+					}
+				}	
+			})
+		 },
 		data() {
 			return {
+				top:0,
+				left:0,
+				y:true,
+				isFixed:true,
+				headerHeight:0,
 				baby:{},  //当前宝宝
+				// canEdit:false,    //当前是否可以进行编辑
 				showSelect:false,
-				orginSelectType:0,     //初始方案类型
-				actualSchemeType:0,    //实际方案类型
-				orginSelectIdList:[],  //初始返回的id列表
+				orginSelectType:"0",      //初始方案类型
+				actualSchemeType:"0",     //实际方案类型
+				orginSelectIdList:[],   //页面初始化返回的 已选择的id列表
+				selectSelectIdList:[],  //下拉菜单发生变化时返回的 已选择的id列表
 				list:[
 					{value: '国家免费方案', type: 1},
 					{value: '常规推荐方案', type: 2},
@@ -167,9 +228,9 @@
 						id:global.getBabyId()
 					};
 					this.baby = await babyApi.getBabyDetail(obj);
-					this.orginSelectType = this.baby.data.actualSchemeType || 0;
-					this.actualSchemeType = this.baby.data.actualSchemeType || 0;
-					this.getLoginData(this.baby.schemeType);
+					this.orginSelectType = this.baby.data.actualSchemeType || "0";
+					this.actualSchemeType = this.baby.data.actualSchemeType || "0";
+					this.getLoginData(this.baby.actualSchemeType);
 				}
 			}else{
 				this.getNoLoginData();
@@ -186,7 +247,7 @@
 		computed:{
 			showExtend:function(){
 				let list = [];
-				if(this.actualSchemeType != 4){
+				if(this.orginSelectType != 4){
 					list = [
 						{value: '国家免费方案', type: 1},
 						{value: '常规推荐方案', type: 2},
@@ -201,14 +262,54 @@
 					]
 				}
 				return list;
+			},
+			"styleQ":function(){
+				if(!this.isFixed){
+					return "display:none;"
+				}
+				if(this.y){
+					return "position:absolute;top:0;transform:translateY(0px);left:"+this.left+"px;";
+				}else{
+					let top = this.top;
+					return "position:fixed;transform:translateY(-"+top+"px);left:0";
+				}
+			},
+			"styleH":function(){
+				if(!this.isFixed){
+					return "display:none;"
+				}
+				if(this.y){
+					if(this.top > 150){
+						return "display:block;position:fixed;z-index:3;top:"+this.headerHeight+";margin-left:-"+this.left+"px;";
+					}else{
+						return "display:none;"
+					}
+					
+				}else{
+					let top = this.top+'px';
+					if(this.top > 150){
+						return "display:block;position:fixed;z-index:3;top:"+this.headerHeight+";margin-left:-"+this.left+"px;";
+					}else{
+						return "display:none;"
+					}
+					if(this.top == 0){
+						return "display:none;"
+					}
+				}
 			}
 		},
 		methods: {
+			tovaccInfo(id){
+				this.babyId = global.getBabyId()
+				uni.navigateTo({
+					url:"/pages/vaccine/vaccineInfo?babyid="+this.babyId+"&vaccineDetailId="+id
+				});
+			},
 			//获取未登录是页面列表数据
 			getNoLoginData(){
 				const obj={
-					provinceId:0,
-					schemeType:0
+					provinceId:'0',
+					schemeType:'0'
 				};
 				vaccineApi.getSchemeNoLogin(obj).then(res=>{
 					if(res.code == "0000"){
@@ -227,29 +328,23 @@
 					}
 				});
 			},
-			//登陆时 获取页面列表数据
-			getLoginData(type){
+			//切换方案时 获取页面数据
+			getSelectListData(type){
 				const obj={
 					babyId:global.getBabyId(),
-					schemeType:type || 1
+					schemeType:type
 				};
 				vaccineApi.getScheme(obj).then(res=>{
 					if(res.code == "0000"){
 						if(res.data){
 							this.loginData = res.data;
 							this.setOrginNum(res.data);
-							if(res.data.schemeType){
-								this.orginSelectType = res.data.schemeType;
-								this.actualSchemeType = res.data.schemeType;
-							}
-							this.setSelectValue(this.actualSchemeType);
-							this.orginSelectIdList = this.setSelectIdList(res.data.schemeVaccineInfoList);
 							//创建疫苗map
 							if(res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length>0){
+								this.selectSelectIdList = this.setSelectIdList(res.data.schemeVaccineInfoList);
 								this.creatSchemeListMap(res.data.schemeVaccineInfoList);
 								this.setPrice();
 							}
-							this.showSelect = true;
 						}else{
 							this.loginData  = {};
 						}
@@ -261,7 +356,42 @@
 					}
 				});
 			},
-			//创建初始方案id列表
+			//登陆时 获取页面列表数据
+			getLoginData(type){
+				const obj={
+					babyId:global.getBabyId(),
+					schemeType:type || "0"
+				};
+				vaccineApi.getScheme(obj).then(res=>{
+					if(res.code == "0000"){
+						if(res.data){
+							this.loginData = res.data;
+							this.setOrginNum(res.data);
+							if(res.data.schemeType){
+								this.orginSelectType = res.data.schemeType;
+								this.actualSchemeType = res.data.schemeType;
+							}
+							this.setSelectValue(this.actualSchemeType);
+							if(res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length>0){
+								this.orginSelectIdList = this.setSelectIdList(res.data.schemeVaccineInfoList);
+								//创建疫苗map
+								this.creatSchemeListMap(res.data.schemeVaccineInfoList);
+								this.setPrice();
+							}
+							this.showSelect = true;
+						}else{
+							this.loginData  = {};
+						}
+						
+					}else{
+						uni.showToast({
+							icon:"none",
+						    title: res.responseMsg
+						});
+					}
+				});
+			},
+			//创建当前所选择的id列表
 			setSelectIdList(list){
 				let ret = [];
 				for(var i=0;i<list.length;i++){
@@ -271,14 +401,64 @@
 				}
 				return ret;
 			},
+			//保存之前进行验证 有没有更改原始方案
+			toDoSave(){
+				//先判断 页面初始化时 有没有方案
+				if(!this.orginSelectType){  //如果页面初始化时 没有方案
+					//在判断下拉菜单是否改变
+					if( this.actualSchemeType != this.orginSelectType){ //如果下拉菜单发生变化						
+						this.doJudgeSelectSave(true);
+					}else{
+						this.actualSchemeType = 4;
+						this.setMapType(this.actualSchemeType);
+						this.doSave();
+					}
+				}else{ //如果页面初始化时 有方案
+					if( this.actualSchemeType != this.orginSelectType){ //如果下拉菜单发生改变
+						this.doJudgeSelectSave(true);
+					}else{
+						this.doJudgeSelectSave(false);
+					}
+				}
+			},
+			doJudgeSelectSave(flag){
+				//获取当前方案类型
+				this.actualSchemeType = this.getCurrentSchemeType(flag);
+				//设置cellMap 里面的值
+				this.setMapType(this.actualSchemeType);
+				//执行保存操作
+				this.doSave();
+			},
+			//获取当前方案类型
+			getCurrentSchemeType(flag){
+				let type = this.actualSchemeType;
+				var selectIdStr = "";
+				if(flag){ //如果下拉菜单发生变化 那当前id列表 与 选择下拉列表是 初始id列表比较
+					selectIdStr = this.selectSelectIdList.join(",");  //下拉菜单改变时  初始所选择的id列表
+				}else{
+					selectIdStr = this.orginSelectIdList.join(",");  //下拉菜单未改变时  页面初始化id列表
+				}
+				var currentSelectStr = this.setSelectIdList(this.loginData.schemeVaccineInfoList); //当前所选择的id列表
+				if(selectIdStr != currentSelectStr){  //如果当前所选择的id列表 与 下拉菜单改变时初始id列表所选值 不同时   此时为自定义方案
+					type = 4;
+				}
+				return type;
+			},
 			//保存
 			doSave(){
 				const obj={
 					babyId : global.getBabyId(),
+					actualSchemeType : this.actualSchemeType,
 					vaccineRecordReqList : this.getVaccineList()
 				}
 				vaccineApi.saveScheme(obj).then(res=>{
 					if(res.code == "0000"){
+						uni.showToast({
+							icon:"success",
+						    title: res.responseMsg
+						});
+						this.$emit("changePage",1);
+					}else{
 						uni.showToast({
 							icon:"success",
 						    title: res.responseMsg
@@ -306,6 +486,13 @@
 			},
 			//点击表格左侧设置状态
 			changeStatus(status,item){
+				// if(!this.canEdit){
+				// 	uni.showToast({
+				// 		icon:"none",
+				// 	    title: "当前状态无法编辑，点击下方编辑按钮进行编辑"
+				// 	});
+				// 	return;
+				// }
 				switch (status){
 					case 0:
 						this.setUnSelectStatus(item);
@@ -335,25 +522,7 @@
 				//强制刷新页面
 				this.$nextTick(()=>{
 					this.$forceUpdate();
-				});
-				//获取最新所选择的id列表 判断是否是自定义
-				this.getCurrentIdList(this.loginData.schemeVaccineInfoList);
-				
-			},
-			getCurrentIdList(list){
-				this.showSelect = false;
-				let newSelectIdList = this.setSelectIdList(list);
-				let newIdsStr = newSelectIdList.join(",");
-				let orginIdsStr = this.orginSelectIdList.join(",");
-				if(newIdsStr!=orginIdsStr){
-					this.actualSchemeType = 4;
-				}else{
-					this.actualSchemeType = this.orginSelectType;
-				}
-				this.setMapType(this.actualSchemeType);
-				this.setSelectValue(this.actualSchemeType);
-				this.showSelect = true;
-				
+				});				
 			},
 			//改变map里面的type类型 用于保存
 			setMapType(type){
@@ -570,21 +739,25 @@
 			doAddBabyOrLogin(){
 				this.checkLogin("/pages/vaccine/index");
 			},
-			changePage(val) {
-				this.isShow = val;
-			},
-			onChange(event) {
-				console.log(event)
-			},
-			toggle(event) {
-				event.status = !event.status;
-				console.log(event);
-			},
 			changeSec(e) {
 				this.actualSchemeType = e.orignItem.type;
-				this.setMapType(this.actualSchemeType);
-				this.getLoginData(e.orignItem.type);
+				this.getSelectListData(e.orignItem.type);
 			},
+			toScheme(){
+				uni.navigateTo({
+					url:"/pages/vaccine/scheme"
+				});
+			},
+			toVaccknow(){
+				uni.navigateTo({
+					url:"/pages/vaccine/vaccKnow"
+				});
+			},
+			//
+			setScrollInfo(event){
+				this.y = false;
+				this.left = event.detail.scrollLeft;
+			}
 		}
 	}
 </script>
@@ -598,6 +771,7 @@
 		padding-top: 20rpx;
 		color: #8686F7;
 		font-size: 26rpx;
+		margin-right: 10rpx;
 	}
 }
 .vaccTotal{
@@ -616,6 +790,7 @@
   overflow-y: auto;
   width:100%;
   padding-bottom:120rpx;
+  position:relative;
 }
 .tr {
   display: flex;
@@ -660,6 +835,7 @@
 	text-align: center;
 	bottom: 0;
 	width: 100%;
+	z-index: 2;;
 	.moneyNum{
 		display: inline-block;
 		width: 60%;
@@ -726,5 +902,15 @@
 .td-missed{
 	background:url("../../../static/img/dosage_missed.png") no-repeat center;
 	background-size:cover;
+}
+.scroll-left{
+	width:267rpx;
+	background:#fff;
+	z-index: 1;
+	position:absolute;
+}
+.table-fixed{
+	z-index:3;
+	position:fixed;
 }
 </style>

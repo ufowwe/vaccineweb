@@ -24,6 +24,8 @@ const config = {
 			getSchemeNoLogin:`${Base.baseUrl}/beforeLogin/getSchemeNoLogin`, //获取接种基础方案 未登录
 			getScheme:`${Base.appService}/vaccineScheme/getScheme`,   //获取接基础方案 已登录
 			saveScheme:`${Base.appService}/vaccineScheme/saveScheme`,    //保存接种方案
+			
+			getvaccDetail:`${Base.appService}/vaccineDetail/getDetail`,//获取疫苗明细
 		}
 	}
 }
