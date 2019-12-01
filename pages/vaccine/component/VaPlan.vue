@@ -204,8 +204,8 @@
 					{value: '最优推荐方案', type: 3},
 				],
 				initValue:"",      //下拉菜单默认显示的数据
-				isLogin:0,     //是否已登陆
-				isHaveBaby:0,  //是否有宝宝
+				isLogin:false,     //是否已登陆
+				isHaveBaby:false,  //是否有宝宝
 				isHavePlan:false,  //是否有接种方案
 				noLoginData:{},    //没有登录 或者 没有宝宝的时候 页面显示的数据
 				loginData:{},      //有宝宝的时候 页面显示的数据
@@ -219,12 +219,11 @@
 			};
 		},
 		async mounted() {
-			debugger;
 			this.isLogin = await authApi.login();
 			if(this.isLogin){
 				this.isHaveBaby = await babyApi.isHaveBaby();
 				if(!this.isHaveBaby){
-					this.getNoLoginData();
+					this.getNoLoginData(0);
 				}else{
 					const obj={
 						id:global.getBabyId()
@@ -235,7 +234,7 @@
 					this.getLoginData(this.baby.data.actualSchemeType);
 				}
 			}else{
-				this.getNoLoginData();
+				this.getNoLoginData(0);
 			}
 		},
 		onTabItemTap() {
@@ -307,10 +306,10 @@
 				});
 			},
 			//获取未登录是页面列表数据
-			getNoLoginData(){
+			getNoLoginData(type){
 				const obj={
 					provinceId:1,
-					schemeType:0
+					schemeType:type
 				};
 				vaccineApi.getSchemeNoLogin(obj).then(res=>{
 					if(res.code == "0000"){
@@ -741,6 +740,10 @@
 				this.checkLogin("/pages/vaccine/index");
 			},
 			changeSec(e) {
+				if(!this.isLogin || !this.isHaveBaby){
+					this.getNoLoginData(e.orignItem.type);
+					return;
+				}
 				this.actualSchemeType = e.orignItem.type;
 				this.getSelectListData(e.orignItem.type);
 			},
