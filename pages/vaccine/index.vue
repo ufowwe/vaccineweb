@@ -33,7 +33,7 @@
 					'vaPlan':'接种方案', //导航标题
 				},
 				isShow: 1,
-				babyShow: true,
+				babyShow: false,
 				babyList: [],
 			}
 		},
