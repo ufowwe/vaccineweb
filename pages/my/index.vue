@@ -3,10 +3,10 @@
 	<view class="">
 		<!-- <bar :nav="setNav"></bar> -->
 		<view class="mymain" style="">
-			<view class="myHead" v-if="!isShow" :style="{'background-size': '100%','background': 'url('+imageURL+')'}">
+			<view class="myHead" v-if="!isShow" style="background-size: 100%;background: url('http://47.92.33.214:12800/data/image/5.jpg')">
 				<van-button round type="default" custom-class="nologin" @click="toLogin">登录 / 注册</van-button>
 			</view>
-			<view class="myHead" v-if="isShow" :style="{'background-size': '100%','background': 'url('+imageURL+')'}">
+			<view class="myHead" v-if="isShow" style="background-size: 100%;background: url('http://47.92.33.214:12800/data/image/5.jpg')">
 				<view class="myname">
 					<view class="myname-box">
 						<view class="myname-box-name">{{userInfo.nickName}}</view>
@@ -151,7 +151,7 @@ export default {
 		},
 		toLogin(){
 			uni.navigateTo({
-				url:"/pages/login/login"
+				url:"/pages/login/login?backUrl=/pages/my/index"
 			});
 		},
 		toceshi(){

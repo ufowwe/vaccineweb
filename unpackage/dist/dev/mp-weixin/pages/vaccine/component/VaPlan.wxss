@@ -151,14 +151,12 @@
 .table-self {
   color: #E088FF;
   border: 2rpx solid #E088FF;
-  -webkit-border-radius: 4rpx;
-          border-radius: 4rpx;
+  border-radius: 4rpx;
 }
 .table-free {
   color: #00D5B5;
   border: 2rpx solid #00D5B5;
-  -webkit-border-radius: 4rpx;
-          border-radius: 4rpx;
+  border-radius: 4rpx;
 }
 .table-total {
   font-size: 22rpx;

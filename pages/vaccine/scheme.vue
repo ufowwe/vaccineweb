@@ -2,9 +2,9 @@
 	<view>
 		<Bar :nav="setNav"></Bar>
 		<view class="imgBox">
-			<image src="../../static/img/u944.png" mode=""></image>
-			<image src="../../static/img/u945.png" mode=""></image>
-			<image src="../../static/img/u946.png" mode=""></image>
+			<image src="http://47.92.33.214:12800/data/image/u944.png" mode=""></image>
+			<image src="http://47.92.33.214:12800/data/image/u945.png" mode=""></image>
+			<image src="http://47.92.33.214:12800/data/image/u946.png" mode=""></image>
 		</view>
 	</view>
 </template>
