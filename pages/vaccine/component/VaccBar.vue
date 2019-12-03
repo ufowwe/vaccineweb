@@ -70,7 +70,7 @@
 		 },
 		onLoad(options) {
 		  	if(global.getBabyId()){
-		 		this.radio = global.getBabyId();
+		 		this.radio = global.getBabyId().toString();
 		 	}
 		},
 		methods: {
@@ -79,7 +79,7 @@
 				global.setBabyId(this.radio);
 				if (getCurrentPages().length != 0) {
 					//刷新当前页面的数据
-					getCurrentPages()[getCurrentPages().length - 1].onLoad()
+					getCurrentPages()[getCurrentPages().length - 1].onShow()
 				  }
 				this.show = false;
 			},
@@ -89,7 +89,7 @@
 			showPopup(type) {
 				this.show = true;
 				if(global.getBabyId()){
-					this.radio = global.getBabyId();
+					this.radio = global.getBabyId().toString();
 				}
 			},
 			addBaby(){

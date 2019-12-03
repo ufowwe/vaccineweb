@@ -127,7 +127,8 @@ var _VaccBar = _interopRequireDefault(__webpack_require__(/*! ./component/VaccBa
 var _VaCertificate = _interopRequireDefault(__webpack_require__(/*! ./component/VaCertificate.vue */ 67));
 var _VaPlan = _interopRequireDefault(__webpack_require__(/*! ./component/VaPlan.vue */ 83));
 var _auth = _interopRequireDefault(__webpack_require__(/*! ../../service/auth */ 18));
-var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ 24));
+var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 
 {
   components: {
@@ -159,13 +160,29 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
   // 		this.getbabyList();
   // 	}
   // },
-  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var login, isHaveBaby;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _auth.default.login());case 2:login = _context.sent;_context.next = 5;return (
-                _baby.default.isHaveBaby());case 5:isHaveBaby = _context.sent;
-              if (login && isHaveBaby) {
-                this.babyShow = true;
-                this.getbabyList();
-              }case 7:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}(),
+
+
+
+
+
+
+
+
+
+
+  onShow: function () {var _onShow = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(options) {var orginIsShow, login, isHaveBaby;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+              orginIsShow = this.isShow;
+              this.isShow = 0;_context2.next = 4;return (
+                _auth.default.login());case 4:login = _context2.sent;_context2.next = 7;return (
+                _baby.default.isHaveBaby());case 7:isHaveBaby = _context2.sent;if (!(
+              login && isHaveBaby)) {_context2.next = 15;break;}
+              this.babyShow = true;_context2.next = 12;return (
+                this.getbabyList());case 12:
+              this.isShow = orginIsShow;_context2.next = 16;break;case 15:
+
+              this.isShow = orginIsShow;case 16:case "end":return _context2.stop();}}}, _callee2, this);}));function onShow(_x2) {return _onShow.apply(this, arguments);}return onShow;}(),
+
 
   methods: {
     changePage: function changePage(val) {
@@ -177,6 +194,9 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
       _baby.default.getBabyList().then(function (res) {
         if (res.code == "0000") {
           _this.babyList = res.data;
+          if (!_global.default.getBabyId()) {
+            _global.default.setBabyId(_this.babyList[0].id);
+          }
         } else {
           uni.showToast({
             icon: "none",
@@ -373,14 +393,14 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby
 //
 //
 //
-var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId();}}, methods: { onChange: function onChange(event) {this.radio = event.detail;_global.default.setBabyId(this.radio);if (getCurrentPages().length != 0) {//刷新当前页面的数据
-        getCurrentPages()[getCurrentPages().length - 1].onLoad();}this.show = false;}, onClose: function onClose() {
+var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}}, methods: { onChange: function onChange(event) {this.radio = event.detail;_global.default.setBabyId(this.radio);if (getCurrentPages().length != 0) {//刷新当前页面的数据
+        getCurrentPages()[getCurrentPages().length - 1].onShow();}this.show = false;}, onClose: function onClose() {
       this.show = false;
     },
     showPopup: function showPopup(type) {
       this.show = true;
       if (_global.default.getBabyId()) {
-        this.radio = _global.default.getBabyId();
+        this.radio = _global.default.getBabyId().toString();
       }
     },
     addBaby: function addBaby() {
@@ -659,7 +679,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
                 _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
 
               this.isHaveBaby) {_context.next = 11;break;}
-              this.getNoLoginList();_context.next = 17;break;case 11:
+              this.getLoginButNoBabyList();_context.next = 17;break;case 11:
 
               obj = {
                 id: _global.default.getBabyId() };_context.next = 14;return (
@@ -710,8 +730,25 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
         }
       });
     },
+    //用户已登录但是没有宝宝
+    getLoginButNoBabyList: function getLoginButNoBabyList() {var _this3 = this;
+      _vaccine.default.getRecordByLogin().then(function (res) {
+        if (res.code == "0000") {
+          if (res.data.vaccineRecordGroupList && res.data.vaccineRecordGroupList.length > 0) {
+            _this3.noLoginList = res.data.vaccineRecordGroupList;
+          } else {
+            _this3.noLoginList = [];
+          }
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: res.responseMsg });
+
+        }
+      });
+    },
     //更新接种证
-    updateRecord: function updateRecord(obj) {var _this3 = this;
+    updateRecord: function updateRecord(obj) {var _this4 = this;
       var param = {
         id: this.selectItem.vaccineSchemeId,
         vaccinationDate: obj.status ? obj.vaccinationDate : "",
@@ -723,7 +760,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
             icon: "none",
             title: "更新成功" });
 
-          _this3.getLoginList();
+          _this4.getLoginList();
         } else {
           uni.showToast({
             icon: "none",
@@ -747,7 +784,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
       this.$emit("changePage", 2);
     },
     //去编辑当前疫苗状态
-    setTime: function setTime(item) {var _this4 = this;
+    setTime: function setTime(item) {var _this5 = this;
       this.showPopup = true;
       this.selectItem = item;
       var popData = {
@@ -755,7 +792,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
         curTime: item.vaccinationDate };
 
       this.$nextTick(function () {
-        _this4.$refs.pop.setPopData(popData);
+        _this5.$refs.pop.setPopData(popData);
       });
     },
     //取消当前疫苗状态
@@ -1344,7 +1381,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
               this.isLogin) {_context.next = 20;break;}_context.next = 6;return (
                 _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
               this.isHaveBaby) {_context.next = 11;break;}
-              this.getNoLoginData(0);_context.next = 18;break;case 11:
+              this.getLoginButNoBaByData(0);_context.next = 18;break;case 11:
 
               obj = {
                 id: _global.default.getBabyId() };_context.next = 14;return (
@@ -1449,25 +1486,19 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         }
       });
     },
-    //切换方案时 获取页面数据
-    getSelectListData: function getSelectListData(type) {var _this2 = this;
+    //已登录 但是无宝宝
+    getLoginButNoBaByData: function getLoginButNoBaByData(type) {var _this2 = this;
       var obj = {
-        babyId: _global.default.getBabyId(),
         schemeType: type };
 
       _vaccine.default.getScheme(obj).then(function (res) {
         if (res.code == "0000") {
           if (res.data) {
-            _this2.loginData = res.data;
+            _this2.noLoginData = res.data;
             _this2.setOrginNum(res.data);
-            //创建疫苗map
-            if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
-              _this2.selectSelectIdList = _this2.setSelectIdList(res.data.schemeVaccineInfoList);
-              _this2.creatSchemeListMap(res.data.schemeVaccineInfoList);
-              _this2.setPrice();
-            }
+            _this2.showSelect = true;
           } else {
-            _this2.loginData = {};
+            _this2.noLoginData = {};
           }
         } else {
           uni.showToast({
@@ -1477,8 +1508,36 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         }
       });
     },
-    //登陆时 获取页面列表数据
-    getLoginData: function getLoginData(type) {var _this3 = this;
+    //切换方案时 获取页面数据
+    getSelectListData: function getSelectListData(type) {var _this3 = this;
+      var obj = {
+        babyId: _global.default.getBabyId(),
+        schemeType: type };
+
+      _vaccine.default.getScheme(obj).then(function (res) {
+        if (res.code == "0000") {
+          if (res.data) {
+            _this3.loginData = res.data;
+            _this3.setOrginNum(res.data);
+            //创建疫苗map
+            if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
+              _this3.selectSelectIdList = _this3.setSelectIdList(res.data.schemeVaccineInfoList);
+              _this3.creatSchemeListMap(res.data.schemeVaccineInfoList);
+              _this3.setPrice();
+            }
+          } else {
+            _this3.loginData = {};
+          }
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: res.responseMsg });
+
+        }
+      });
+    },
+    //登陆时有宝宝 获取页面列表数据
+    getLoginData: function getLoginData(type) {var _this4 = this;
       var obj = {
         babyId: _global.default.getBabyId(),
         schemeType: type || 0 };
@@ -1486,22 +1545,22 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       _vaccine.default.getScheme(obj).then(function (res) {
         if (res.code == "0000") {
           if (res.data) {
-            _this3.loginData = res.data;
-            _this3.setOrginNum(res.data);
+            _this4.loginData = res.data;
+            _this4.setOrginNum(res.data);
             if (res.data.schemeType) {
-              _this3.orginSelectType = res.data.schemeType;
-              _this3.actualSchemeType = res.data.schemeType;
+              _this4.orginSelectType = res.data.schemeType;
+              _this4.actualSchemeType = res.data.schemeType;
             }
-            _this3.setSelectValue(_this3.actualSchemeType);
+            _this4.setSelectValue(_this4.actualSchemeType);
             if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
-              _this3.orginSelectIdList = _this3.setSelectIdList(res.data.schemeVaccineInfoList);
+              _this4.orginSelectIdList = _this4.setSelectIdList(res.data.schemeVaccineInfoList);
               //创建疫苗map
-              _this3.creatSchemeListMap(res.data.schemeVaccineInfoList);
-              _this3.setPrice();
+              _this4.creatSchemeListMap(res.data.schemeVaccineInfoList);
+              _this4.setPrice();
             }
-            _this3.showSelect = true;
+            _this4.showSelect = true;
           } else {
-            _this3.loginData = {};
+            _this4.loginData = {};
           }
 
         } else {
@@ -1566,7 +1625,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       return type;
     },
     //保存
-    doSave: function doSave() {var _this4 = this;
+    doSave: function doSave() {var _this5 = this;
       var obj = {
         babyId: _global.default.getBabyId(),
         actualSchemeType: this.actualSchemeType,
@@ -1578,7 +1637,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
             icon: "success",
             title: res.responseMsg });
 
-          _this4.$emit("changePage", 1);
+          _this5.$emit("changePage", 1);
         } else {
           uni.showToast({
             icon: "success",
@@ -1606,7 +1665,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       }
     },
     //点击表格左侧设置状态
-    changeStatus: function changeStatus(status, item) {var _this5 = this;
+    changeStatus: function changeStatus(status, item) {var _this6 = this;
       // if(!this.canEdit){
       // 	uni.showToast({
       // 		icon:"none",
@@ -1642,7 +1701,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       this.setTotalInfoNum();
       //强制刷新页面
       this.$nextTick(function () {
-        _this5.$forceUpdate();
+        _this6.$forceUpdate();
       });
     },
     //改变map里面的type类型 用于保存
@@ -1861,8 +1920,12 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       this.checkLogin("/pages/vaccine/index");
     },
     changeSec: function changeSec(e) {
-      if (!this.isLogin || !this.isHaveBaby) {
+      if (!this.isLogin) {
         this.getNoLoginData(e.orignItem.type);
+        return;
+      }
+      if (isLogin && !this.isHaveBaby) {
+        this.getLoginButNoBaByData(e.orignItem.type);
         return;
       }
       this.actualSchemeType = e.orignItem.type;

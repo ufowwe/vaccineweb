@@ -113,7 +113,7 @@
 				this.isHaveBaby = await babyApi.isHaveBaby();
 				//this.isHaveBaby = true;
 				if(!this.isHaveBaby){
-					this.getNoLoginList();
+					this.getLoginButNoBabyList();
 				}else{
 					const obj={
 						id:global.getBabyId()
@@ -163,6 +163,23 @@
 						});
 					}
 				});	
+			},
+			//用户已登录但是没有宝宝
+			getLoginButNoBabyList(){
+				vaccineApi.getRecordByLogin().then(res=>{
+					if(res.code == "0000"){
+						if(res.data.vaccineRecordGroupList && res.data.vaccineRecordGroupList.length > 0){
+							this.noLoginList = res.data.vaccineRecordGroupList;
+						}else{
+							this.noLoginList = [];
+						}
+					}else{
+						uni.showToast({
+							icon:"none",
+						    title: res.responseMsg
+						});
+					}
+				});
 			},
 			//更新接种证
 			updateRecord(obj){

@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<VaccBar ref="bar" :babyList="babyList" :navStatus="isShow" :babyShow="babyShow" :nav="setNav" @changePage="changePage"></VaccBar>
+		<VaccBar ref="bar" :babyList="babyList" :babyShow="babyShow" :nav="setNav" @changePage="changePage"></VaccBar>
 		<VaCertificate @changePage="changePage" v-if="isShow == 1"></VaCertificate>	
 		<VaPlan :scrollTop="scrollTop" @changePage="changePage"  v-if="isShow == 2"></VaPlan>	
 	</view>
@@ -12,6 +12,7 @@
 	import VaPlan from './component/VaPlan.vue';
 	import authApi from '../../service/auth';
 	import babyApi from "../../service/baby";
+	import global from "../../utils/global.js";
 	
 	export default {
 		components:{
@@ -44,12 +45,28 @@
 		// 	}
 		// },
 		async onLoad(options){
-		  const login = await authApi.login();
-		  const isHaveBaby = await babyApi.isHaveBaby();
-		  if(login&&isHaveBaby){
-			this.babyShow = true;
-			this.getbabyList();
-		  }
+		  // const orginIsShow = this.isShow;  
+		  //    this.isShow = 0;  
+		  //     const login = await authApi.login();  
+		  //     const isHaveBaby = await babyApi.isHaveBaby();  
+		  //     if(login&&isHaveBaby){  
+				//   this.babyShow = true;  
+				//   await this.getbabyList();  
+				//  this.isShow = orginIsShow;  
+			 //  }
+		},
+		async onShow(options){
+		 const orginIsShow = this.isShow;  
+		     this.isShow = 0;  
+		      const login = await authApi.login();  
+		      const isHaveBaby = await babyApi.isHaveBaby();  
+		      if(login&&isHaveBaby){  
+				  this.babyShow = true;  
+				  await this.getbabyList();  
+				 this.isShow = orginIsShow;  
+			  }else{
+				  this.isShow = orginIsShow;
+			  }
 		},
 		methods: {
 			changePage(val) {
@@ -61,6 +78,9 @@
 			 	babyApi.getBabyList().then(res=>{
 			 		if(res.code == "0000"){
 			 			this.babyList = res.data;
+						if(!global.getBabyId()){
+							global.setBabyId(this.babyList[0].id);
+						}
 			 		}else{
 			 			uni.showToast({
 			 				icon:"none",

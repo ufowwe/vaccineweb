@@ -223,7 +223,7 @@
 			if(this.isLogin){
 				this.isHaveBaby = await babyApi.isHaveBaby();
 				if(!this.isHaveBaby){
-					this.getNoLoginData(0);
+					this.getLoginButNoBaByData(0);
 				}else{
 					const obj={
 						id:global.getBabyId()
@@ -328,6 +328,28 @@
 					}
 				});
 			},
+			//已登录 但是无宝宝
+			getLoginButNoBaByData(type){
+				const obj={
+					schemeType:type
+				};
+				vaccineApi.getScheme(obj).then(res=>{
+					if(res.code == "0000"){
+						if(res.data){
+							this.noLoginData = res.data;
+							this.setOrginNum(res.data);
+							this.showSelect = true;
+						}else{
+							this.noLoginData = {};
+						}
+					}else{
+						uni.showToast({
+							icon:"none",
+						    title: res.responseMsg
+						});
+					}
+				});
+			},
 			//切换方案时 获取页面数据
 			getSelectListData(type){
 				const obj={
@@ -356,7 +378,7 @@
 					}
 				});
 			},
-			//登陆时 获取页面列表数据
+			//登陆时有宝宝 获取页面列表数据
 			getLoginData(type){
 				const obj={
 					babyId:global.getBabyId(),
@@ -740,8 +762,12 @@
 				this.checkLogin("/pages/vaccine/index");
 			},
 			changeSec(e) {
-				if(!this.isLogin || !this.isHaveBaby){
+				if(!this.isLogin){
 					this.getNoLoginData(e.orignItem.type);
+					return;
+				}
+				if(isLogin && !this.isHaveBaby){
+					this.getLoginButNoBaByData(e.orignItem.type);
 					return;
 				}
 				this.actualSchemeType = e.orignItem.type;

@@ -347,7 +347,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
               this.isLogin) {_context.next = 20;break;}_context.next = 6;return (
                 _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
               this.isHaveBaby) {_context.next = 11;break;}
-              this.getNoLoginData(0);_context.next = 18;break;case 11:
+              this.getLoginButNoBaByData(0);_context.next = 18;break;case 11:
 
               obj = {
                 id: _global.default.getBabyId() };_context.next = 14;return (
@@ -452,25 +452,19 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         }
       });
     },
-    //切换方案时 获取页面数据
-    getSelectListData: function getSelectListData(type) {var _this2 = this;
+    //已登录 但是无宝宝
+    getLoginButNoBaByData: function getLoginButNoBaByData(type) {var _this2 = this;
       var obj = {
-        babyId: _global.default.getBabyId(),
         schemeType: type };
 
       _vaccine.default.getScheme(obj).then(function (res) {
         if (res.code == "0000") {
           if (res.data) {
-            _this2.loginData = res.data;
+            _this2.noLoginData = res.data;
             _this2.setOrginNum(res.data);
-            //创建疫苗map
-            if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
-              _this2.selectSelectIdList = _this2.setSelectIdList(res.data.schemeVaccineInfoList);
-              _this2.creatSchemeListMap(res.data.schemeVaccineInfoList);
-              _this2.setPrice();
-            }
+            _this2.showSelect = true;
           } else {
-            _this2.loginData = {};
+            _this2.noLoginData = {};
           }
         } else {
           uni.showToast({
@@ -480,8 +474,36 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         }
       });
     },
-    //登陆时 获取页面列表数据
-    getLoginData: function getLoginData(type) {var _this3 = this;
+    //切换方案时 获取页面数据
+    getSelectListData: function getSelectListData(type) {var _this3 = this;
+      var obj = {
+        babyId: _global.default.getBabyId(),
+        schemeType: type };
+
+      _vaccine.default.getScheme(obj).then(function (res) {
+        if (res.code == "0000") {
+          if (res.data) {
+            _this3.loginData = res.data;
+            _this3.setOrginNum(res.data);
+            //创建疫苗map
+            if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
+              _this3.selectSelectIdList = _this3.setSelectIdList(res.data.schemeVaccineInfoList);
+              _this3.creatSchemeListMap(res.data.schemeVaccineInfoList);
+              _this3.setPrice();
+            }
+          } else {
+            _this3.loginData = {};
+          }
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: res.responseMsg });
+
+        }
+      });
+    },
+    //登陆时有宝宝 获取页面列表数据
+    getLoginData: function getLoginData(type) {var _this4 = this;
       var obj = {
         babyId: _global.default.getBabyId(),
         schemeType: type || 0 };
@@ -489,22 +511,22 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       _vaccine.default.getScheme(obj).then(function (res) {
         if (res.code == "0000") {
           if (res.data) {
-            _this3.loginData = res.data;
-            _this3.setOrginNum(res.data);
+            _this4.loginData = res.data;
+            _this4.setOrginNum(res.data);
             if (res.data.schemeType) {
-              _this3.orginSelectType = res.data.schemeType;
-              _this3.actualSchemeType = res.data.schemeType;
+              _this4.orginSelectType = res.data.schemeType;
+              _this4.actualSchemeType = res.data.schemeType;
             }
-            _this3.setSelectValue(_this3.actualSchemeType);
+            _this4.setSelectValue(_this4.actualSchemeType);
             if (res.data.schemeVaccineInfoList && res.data.schemeVaccineInfoList.length > 0) {
-              _this3.orginSelectIdList = _this3.setSelectIdList(res.data.schemeVaccineInfoList);
+              _this4.orginSelectIdList = _this4.setSelectIdList(res.data.schemeVaccineInfoList);
               //创建疫苗map
-              _this3.creatSchemeListMap(res.data.schemeVaccineInfoList);
-              _this3.setPrice();
+              _this4.creatSchemeListMap(res.data.schemeVaccineInfoList);
+              _this4.setPrice();
             }
-            _this3.showSelect = true;
+            _this4.showSelect = true;
           } else {
-            _this3.loginData = {};
+            _this4.loginData = {};
           }
 
         } else {
@@ -569,7 +591,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       return type;
     },
     //保存
-    doSave: function doSave() {var _this4 = this;
+    doSave: function doSave() {var _this5 = this;
       var obj = {
         babyId: _global.default.getBabyId(),
         actualSchemeType: this.actualSchemeType,
@@ -581,7 +603,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
             icon: "success",
             title: res.responseMsg });
 
-          _this4.$emit("changePage", 1);
+          _this5.$emit("changePage", 1);
         } else {
           uni.showToast({
             icon: "success",
@@ -609,7 +631,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       }
     },
     //点击表格左侧设置状态
-    changeStatus: function changeStatus(status, item) {var _this5 = this;
+    changeStatus: function changeStatus(status, item) {var _this6 = this;
       // if(!this.canEdit){
       // 	uni.showToast({
       // 		icon:"none",
@@ -645,7 +667,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       this.setTotalInfoNum();
       //强制刷新页面
       this.$nextTick(function () {
-        _this5.$forceUpdate();
+        _this6.$forceUpdate();
       });
     },
     //改变map里面的type类型 用于保存
@@ -864,8 +886,12 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
       this.checkLogin("/pages/vaccine/index");
     },
     changeSec: function changeSec(e) {
-      if (!this.isLogin || !this.isHaveBaby) {
+      if (!this.isLogin) {
         this.getNoLoginData(e.orignItem.type);
+        return;
+      }
+      if (isLogin && !this.isHaveBaby) {
+        this.getLoginButNoBaByData(e.orignItem.type);
         return;
       }
       this.actualSchemeType = e.orignItem.type;

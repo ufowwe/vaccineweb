@@ -58,7 +58,7 @@
 		 },
 		onLoad(options) {
 		 	if(global.getBabyId()){
-				this.radio = global.getBabyId();
+				this.radio = global.getBabyId().toString();
 			}
 		},
 		methods: {
@@ -77,7 +77,7 @@
 			showPopup(type) {
 				this.show = true;
 				if(global.getBabyId()){
-					this.radio = global.getBabyId();
+					this.radio = global.getBabyId().toString();
 				}
 			},
 			addBaby(){

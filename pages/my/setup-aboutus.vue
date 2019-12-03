@@ -59,8 +59,8 @@
 	.babyInfo{
 		margin-top: 60rpx;
 		.babyInfoList{
-			padding: 30rpx 22%;
-			width: 55%;
+			padding: 30rpx 25%;
+			width: 50%;
 			// background: #FAFAFB;
 			margin-bottom:30rpx;
 			border-radius: 20rpx;

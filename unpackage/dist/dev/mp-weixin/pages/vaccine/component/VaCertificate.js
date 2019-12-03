@@ -246,7 +246,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
                 _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
 
               this.isHaveBaby) {_context.next = 11;break;}
-              this.getNoLoginList();_context.next = 17;break;case 11:
+              this.getLoginButNoBabyList();_context.next = 17;break;case 11:
 
               obj = {
                 id: _global.default.getBabyId() };_context.next = 14;return (
@@ -297,8 +297,25 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
         }
       });
     },
+    //用户已登录但是没有宝宝
+    getLoginButNoBabyList: function getLoginButNoBabyList() {var _this3 = this;
+      _vaccine.default.getRecordByLogin().then(function (res) {
+        if (res.code == "0000") {
+          if (res.data.vaccineRecordGroupList && res.data.vaccineRecordGroupList.length > 0) {
+            _this3.noLoginList = res.data.vaccineRecordGroupList;
+          } else {
+            _this3.noLoginList = [];
+          }
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: res.responseMsg });
+
+        }
+      });
+    },
     //更新接种证
-    updateRecord: function updateRecord(obj) {var _this3 = this;
+    updateRecord: function updateRecord(obj) {var _this4 = this;
       var param = {
         id: this.selectItem.vaccineSchemeId,
         vaccinationDate: obj.status ? obj.vaccinationDate : "",
@@ -310,7 +327,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
             icon: "none",
             title: "更新成功" });
 
-          _this3.getLoginList();
+          _this4.getLoginList();
         } else {
           uni.showToast({
             icon: "none",
@@ -334,7 +351,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
       this.$emit("changePage", 2);
     },
     //去编辑当前疫苗状态
-    setTime: function setTime(item) {var _this4 = this;
+    setTime: function setTime(item) {var _this5 = this;
       this.showPopup = true;
       this.selectItem = item;
       var popData = {
@@ -342,7 +359,7 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
         curTime: item.vaccinationDate };
 
       this.$nextTick(function () {
-        _this4.$refs.pop.setPopData(popData);
+        _this5.$refs.pop.setPopData(popData);
       });
     },
     //取消当前疫苗状态
