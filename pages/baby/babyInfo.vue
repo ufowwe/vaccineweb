@@ -89,6 +89,7 @@
 </template>
 
 <script>
+	import global from "../../utils/global.js";
 	import babyApi from "../../service/baby";
 	import authApi from "../../service/auth.js";
 	import city from "../../dataDict/city.js"
@@ -217,8 +218,11 @@
 				};
 				babyApi.babyUpdate(obj).then(res=>{
 					if(res.code == "0000"){
+						if(global.getBabyId()==this.id){
+							global.setBabyBirthday(this.birthday.split('/').join('-'));
+						}
 						console.log(this.backUrl)
-						uni.reLaunch({
+						uni.redirectTo({
 							url: this.backUrl || '/pages/task/index'
 						});
 						uni.showToast({

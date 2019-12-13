@@ -1508,7 +1508,7 @@ uni$1;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/task/index": { "navigationStyle": "custom" }, "pages/vaccine/index": { "navigationStyle": "custom" }, "pages/inoculate/index": { "navigationBarTextStyle": "black", "navigationStyle": "custom" }, "pages/my/index": { "navigationStyle": "custom" }, "pages/task/component/Login": {}, "pages/task/component/Nobaby": {}, "pages/task/component/TaskBar": {}, "pages/vaccine/component/VaccBar": {}, "pages/vaccine/component/VaPlan": {}, "pages/vaccine/component/VaCertificate": {}, "pages/my/insurancePolicy": { "navigationStyle": "custom" }, "pages/my/component/PolicyInfo": {}, "pages/my/myBaby": { "navigationBarTextStyle": "black" }, "pages/my/setup": { "navigationBarTextStyle": "black" }, "pages/my/setup-remind": { "navigationBarTextStyle": "black" }, "pages/my/setup-useragree": { "navigationBarTextStyle": "black" }, "pages/my/setup-conceal": { "navigationBarTextStyle": "black" }, "pages/my/setup-aboutus": { "navigationBarTextStyle": "black" }, "pages/my/advice": { "navigationBarTextStyle": "black" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/components/timePicker": {}, "pages/baby/addBaby": { "navigationBarTextStyle": "black" }, "pages/baby/babyInfo": { "navigationBarTextStyle": "black" }, "pages/vaccine/vaccineInfo": { "navigationStyle": "custom" }, "pages/vaccine/component/Infojieshao": {}, "pages/vaccine/component/Infoyimiao": {}, "pages/vaccine/component/Infojici": {}, "pages/vaccine/scheme": { "navigationStyle": "custom" }, "pages/vaccine/vaccKnow": { "navigationStyle": "custom" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/task/index": { "navigationStyle": "custom", "usingComponents": { "login-in": "/pages/task/component/Login", "nobaby": "/pages/task/component/Nobaby", "task-bar": "/pages/task/component/TaskBar" } }, "pages/vaccine/index": { "navigationStyle": "custom", "usingComponents": { "vacc-bar": "/pages/vaccine/component/VaccBar", "va-certificate": "/pages/vaccine/component/VaCertificate", "va-plan": "/pages/vaccine/component/VaPlan" } }, "pages/inoculate/index": { "navigationBarTextStyle": "black", "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } }, "pages/my/index": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } }, "pages/task/component/Login": { "usingComponents": {} }, "pages/task/component/Nobaby": { "usingComponents": {} }, "pages/task/component/TaskBar": { "usingComponents": {} }, "pages/vaccine/component/VaccBar": { "usingComponents": {} }, "pages/vaccine/component/VaPlan": { "usingComponents": { "xfl-select": "/pages/components/xfl-select" } }, "pages/vaccine/component/VaCertificate": { "usingComponents": { "t-picker": "/pages/components/timePicker" } }, "pages/my/insurancePolicy": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar", "policy-info": "/pages/my/component/PolicyInfo" } }, "pages/my/component/PolicyInfo": { "usingComponents": {} }, "pages/my/myBaby": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-remind": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-useragree": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-conceal": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/setup-aboutus": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/my/advice": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/login/login": { "navigationStyle": "custom", "usingComponents": {} }, "pages/components/timePicker": { "usingComponents": {} }, "pages/baby/addBaby": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/baby/babyInfo": { "navigationBarTextStyle": "black", "usingComponents": {} }, "pages/vaccine/vaccineInfo": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar", "infojieshao": "/pages/vaccine/component/Infojieshao", "infojici": "/pages/vaccine/component/Infojici", "infoyimiao": "/pages/vaccine/component/Infoyimiao" } }, "pages/vaccine/component/Infojieshao": { "usingComponents": {} }, "pages/vaccine/component/Infoyimiao": { "usingComponents": {} }, "pages/vaccine/component/Infojici": { "usingComponents": {} }, "pages/vaccine/scheme": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } }, "pages/vaccine/vaccKnow": { "navigationStyle": "custom", "usingComponents": { "bar": "/pages/components/Bar" } } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 
@@ -1812,7 +1812,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 var KEY_TOKEN = "_token";
 var KEY_USER_INFO = "user";
-var KEY_BABY_ID = "baby_Id";var
+var KEY_BABY_ID = "baby_Id";
+var KEY_BABY_BIRTHDAY = "baby_birthday";var
 
 global = /*#__PURE__*/function () {function global() {_classCallCheck(this, global);}_createClass(global, null, [{ key: "getToken",
 
@@ -1843,6 +1844,22 @@ global = /*#__PURE__*/function () {function global() {_classCallCheck(this, glob
 
     {
       return _storage.default.get(KEY_BABY_ID);
+    } }, { key: "removeBabyId", value: function removeBabyId()
+
+    {
+      return _storage.default.remove(KEY_BABY_ID);
+    } }, { key: "setBabyBirthday", value: function setBabyBirthday(
+
+    id) {
+      return _storage.default.set(KEY_BABY_BIRTHDAY, id);
+    } }, { key: "getBabyBirthday", value: function getBabyBirthday()
+
+    {
+      return _storage.default.get(KEY_BABY_BIRTHDAY);
+    } }, { key: "removeBabyBirthday", value: function removeBabyBirthday()
+
+    {
+      return _storage.default.remove(KEY_BABY_BIRTHDAY);
     } }]);return global;}();var _default =
 
 

@@ -2,7 +2,8 @@ import storage from "./storage";
 
 const KEY_TOKEN = "_token";
 const KEY_USER_INFO = "user";
-const KEY_BABY_ID = "baby_Id"
+const KEY_BABY_ID = "baby_Id";
+const KEY_BABY_BIRTHDAY = "baby_birthday";
 
 class global {
 
@@ -33,6 +34,22 @@ class global {
   
   static getBabyId () {
     return storage.get(KEY_BABY_ID);
+  }
+  
+  static removeBabyId () {
+    return storage.remove(KEY_BABY_ID);
+  }
+  
+  static setBabyBirthday (id) {
+    return storage.set(KEY_BABY_BIRTHDAY, id);
+  }
+  
+  static getBabyBirthday () {
+    return storage.get(KEY_BABY_BIRTHDAY);
+  }
+  
+  static removeBabyBirthday () {
+    return storage.remove(KEY_BABY_BIRTHDAY);
   }
 }
 

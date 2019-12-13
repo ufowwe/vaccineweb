@@ -235,7 +235,7 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
       }
     } },
 
-  onLoad: function () {var _onLoad = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var login, isHaveBaby;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+  onShow: function () {var _onShow = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(options) {var login, isHaveBaby;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 _auth.default.login());case 2:login = _context.sent;_context.next = 5;return (
                 _baby.default.isHaveBaby());case 5:isHaveBaby = _context.sent;
               if (!login) {
@@ -245,7 +245,7 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */
               } else {
                 this.isLogin = 3;
                 this.getbabyList();
-              }case 7:case "end":return _context.stop();}}}, _callee, this);}));function onLoad(_x) {return _onLoad.apply(this, arguments);}return onLoad;}() };exports.default = _default;
+              }case 7:case "end":return _context.stop();}}}, _callee, this);}));function onShow(_x) {return _onShow.apply(this, arguments);}return onShow;}() };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -722,9 +722,19 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby
 //
 var _default = { props: ["babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}},
   methods: {
-    onChange: function onChange(event) {
+    onChange: function onChange(event) {var _this = this;
       this.radio = event.detail;
-      _global.default.setBabyId(this.radio);
+      if (this.radio != 0) {
+        this.baby = this.babyList.filter(function (item) {
+          return item.id == _this.radio;
+        });
+        debugger;
+        _global.default.setBabyBirthday(this.baby[0].birthday);
+        _global.default.setBabyId(this.radio);
+      } else {
+        _global.default.removeBabyBirthday();
+        _global.default.removeBabyId();
+      }
       if (getCurrentPages().length != 0) {
         //刷新当前页面的数据
         getCurrentPages()[getCurrentPages().length - 1].onLoad();

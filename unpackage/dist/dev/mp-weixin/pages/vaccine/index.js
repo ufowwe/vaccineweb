@@ -196,6 +196,7 @@ var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.
           _this.babyList = res.data;
           if (!_global.default.getBabyId()) {
             _global.default.setBabyId(_this.babyList[0].id);
+            _global.default.setBabyBirthday(_this.babyList[0].birthday);
           }
         } else {
           uni.showToast({
@@ -393,8 +394,12 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby
 //
 //
 //
-var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}}, methods: { onChange: function onChange(event) {this.radio = event.detail;_global.default.setBabyId(this.radio);if (getCurrentPages().length != 0) {//刷新当前页面的数据
-        getCurrentPages()[getCurrentPages().length - 1].onShow();}this.show = false;}, onClose: function onClose() {
+var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}}, methods: { onChange: function onChange(event) {var _this = this;this.radio = event.detail;this.baby = this.babyList.filter(function (item) {return item.id == _this.radio;});_global.default.setBabyBirthday(this.baby[0].birthday);_global.default.setBabyId(this.radio);if (getCurrentPages().length != 0) {//刷新当前页面的数据
+        getCurrentPages()[getCurrentPages().length - 1].onShow();
+      }
+      this.show = false;
+    },
+    onClose: function onClose() {
       this.show = false;
     },
     showPopup: function showPopup(type) {
@@ -936,7 +941,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _index = __webpack_require__(/*! ../../utils/index.js */ 78); //
+var _index = __webpack_require__(/*! ../../utils/index.js */ 78);
+var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
 //
@@ -948,7 +954,8 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 78); //
 //
 //
 //
-var _default = { data: function data() {return { currentDate: new Date().getTime(), minDate: new Date(new Date()).getTime(), maxDate: new Date(new Date().getFullYear() + 10, 1, 1).getTime(), isSelect: false, showPop: true, tipText: "选择预约接种日期" };}, methods: {
+var _default = { data: function data() {return { currentDate: new Date().getTime(), minDate: new Date(new Date()).getTime(), maxDate: new Date(new Date().getFullYear() + 10, 1, 1).getTime(), isSelect: false, showPop: true, tipText: "选择预约接种日期", birthday: "" //宝宝出生日期
+    };}, methods: {
     setPopData: function setPopData(obj) {
       this.checkStatus(obj);
     },
@@ -971,29 +978,34 @@ var _default = { data: function data() {return { currentDate: new Date().getTime
 
       this.$emit("getSelect", obj);
     },
-    checkStatus: function checkStatus(obj) {
+    checkStatus: function checkStatus(obj) {var _this = this;
       if (obj.status == 5 || obj.status == 6) {
         this.isSelect = true;
-        this.tipText = "选择实际接种日期";
-        this.currentDate = new Date(obj.curTime).getTime() ? new Date(obj.curTime).getTime() : new Date().getTime();
-        this.minDate = new Date(new Date().getFullYear() - 10, 1, 1).getTime();
-        this.maxDate = new Date().getTime();
+        this.$nextTick(function () {
+          _this.tipText = "选择实际接种日期";
+          _this.currentDate = new Date(obj.curTime).getTime() ? new Date(obj.curTime).getTime() : new Date().getTime();
+          _this.minDate = _this.birthday ? new Date(_this.birthday).getTime() : new Date(new Date().getFullYear() - 10, 1, 1).getTime();
+          _this.maxDate = new Date().getTime();
+        });
       } else {
         this.isSelect = false;
-        this.tipText = "选择预约接种日期";
-        this.currentDate = new Date().getTime();
-        this.maxDate = new Date(new Date().getFullYear() + 10, 1, 1).getTime();
-        this.minDate = new Date().getTime();
+        this.$nextTick(function () {
+          _this.tipText = "选择预约接种日期";
+          _this.currentDate = new Date().getTime();
+          _this.maxDate = new Date(new Date().getFullYear() + 10, 1, 1).getTime();
+          _this.minDate = new Date().getTime();
+        });
       }
     } },
 
   mounted: function mounted() {
+    this.birthday = _global.default.getBabyBirthday();
 
   },
   watch: {
     isSelect: function isSelect(value) {
       if (value) {
-        this.minDate = new Date(new Date().getFullYear() - 10, 1, 1).getTime();
+        this.minDate = this.birthday ? new Date(this.birthday).getTime() : new Date(new Date().getFullYear() - 10, 1, 1).getTime();
         this.maxDate = new Date().getTime();
         this.currentDate = new Date().getTime();
       } else {

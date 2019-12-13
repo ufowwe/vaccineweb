@@ -80,6 +80,7 @@
 			 			this.babyList = res.data;
 						if(!global.getBabyId()){
 							global.setBabyId(this.babyList[0].id);
+							global.setBabyBirthday(this.babyList[0].birthday);
 						}
 			 		}else{
 			 			uni.showToast({

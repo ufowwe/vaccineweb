@@ -182,6 +182,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _global = _interopRequireDefault(__webpack_require__(/*! ../../utils/global.js */ 19));
 var _baby = _interopRequireDefault(__webpack_require__(/*! ../../service/baby */ 24));
 var _city = _interopRequireDefault(__webpack_require__(/*! ../../dataDict/city.js */ 199));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -293,7 +294,9 @@ var _default = { data: function data() {return { backUrl: "", areaList: _city.de
 
       _baby.default.babySave(obj).then(function (res) {
         if (res.code == "0000") {
-          uni.reLaunch({
+          _global.default.setBabyId(res.data.id);
+          _global.default.setBabyBirthday(res.data.birthday);
+          uni.redirectTo({
             url: _this.backUrl || '/pages/task/index' });
 
           uni.showToast({

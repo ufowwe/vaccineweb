@@ -58,6 +58,7 @@
 </template>
 
 <script>
+	import global from "../../utils/global.js";
 	import babyApi from "../../service/baby";
 	import city from "../../dataDict/city.js"
 	
@@ -169,7 +170,9 @@
 				};
 				babyApi.babySave(obj).then(res=>{
 					if(res.code == "0000"){
-						uni.reLaunch({
+						global.setBabyId(res.data.id);
+						global.setBabyBirthday(res.data.birthday);
+						uni.redirectTo({
 							url: this.backUrl || '/pages/task/index'
 						});
 						uni.showToast({

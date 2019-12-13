@@ -206,8 +206,12 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby
 //
 //
 //
-var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}}, methods: { onChange: function onChange(event) {this.radio = event.detail;_global.default.setBabyId(this.radio);if (getCurrentPages().length != 0) {//刷新当前页面的数据
-        getCurrentPages()[getCurrentPages().length - 1].onShow();}this.show = false;}, onClose: function onClose() {
+var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, isCheck: 1, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}}, methods: { onChange: function onChange(event) {var _this = this;this.radio = event.detail;this.baby = this.babyList.filter(function (item) {return item.id == _this.radio;});_global.default.setBabyBirthday(this.baby[0].birthday);_global.default.setBabyId(this.radio);if (getCurrentPages().length != 0) {//刷新当前页面的数据
+        getCurrentPages()[getCurrentPages().length - 1].onShow();
+      }
+      this.show = false;
+    },
+    onClose: function onClose() {
       this.show = false;
     },
     showPopup: function showPopup(type) {

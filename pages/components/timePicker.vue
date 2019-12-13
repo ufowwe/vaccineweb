@@ -12,6 +12,7 @@
 
 <script>
 	import { formatTime } from  "../../utils/index.js";
+	import global from  "../../utils/global.js";
 	export default{
 		data(){
 			return{
@@ -20,7 +21,8 @@
 				maxDate:new Date(new Date().getFullYear()+10,1,1).getTime(),
 				isSelect:false,
 				showPop:true,
-				tipText:"选择预约接种日期"	
+				tipText:"选择预约接种日期",
+				birthday:"", //宝宝出生日期
 			}
 		},
 		methods:{
@@ -49,26 +51,31 @@
 			checkStatus(obj){
 				if(obj.status == 5 || obj.status == 6){
 					this.isSelect = true;
-					this.tipText = "选择实际接种日期";
-					this.currentDate = new Date(obj.curTime).getTime() ? new Date(obj.curTime).getTime() : new Date().getTime();
-					this.minDate = new Date(new Date().getFullYear()-10,1,1).getTime();
-					this.maxDate = new Date().getTime();
+					this.$nextTick(()=>{
+						this.tipText = "选择实际接种日期";
+						this.currentDate = new Date(obj.curTime).getTime() ? new Date(obj.curTime).getTime() : new Date().getTime();
+						this.minDate = this.birthday ? new Date(this.birthday).getTime() : new Date(new Date().getFullYear()-10,1,1).getTime();
+						this.maxDate = new Date().getTime();
+					})
 				}else{
 					this.isSelect = false;
-					this.tipText = "选择预约接种日期";
-					this.currentDate = new Date().getTime();
-					this.maxDate = new Date(new Date().getFullYear()+10,1,1).getTime();
-					this.minDate = new Date().getTime();
+					this.$nextTick(()=>{
+						this.tipText = "选择预约接种日期";
+						this.currentDate = new Date().getTime();
+						this.maxDate = new Date(new Date().getFullYear()+10,1,1).getTime();
+						this.minDate = new Date().getTime();
+					})
 				}
 			}
 		},
 		mounted(){
+			this.birthday = global.getBabyBirthday();
 			
 		},
 		watch:{
 			isSelect:function(value){
 				if(value){
-					this.minDate = new Date(new Date().getFullYear()-10,1,1).getTime();
+					this.minDate = this.birthday ? new Date(this.birthday).getTime() : new Date(new Date().getFullYear()-10,1,1).getTime();
 					this.maxDate = new Date().getTime();
 					this.currentDate = new Date().getTime();
 				}else{

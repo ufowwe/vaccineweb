@@ -117,7 +117,7 @@ export default {
 			}
 		}
 	},
-	async onLoad(options){
+	async onShow(options){
 	  const login = await authApi.login();
 	  const isHaveBaby = await babyApi.isHaveBaby();
 	  if(!login){

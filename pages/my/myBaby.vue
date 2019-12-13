@@ -29,6 +29,7 @@
 </template>
 
 <script>
+	import global from "../../utils/global.js";
 	import babyApi from "../../service/baby";
 	
 	export default {
@@ -63,6 +64,10 @@
 				        if (res.confirm) {
 				            babyApi.babyDelete({'id':id}).then(res=>{
 				            	if(res.code == "0000"){
+									if(global.getBabyId()==id){
+										global.removeBabyId();
+										global.removeBabyBirthday();
+									}
 				            		_this.getbabyList()
 				            	}else{
 				            		uni.showToast({
@@ -90,7 +95,7 @@
 				});
 			},
 			toBabyInfo(id){
-				uni.navigateTo({
+				uni.redirectTo({
 					url: '/pages/baby/babyInfo?id='+id+'&backpath=/pages/my/myBaby'
 				});
 			},
