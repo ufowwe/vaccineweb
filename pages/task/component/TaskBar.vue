@@ -59,16 +59,17 @@
 		onLoad(options) {
 		 	if(global.getBabyId()){
 				this.radio = global.getBabyId().toString();
+			}else{
+				this.radio = '0';
 			}
 		},
 		methods: {
 			onChange(event) {
-			    this.radio = event.detail;
+				this.radio = event.detail;
 				if(this.radio!=0){
 					this.baby = this.babyList.filter(item => {
 					    return item.id == this.radio
 					});
-					debugger
 					global.setBabyBirthday(this.baby[0].birthday);
 					global.setBabyId(this.radio);
 				}else{
@@ -88,14 +89,18 @@
 				this.show = true;
 				if(global.getBabyId()){
 					this.radio = global.getBabyId().toString();
+				}else{
+					this.radio = '0'
 				}
 			},
 			addBaby(){
+				this.show = false;
 				uni.navigateTo({
 				    url:'/pages/baby/addBaby'
 				});
 			},
 			tomyBaby(){
+				this.show = false;
 				uni.navigateTo({
 				    url:'/pages/my/myBaby'
 				});

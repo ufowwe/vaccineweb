@@ -221,11 +221,13 @@ var _default = { props: ["nav", "babyShow", "babyList"], data: function data() {
       }
     },
     addBaby: function addBaby() {
+      this.show = false;
       uni.navigateTo({
         url: '/pages/baby/addBaby' });
 
     },
     tomyBaby: function tomyBaby() {
+      this.show = false;
       uni.navigateTo({
         url: '/pages/my/myBaby' });
 

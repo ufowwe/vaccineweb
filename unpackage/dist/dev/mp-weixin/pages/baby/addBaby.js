@@ -296,9 +296,15 @@ var _default = { data: function data() {return { backUrl: "", areaList: _city.de
         if (res.code == "0000") {
           _global.default.setBabyId(res.data.id);
           _global.default.setBabyBirthday(res.data.birthday);
-          uni.redirectTo({
-            url: _this.backUrl || '/pages/task/index' });
+          if (_this.backUrl != '') {
+            uni.redirectTo({
+              url: _this.backUrl });
 
+          } else {
+            uni.switchTab({
+              url: '/pages/task/index' });
+
+          }
           uni.showToast({
             icon: "success",
             title: '添加成功',

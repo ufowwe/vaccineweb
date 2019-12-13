@@ -100,7 +100,7 @@
 				});
 			},
 			toaddBaby(){
-				uni.navigateTo({
+				uni.redirectTo({
 					url: '/pages/baby/addBaby?backpath=/pages/my/myBaby'
 				});
 			}

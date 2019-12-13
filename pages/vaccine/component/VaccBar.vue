@@ -97,11 +97,13 @@
 				}
 			},
 			addBaby(){
+				this.show = false;
 				uni.navigateTo({
 				    url:'/pages/baby/addBaby'
 				});
 			},
 			tomyBaby(){
+				this.show = false;
 				uni.navigateTo({
 				    url:'/pages/my/myBaby'
 				});

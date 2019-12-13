@@ -720,7 +720,9 @@ var _baby = _interopRequireDefault(__webpack_require__(/*! ../../../service/baby
 //
 //
 //
-var _default = { props: ["babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();}},
+var _default = { props: ["babyList"], data: function data() {return { statusBarHeight: 0, titleBarHeight: 0, show: false, radio: '0' };}, created: function created() {var that = this;uni.getSystemInfo({ success: function success(res) {if (res.model.indexOf('iPhone') !== -1) {that.titleBarHeight = 44 + 'px';} else {that.titleBarHeight = 48 + 'px';}that.statusBarHeight = res.statusBarHeight + 'px';} });}, onLoad: function onLoad(options) {if (_global.default.getBabyId()) {this.radio = _global.default.getBabyId().toString();} else {this.radio = '0';
+    }
+  },
   methods: {
     onChange: function onChange(event) {var _this = this;
       this.radio = event.detail;
@@ -728,7 +730,6 @@ var _default = { props: ["babyList"], data: function data() {return { statusBarH
         this.baby = this.babyList.filter(function (item) {
           return item.id == _this.radio;
         });
-        debugger;
         _global.default.setBabyBirthday(this.baby[0].birthday);
         _global.default.setBabyId(this.radio);
       } else {
@@ -748,14 +749,18 @@ var _default = { props: ["babyList"], data: function data() {return { statusBarH
       this.show = true;
       if (_global.default.getBabyId()) {
         this.radio = _global.default.getBabyId().toString();
+      } else {
+        this.radio = '0';
       }
     },
     addBaby: function addBaby() {
+      this.show = false;
       uni.navigateTo({
         url: '/pages/baby/addBaby' });
 
     },
     tomyBaby: function tomyBaby() {
+      this.show = false;
       uni.navigateTo({
         url: '/pages/my/myBaby' });
 

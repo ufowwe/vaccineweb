@@ -172,9 +172,15 @@
 					if(res.code == "0000"){
 						global.setBabyId(res.data.id);
 						global.setBabyBirthday(res.data.birthday);
-						uni.redirectTo({
-							url: this.backUrl || '/pages/task/index'
-						});
+						if(this.backUrl!=''){
+							uni.redirectTo({
+								url: this.backUrl
+							});
+						}else{
+							uni.switchTab({
+								url: '/pages/task/index'
+							});
+						}
 						uni.showToast({
 							icon:"success",
 							title: '添加成功',
