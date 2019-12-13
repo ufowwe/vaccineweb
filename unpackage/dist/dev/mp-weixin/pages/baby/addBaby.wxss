@@ -18,7 +18,8 @@
   position: relative;
   top: -22rpx;
   left: 30rpx;
-  border-radius: 20rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
 }
 .addBaby .addselect {
   color: #999;
@@ -34,7 +35,8 @@
   padding: 20rpx 8%;
   display: inline-block;
   background: #F2F2F2;
-  border-radius: 50rpx;
+  -webkit-border-radius: 50rpx;
+          border-radius: 50rpx;
   margin-right: 20rpx;
 }
 .addBaby .addselect .sexBtn image {
@@ -55,7 +57,8 @@
   padding: 20rpx 5%;
   width: 80%;
   background: #F2F2F2;
-  border-radius: 100rpx;
+  -webkit-border-radius: 100rpx;
+          border-radius: 100rpx;
   margin-right: 20rpx;
 }
 .addBaby .addselect .birthdayBtn image {

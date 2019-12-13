@@ -80,13 +80,15 @@
   left: 15rpx;
   font-size: 30rpx;
   padding: 10rpx;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .header .babyImg {
   display: inline-block;
   width: 80rpx;
   height: 80rpx;
-  border-radius: 80rpx;
+  -webkit-border-radius: 80rpx;
+          border-radius: 80rpx;
 }
 .popupCla {
   width: 92%;
@@ -115,7 +117,8 @@
   width: 90%;
   padding: 5%;
   background: #F8F8FB;
-  border-radius: 20rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
 }
 .tackmain .main_header .slider .tags {
   font-size: 28rpx;
@@ -135,7 +138,8 @@
   padding: 15px;
   background: #FAFAFB;
   margin-bottom: 30rpx;
-  border-radius: 20rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
