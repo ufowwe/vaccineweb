@@ -396,21 +396,26 @@ var _timePicker = _interopRequireDefault(__webpack_require__(/*! ../../component
 
   mounted: function () {var _mounted = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 _auth.default.login());case 2:this.isLogin = _context.sent;if (!
-              this.isLogin) {_context.next = 19;break;}_context.next = 6;return (
+              this.isLogin) {_context.next = 20;break;}_context.next = 6;return (
                 _baby.default.isHaveBaby());case 6:this.isHaveBaby = _context.sent;if (
 
               this.isHaveBaby) {_context.next = 11;break;}
-              this.getLoginButNoBabyList();_context.next = 17;break;case 11:
+              this.getLoginButNoBabyList();_context.next = 18;break;case 11:
 
               obj = {
                 id: _global.default.getBabyId() };_context.next = 14;return (
 
                 _baby.default.getBabyDetail(obj));case 14:this.baby = _context.sent;
               console.log(this.baby);
-              this.getLoginList();case 17:_context.next = 20;break;case 19:
+              if (this.baby.data.actualSchemeType == '0') {
+                this.isHavePlan = false;
+              } else {
+                this.isHavePlan = true;
+              }
+              this.getLoginList();case 18:_context.next = 21;break;case 20:
 
 
-              this.getNoLoginList();case 20:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
+              this.getNoLoginList();case 21:case "end":return _context.stop();}}}, _callee, this);}));function mounted() {return _mounted.apply(this, arguments);}return mounted;}(),
 
 
   methods: {

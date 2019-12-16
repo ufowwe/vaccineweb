@@ -120,7 +120,11 @@
 					};
 					this.baby = await babyApi.getBabyDetail(obj);
 					console.log(this.baby);
-					this.isHavePlan = true;
+					if(this.baby.data.actualSchemeType=='0'){
+						this.isHavePlan = false;
+					}else{
+						this.isHavePlan = true;
+					}
 					this.getLoginList();
 				}
 			}else{

@@ -866,7 +866,7 @@ var _vaccine = _interopRequireDefault(__webpack_require__(/*! ../../../service/v
         this.getNoLoginData(e.orignItem.type);
         return;
       }
-      if (isLogin && !this.isHaveBaby) {
+      if (this.isLogin && !this.isHaveBaby) {
         this.getLoginButNoBaByData(e.orignItem.type);
         return;
       }
