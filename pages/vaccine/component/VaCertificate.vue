@@ -13,7 +13,7 @@
 				</view>
 				<view v-else>
 					<text class="card-top-tip">如接种点未接入本应用，请自行修改预约如期并更新接种记录</text>
-					<van-checkbox custom-class="card-top-btn" :value="isMe" @change="selectMy">只显示我选择的疫苗</van-checkbox>
+					<!-- <van-checkbox custom-class="card-top-btn" :value="isMe" @change="selectMy">只显示我选择的疫苗</van-checkbox> -->
 				</view>
 			</view>
 		</view>
@@ -120,6 +120,7 @@
 					};
 					this.baby = await babyApi.getBabyDetail(obj);
 					console.log(this.baby);
+					this.isHavePlan = true;
 					this.getLoginList();
 				}
 			}else{
